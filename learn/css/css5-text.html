@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 5 — Текст и шрифты — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css5">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 5: Текст и шрифты</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 5</div>
+      <div class="sidebar-title">Текст и шрифты</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> font-family и шрифты
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Начертание шрифта
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Выравнивание и оформление
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Интервалы и пробелы
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> text-shadow и text-overflow
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css5-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 5</div>
+      <h1 class="chapter-title">Текст и шрифты</h1>
+      <p class="chapter-intro">
+        Типографика — это основа читаемости и стиля любого сайта. CSS даёт полный контроль над
+        внешним видом текста: выбор шрифта и его размера, жирность и начертание, выравнивание,
+        межстрочные и межбуквенные интервалы, тени и многое другое. В этом разделе вы научитесь
+        профессионально оформлять текст на веб-страницах.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — font-family и веб-шрифты</h2>
+      <p class="lesson-desc">
+        Свойство <code>font-family</code> задаёт гарнитуру шрифта. Всегда указывайте несколько
+        шрифтов через запятую — это называется <strong>font stack</strong>. Если первый шрифт
+        недоступен на устройстве пользователя, браузер возьмёт следующий из списка.
+        В конце всегда указывайте родовое семейство: <code>serif</code>, <code>sans-serif</code> или <code>monospace</code>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Тип</th><th>Примеры шрифтов</th><th>Характеристика</th></tr>
+        <tr><td><code>serif</code></td><td>Georgia, Times New Roman</td><td>С засечками, классический вид</td></tr>
+        <tr><td><code>sans-serif</code></td><td>Arial, Helvetica, Verdana</td><td>Без засечек, современный вид</td></tr>
+        <tr><td><code>monospace</code></td><td>Courier New, Consolas</td><td>Моноширинный, для кода</td></tr>
+        <tr><td><code>cursive</code></td><td>Comic Sans, Brush Script</td><td>Рукописный стиль</td></tr>
+        <tr><td><code>fantasy</code></td><td>Impact, Papyrus</td><td>Декоративный стиль</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Google Fonts:</strong> Подключайте бесплатные веб-шрифты через
+          <code>@import url('https://fonts.googleapis.com/css2?family=...')</code>
+          в начале CSS или через тег <code>&lt;link&gt;</code> в <code>&lt;head&gt;</code>.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="46"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:ital@0;1&display=swap');
+
+  body { padding: 12px; font-size: 15px; }
+
+  .font-item {
+    margin: 10px 0;
+    padding: 10px 14px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #3498db;
+  }
+
+  .f1 { font-family: 'Roboto', Arial, sans-serif; }
+  .f2 { font-family: 'Playfair Display', Georgia, serif; }
+  .f3 { font-family: Georgia, 'Times New Roman', serif; }
+  .f4 { font-family: 'Courier New', Consolas, monospace; }
+  .f5 { font-family: Arial, Helvetica, sans-serif; }
+
+  small { display: block; font-family: Arial, sans-serif;
+          color: #888; font-size: 11px; margin-top: 3px; }
+</style>
+</head>
+<body>
+  <div class="font-item f1">
+    Roboto — современный гротеск от Google
+    <small>font-family: 'Roboto', Arial, sans-serif</small>
+  </div>
+  <div class="font-item f2">
+    Playfair Display — элегантная антиква
+    <small>font-family: 'Playfair Display', Georgia, serif</small>
+  </div>
+  <div class="font-item f3">
+    Georgia — классический веб-шрифт с засечками
+    <small>font-family: Georgia, 'Times New Roman', serif</small>
+  </div>
+  <div class="font-item f4">
+    Courier New — моноширинный шрифт для кода
+    <small>font-family: 'Courier New', Consolas, monospace</small>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Размер, жирность, начертание шрифта</h2>
+      <p class="lesson-desc">
+        CSS позволяет гибко управлять начертанием шрифта: размером, жирностью, курсивом
+        и вариантами отображения (например, маленькими заглавными — small caps).
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значения</th><th>Описание</th></tr>
+        <tr><td><code>font-size</code></td><td>px, em, rem, %, vw</td><td>Размер шрифта</td></tr>
+        <tr><td><code>font-weight</code></td><td>100–900, normal, bold</td><td>Жирность шрифта</td></tr>
+        <tr><td><code>font-style</code></td><td>normal, italic, oblique</td><td>Курсив</td></tr>
+        <tr><td><code>font-variant</code></td><td>normal, small-caps</td><td>Малые заглавные буквы</td></tr>
+        <tr><td><code>font</code></td><td>сокращение</td><td>style weight size/line-height family</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>rem vs em:</strong> <code>rem</code> всегда относится к корневому размеру шрифта
+          (<code>html</code> элементу, обычно 16px), тогда как <code>em</code> — к размеру шрифта
+          текущего элемента. Используйте <code>rem</code> для предсказуемой типографики.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="50"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, sans-serif; padding: 12px; }
+
+  .row { margin: 8px 0; padding: 6px 12px;
+         background: #f0f4f8; border-radius: 5px; }
+
+  /* font-size */
+  .size-sm  { font-size: 11px; }
+  .size-md  { font-size: 16px; }
+  .size-lg  { font-size: 22px; }
+  .size-xl  { font-size: 2rem; }
+
+  /* font-weight */
+  .w100 { font-weight: 100; }
+  .w400 { font-weight: 400; }
+  .w700 { font-weight: 700; }
+  .w900 { font-weight: 900; }
+
+  /* font-style */
+  .normal  { font-style: normal; }
+  .italic  { font-style: italic; }
+  .oblique { font-style: oblique; }
+
+  /* font-variant */
+  .smallcaps { font-variant: small-caps; color: #8e44ad; }
+
+  /* Сокращённая запись font */
+  .shorthand {
+    font: italic bold 18px/1.5 Georgia, serif;
+    color: #2980b9;
+  }
+</style>
+</head>
+<body>
+  <div class="row size-sm">font-size: 11px — маленький текст</div>
+  <div class="row size-md">font-size: 16px — базовый размер</div>
+  <div class="row size-lg">font-size: 22px — крупный текст</div>
+  <div class="row size-xl">font-size: 2rem — очень крупный</div>
+
+  <div class="row w100">font-weight: 100 (тонкий)</div>
+  <div class="row w400">font-weight: 400 (обычный)</div>
+  <div class="row w700">font-weight: 700 (жирный)</div>
+  <div class="row w900">font-weight: 900 (очень жирный)</div>
+
+  <div class="row italic">font-style: italic — курсив</div>
+  <div class="row smallcaps">font-variant: small-caps — МАЛЫЕ ЗАГЛАВНЫЕ</div>
+  <div class="row shorthand">Сокращение font: italic bold 18px/1.5 Georgia</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Выравнивание и оформление текста</h2>
+      <p class="lesson-desc">
+        CSS предоставляет свойства для управления выравниванием текста, подчёркиванием,
+        регистром и отступом первой строки — всё это влияет на восприятие и читаемость текста.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значения</th><th>Описание</th></tr>
+        <tr><td><code>text-align</code></td><td>left, right, center, justify</td><td>Горизонтальное выравнивание</td></tr>
+        <tr><td><code>text-decoration</code></td><td>none, underline, overline, line-through</td><td>Линии оформления</td></tr>
+        <tr><td><code>text-transform</code></td><td>uppercase, lowercase, capitalize, none</td><td>Регистр символов</td></tr>
+        <tr><td><code>text-indent</code></td><td>px, em</td><td>Отступ первой строки</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>text-decoration-color и text-underline-offset:</strong> Современный CSS позволяет
+          тонко настраивать подчёркивание: <code>text-decoration-color: red</code>,
+          <code>text-underline-offset: 4px</code> — отступ линии от текста.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, sans-serif; padding: 12px; font-size: 15px; }
+  .block {
+    padding: 8px 12px;
+    margin: 7px 0;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border-left: 3px solid #3498db;
+  }
+
+  .align-left    { text-align: left; }
+  .align-center  { text-align: center; }
+  .align-right   { text-align: right; }
+  .align-justify { text-align: justify; width: 100%; }
+
+  .deco-underline    { text-decoration: underline; }
+  .deco-colored {
+    text-decoration: underline;
+    text-decoration-color: #e74c3c;
+    text-underline-offset: 4px;
+  }
+  .deco-through  { text-decoration: line-through; color: #888; }
+  .deco-over     { text-decoration: overline; color: #8e44ad; }
+  .deco-none     { text-decoration: none; color: #3498db; }
+
+  .upper      { text-transform: uppercase; letter-spacing: 2px; }
+  .lower      { text-transform: lowercase; }
+  .capitalize { text-transform: capitalize; }
+
+  .indent {
+    text-indent: 2em;
+    border-left-color: #27ae60;
+  }
+</style>
+</head>
+<body>
+  <div class="block align-center">text-align: center</div>
+  <div class="block align-right">text-align: right</div>
+  <div class="block align-justify">
+    text-align: justify — выравнивание по ширине. Текст растягивается
+    от левого до правого края блока, создавая ровные края с обеих сторон.
+  </div>
+
+  <div class="block deco-underline">text-decoration: underline</div>
+  <div class="block deco-colored">Красное подчёркивание со смещением 4px</div>
+  <div class="block deco-through">text-decoration: line-through</div>
+  <div class="block deco-none">text-decoration: none (ссылка без черты)</div>
+
+  <div class="block upper">text-transform: uppercase</div>
+  <div class="block capitalize">text-transform: capitalize — первые буквы</div>
+  <div class="block indent">
+    text-indent: 2em — красная строка. Первая строка абзаца
+    имеет отступ, как при традиционной типографике.
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Интервалы и пробелы</h2>
+      <p class="lesson-desc">
+        Межстрочный интервал, межбуквенный и межсловный интервалы, а также обработка
+        пробельных символов — всё это влияет на читаемость и эстетику текста.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значения</th><th>Описание</th></tr>
+        <tr><td><code>line-height</code></td><td>число, px, em, %</td><td>Межстрочный интервал</td></tr>
+        <tr><td><code>letter-spacing</code></td><td>px, em</td><td>Межбуквенный интервал (кернинг)</td></tr>
+        <tr><td><code>word-spacing</code></td><td>px, em</td><td>Расстояние между словами</td></tr>
+        <tr><td><code>white-space</code></td><td>normal, nowrap, pre, pre-wrap</td><td>Обработка пробелов и переносов</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Рекомендуемый line-height:</strong> Для хорошей читаемости обычного текста
+          используйте <code>line-height: 1.5</code> — <code>1.7</code>. Заголовкам обычно подходит
+          <code>1.2</code> — <code>1.3</code>.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, sans-serif; padding: 12px; }
+  .block {
+    padding: 10px 14px;
+    margin: 8px 0;
+    background: #f0f4f8;
+    border-radius: 6px;
+    border-left: 3px solid #9b59b6;
+  }
+  label { font-size: 11px; color: #888; display: block;
+          margin-bottom: 4px; font-family: monospace; }
+
+  .lh-tight   { line-height: 1.1; }
+  .lh-normal  { line-height: 1.5; }
+  .lh-loose   { line-height: 2.2; }
+
+  .ls-tight   { letter-spacing: -1px; color: #1a5276; }
+  .ls-normal  { letter-spacing: normal; }
+  .ls-wide    { letter-spacing: 4px; color: #8e44ad; }
+
+  .ws-wide    { word-spacing: 12px; color: #27ae60; }
+
+  .pre-wrap {
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 13px;
+    background: #2c3e50;
+    color: #ecf0f1;
+    border-radius: 5px;
+    padding: 10px 14px;
+    border-left: 3px solid #3498db;
+  }
+</style>
+</head>
+<body>
+  <div class="block lh-tight">
+    <label>line-height: 1.1 (слишком тесно)</label>
+    Первая строка абзаца с тесным межстрочным интервалом.
+    Вторая строка почти сливается с первой. Читать тяжело.
+  </div>
+  <div class="block lh-normal">
+    <label>line-height: 1.5 (оптимально)</label>
+    Первая строка абзаца с комфортным межстрочным интервалом.
+    Вторая строка легко воспринимается. Хорошая читаемость.
+  </div>
+  <div class="block lh-loose">
+    <label>line-height: 2.2 (слишком широко)</label>
+    Слишком большой интервал — текст кажется разорванным.
+  </div>
+
+  <div class="block ls-tight">
+    <label>letter-spacing: -1px</label>
+    Сжатые буквы создают плотный текст
+  </div>
+  <div class="block ls-wide">
+    <label>letter-spacing: 4px</label>
+    Разрежённые буквы — стильно для заголовков
+  </div>
+  <div class="block ws-wide">
+    <label>word-spacing: 12px</label>
+    Большие пробелы между словами
+  </div>
+
+  <div class="pre-wrap">white-space: pre-wrap
+  сохраняет переносы   и   пробелы
+  точно как в HTML-коде</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — text-shadow и text-overflow</h2>
+      <p class="lesson-desc">
+        Свойство <code>text-shadow</code> добавляет тень к тексту, а <code>text-overflow</code>
+        управляет тем, что происходит с текстом, который не помещается в контейнер.
+        Оба свойства часто используются при создании UI-компонентов.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Синтаксис</th><th>Описание</th></tr>
+        <tr><td><code>text-shadow</code></td><td>x y blur color</td><td>Тень текста (можно несколько через запятую)</td></tr>
+        <tr><td><code>text-overflow</code></td><td>clip, ellipsis</td><td>Обрезка длинного текста</td></tr>
+        <tr><td><code>overflow</code></td><td>hidden (обязательно)</td><td>Скрывает выходящий за рамки текст</td></tr>
+        <tr><td><code>white-space</code></td><td>nowrap (обязательно)</td><td>Запрещает перенос строки</td></tr>
+      </table>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Три свойства вместе:</strong> Чтобы <code>text-overflow: ellipsis</code> работало,
+          нужно обязательно задать <code>overflow: hidden</code> и <code>white-space: nowrap</code>
+          на том же элементе — иначе многоточие не появится.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="66"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, sans-serif; padding: 14px;
+         background: #1a1a2e; }
+
+  /* text-shadow примеры */
+  .shadow-demos { margin-bottom: 16px; }
+  .sh {
+    padding: 10px 16px;
+    margin: 8px 0;
+    border-radius: 6px;
+    font-size: 1.1em;
+  }
+
+  .sh1 {
+    color: white;
+    background: #16213e;
+    /* простая тень */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  }
+  .sh2 {
+    color: #f0f0f0;
+    background: #0f3460;
+    /* светящийся эффект */
+    text-shadow: 0 0 8px #e94560, 0 0 20px #e94560;
+  }
+  .sh3 {
+    color: #fff;
+    background: #533483;
+    /* несколько теней — 3D-эффект */
+    text-shadow:
+      1px 1px 0 #c0392b,
+      2px 2px 0 #e74c3c,
+      3px 3px 0 #f39c12;
+  }
+  .sh4 {
+    color: #2c3e50;
+    background: #ecf0f1;
+    /* тиснение */
+    text-shadow: -1px -1px 0 white, 1px 1px 2px rgba(0,0,0,0.3);
+  }
+
+  /* text-overflow примеры */
+  .overflow-demos { margin-top: 16px; }
+  .card-title {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 6px 0;
+    border-left: 3px solid #3498db;
+    font-size: 14px;
+    color: #2c3e50;
+  }
+  .clip { overflow: hidden; white-space: nowrap;
+          text-overflow: clip; }
+  .ellipsis { overflow: hidden; white-space: nowrap;
+              text-overflow: ellipsis; }
+  .normal-wrap { /* без ограничений — текст переносится */ }
+
+  label { font-size: 11px; color: #888; display: block;
+          margin-bottom: 2px; font-family: monospace;
+          color: #aaa; }
+</style>
+</head>
+<body>
+  <div class="shadow-demos">
+    <div class="sh sh1">Простая тень: 2px 2px 4px</div>
+    <div class="sh sh2">Неоновое свечение: 0 0 8px / 0 0 20px</div>
+    <div class="sh sh3">3D-эффект: три слоя теней</div>
+    <div class="sh sh4" style="color:#2c3e50;">Эффект тиснения</div>
+  </div>
+
+  <div class="overflow-demos" style="background:white;
+       border-radius:8px; padding:12px;">
+    <label>text-overflow: clip (резкая обрезка)</label>
+    <div class="card-title clip">
+      Очень длинный заголовок карточки, который не помещается в одну строку
+    </div>
+
+    <label>text-overflow: ellipsis (многоточие)</label>
+    <div class="card-title ellipsis">
+      Очень длинный заголовок карточки, который не помещается в одну строку
+    </div>
+
+    <label>Без ограничений (текст переносится)</label>
+    <div class="card-title normal-wrap">
+      Очень длинный заголовок карточки, который не помещается в одну строку
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 5</h3>
+          <p>Оформите страницу с профессиональной типографикой</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте HTML-страницу с красивой типографикой:
+          <ul>
+            <li>Задать <code>font-family</code> с несколькими запасными шрифтами (font stack)</li>
+            <li>Использовать минимум 3 разных значения <code>font-weight</code> на разных элементах</li>
+            <li>Применить <code>letter-spacing</code> или <code>line-height</code> для улучшения читаемости</li>
+            <li>Добавить <code>text-shadow</code> к заголовку</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css5-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css5-exercise')" data-exercise-id="css5-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css5-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css5-exercise-feedback"></div>
+        <div class="exercise-preview" id="css5-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css5-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="css4-colors.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">CSS Раздел 4: Цвета и фоны</span>
+        </div>
+      </a>
+      <a href="css6-units.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 6: Единицы измерения</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>
