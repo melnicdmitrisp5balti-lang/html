@@ -113,13 +113,8 @@ function highlightToFragment(code, frag) {
       continue;
     }
 
-    // Regular text character
-    const last = frag.lastChild;
-    if (last && last.nodeType === Node.TEXT_NODE) {
-      last.data += code[i]; // coalesce adjacent text nodes
-    } else {
-      frag.appendChild(text(code[i]));
-    }
+    // Regular text character — always create a new text node (no data mutation)
+    frag.appendChild(text(code[i]));
     i++;
   }
 }
@@ -158,12 +153,7 @@ function appendAttrNodes(frag, attrStr, span, text) {
   const len = attrStr.length;
   while (i < len) {
     if (/\s/.test(attrStr[i])) {
-      const last = frag.lastChild;
-      if (last && last.nodeType === Node.TEXT_NODE) {
-        last.data += attrStr[i];
-      } else {
-        frag.appendChild(text(attrStr[i]));
-      }
+      frag.appendChild(text(attrStr[i]));
       i++; continue;
     }
     let nameEnd = i;
