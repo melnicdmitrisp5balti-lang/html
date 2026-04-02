@@ -459,6 +459,159 @@ const exerciseValidators = {
       test: code => /youtube\.com|youtu\.be/i.test(code),
       hint: 'Используйте ссылку на YouTube (youtube.com или youtu.be) в атрибуте src'
     }
+  ],
+
+  'ch10-exercise': [
+    {
+      test: code => /<style[\s>]/i.test(code),
+      hint: 'Добавьте тег <style> с CSS-правилами в раздел <head>'
+    },
+    {
+      test: code => /color\s*:/i.test(code),
+      hint: 'Используйте свойство color для цвета текста'
+    },
+    {
+      test: code => /background(-color)?\s*:/i.test(code),
+      hint: 'Используйте свойство background-color для фона элемента'
+    },
+    {
+      test: code => /\.[a-z_-]+\s*\{/i.test(code),
+      hint: 'Добавьте стиль через класс (например: .myclass { ... })'
+    },
+    {
+      test: code => /#[a-z_-]+\s*\{/i.test(code),
+      hint: 'Добавьте стиль через ID (например: #myid { ... })'
+    }
+  ],
+
+  'ch11-exercise': [
+    {
+      test: code => /padding\s*:/i.test(code),
+      hint: 'Добавьте свойство padding для внутреннего отступа'
+    },
+    {
+      test: code => /margin\s*:/i.test(code),
+      hint: 'Добавьте свойство margin для внешнего отступа'
+    },
+    {
+      test: code => /border\s*:/i.test(code),
+      hint: 'Добавьте свойство border для рамки (например: border: 2px solid black)'
+    },
+    {
+      test: code => /border-radius\s*:/i.test(code),
+      hint: 'Добавьте свойство border-radius для скруглённых углов'
+    },
+    {
+      test: code => /width\s*:|max-width\s*:/i.test(code),
+      hint: 'Задайте ширину элемента с помощью width или max-width'
+    }
+  ],
+
+  'ch12-exercise': [
+    {
+      test: code => /color\s*:/i.test(code),
+      hint: 'Используйте свойство color для цвета текста'
+    },
+    {
+      test: code => /background(-color)?\s*:/i.test(code),
+      hint: 'Добавьте свойство background-color для фона'
+    },
+    {
+      test: code => /font-size\s*:/i.test(code),
+      hint: 'Используйте свойство font-size для размера шрифта'
+    },
+    {
+      test: code => /font-weight\s*:/i.test(code),
+      hint: 'Добавьте свойство font-weight (bold или число)'
+    },
+    {
+      test: code => /text-align\s*:/i.test(code),
+      hint: 'Используйте свойство text-align для выравнивания текста'
+    },
+    {
+      test: code => /line-height\s*:/i.test(code),
+      hint: 'Добавьте свойство line-height для межстрочного интервала'
+    }
+  ],
+
+  'ch13-exercise': [
+    {
+      test: code => /display\s*:\s*block/i.test(code),
+      hint: 'Добавьте элемент с display: block'
+    },
+    {
+      test: code => /display\s*:\s*inline-block/i.test(code),
+      hint: 'Добавьте элемент с display: inline-block'
+    },
+    {
+      test: code => /position\s*:\s*relative/i.test(code),
+      hint: 'Добавьте элемент с position: relative'
+    },
+    {
+      test: code => /position\s*:\s*absolute/i.test(code),
+      hint: 'Добавьте элемент с position: absolute внутри родителя с position: relative'
+    }
+  ],
+
+  'ch14-exercise': [
+    {
+      test: code => /display\s*:\s*flex/i.test(code),
+      hint: 'Добавьте контейнер с display: flex'
+    },
+    {
+      test: code => /justify-content\s*:/i.test(code),
+      hint: 'Используйте свойство justify-content для выравнивания по главной оси'
+    },
+    {
+      test: code => /align-items\s*:/i.test(code),
+      hint: 'Используйте свойство align-items для выравнивания по поперечной оси'
+    },
+    {
+      test: code => /gap\s*:/i.test(code),
+      hint: 'Добавьте свойство gap для отступов между элементами'
+    },
+    {
+      test: code => /flex-wrap\s*:\s*wrap/i.test(code),
+      hint: 'Используйте flex-wrap: wrap для переноса элементов на новую строку'
+    }
+  ],
+
+  'ch15-exercise': [
+    {
+      test: code => /display\s*:\s*grid/i.test(code),
+      hint: 'Добавьте контейнер с display: grid'
+    },
+    {
+      test: code => /grid-template-columns\s*:/i.test(code),
+      hint: 'Используйте grid-template-columns для определения колонок'
+    },
+    {
+      test: code => /gap\s*:/i.test(code),
+      hint: 'Добавьте свойство gap для промежутков между ячейками'
+    },
+    {
+      test: code => /grid-column\s*:\s*span|grid-row\s*:\s*span/i.test(code),
+      hint: 'Растяните элемент на несколько ячеек с помощью grid-column: span N или grid-row: span N'
+    }
+  ],
+
+  'ch16-exercise': [
+    {
+      test: code => /name\s*=\s*["']viewport["']/i.test(code),
+      hint: 'Добавьте мета-тег viewport: <meta name="viewport" content="width=device-width, initial-scale=1.0">'
+    },
+    {
+      test: code => /@media\s*\(/i.test(code),
+      hint: 'Используйте media query: @media (max-width: 768px) { ... }'
+    },
+    {
+      test: code => /[0-9]+(em|rem|vw|vh|%)/i.test(code),
+      hint: 'Используйте относительные единицы: em, rem, vw, vh или %'
+    },
+    {
+      test: code => /max-width\s*:/i.test(code),
+      hint: 'Ограничьте ширину контейнера с помощью max-width'
+    }
   ]
 };
 

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 16: Адаптивный дизайн — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch16">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 16: Адаптивный дизайн</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 16</div>
+      <div class="sidebar-title">Адаптивный дизайн</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Что такое адаптивный дизайн?
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Viewport и meta тег
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Media Queries
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Адаптивная типографика
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Адаптивная сетка
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch16-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📱 Глава 16</div>
+      <h1 class="chapter-title">Адаптивный дизайн</h1>
+      <p class="chapter-intro">
+        Адаптивный (responsive) дизайн — подход, при котором сайт выглядит корректно
+        на любом устройстве: смартфоне, планшете или компьютере. Ключевые инструменты —
+        viewport meta-тег, media queries и гибкие единицы измерения.
+      </p>
+    </div>
+
+    <!-- LESSON 1: What is Responsive Design -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Что такое адаптивный дизайн?</h2>
+      <p class="lesson-desc">
+        Более половины интернет-трафика поступает с мобильных устройств.
+        Адаптивный дизайн означает, что сайт автоматически подстраивается под размер экрана.
+        Три столпа адаптивного дизайна:
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Принцип</th><th>Описание</th></tr>
+        <tr>
+          <td><strong>Гибкая сетка</strong></td>
+          <td>Использование относительных единиц (<code>%</code>, <code>fr</code>) вместо фиксированных (<code>px</code>)</td>
+        </tr>
+        <tr>
+          <td><strong>Гибкие изображения</strong></td>
+          <td><code>max-width: 100%</code> — изображение никогда не шире своего контейнера</td>
+        </tr>
+        <tr>
+          <td><strong>Media Queries</strong></td>
+          <td>Разные стили для разных размеров экрана</td>
+        </tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">📱</span>
+        <div class="callout-body">
+          <strong>Mobile First:</strong> Рекомендуется сначала проектировать для мобильных устройств,
+          затем постепенно добавлять стили для больших экранов. Это делает CSS проще и производительнее.
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: Viewport Meta Tag -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Viewport и meta тег</h2>
+      <p class="lesson-desc">
+        Без viewport meta-тега мобильный браузер масштабирует страницу, как если бы она была
+        для десктопа. Мета-тег viewport сообщает браузеру, как обрабатывать ширину страницы.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Всегда добавляйте в &lt;head&gt;:</strong><br>
+          <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code><br><br>
+          <strong>width=device-width</strong> — ширина равна ширине экрана устройства.<br>
+          <strong>initial-scale=1.0</strong> — начальный масштаб 100% (без зума).
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Гибкий layout с процентами</div>
+          <textarea class="code-editor" id="ex2-code" rows="24"><!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 8px; font-family: Arial, sans-serif; }
+    .container { max-width: 600px; margin: 0 auto; }
+    .row { display: flex; gap: 8px; margin-bottom: 8px; }
+    .col-half  { width: 50%; background: #d6eaf8; padding: 12px; border-radius:4px; }
+    .col-third { width: 33.33%; background: #d5f5e3; padding: 12px; border-radius:4px; }
+    img { max-width: 100%; height: auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-half">50%</div>
+      <div class="col-half">50%</div>
+    </div>
+    <div class="row">
+      <div class="col-third">33%</div>
+      <div class="col-third">33%</div>
+      <div class="col-third">33%</div>
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: Media Queries -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Media Queries</h2>
+      <p class="lesson-desc">
+        Media Queries позволяют применять CSS только при определённых условиях (ширина экрана,
+        ориентация и т.д.). Синтаксис: <code>@media (условие) &#123; стили &#125;</code>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Точка разрыва (breakpoint)</th><th>Устройство</th></tr>
+        <tr><td><code>max-width: 480px</code></td><td>Смартфон (маленький)</td></tr>
+        <tr><td><code>max-width: 768px</code></td><td>Планшет / смартфон</td></tr>
+        <tr><td><code>max-width: 1024px</code></td><td>Небольшой ноутбук</td></tr>
+        <tr><td><code>min-width: 1200px</code></td><td>Большой монитор</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Media Query — пример</div>
+          <textarea class="code-editor" id="ex3-code" rows="28"><!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; }
+
+    .box {
+      background: #27ae60;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    /* Планшет и меньше */
+    @media (max-width: 768px) {
+      .box {
+        background: #2980b9;
+        font-size: 1rem;
+      }
+    }
+
+    /* Мобильный */
+    @media (max-width: 480px) {
+      .box {
+        background: #e74c3c;
+        font-size: 0.9rem;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    Измените ширину окна предпросмотра!<br>
+    Зелёный = desktop, Синий = tablet, Красный = mobile
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: Responsive Typography -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Адаптивная типографика</h2>
+      <p class="lesson-desc">
+        Для адаптивной типографики используют относительные единицы и функцию <code>clamp()</code>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Единица</th><th>Описание</th></tr>
+        <tr><td><code>em</code></td><td>Относительно размера шрифта родителя</td></tr>
+        <tr><td><code>rem</code></td><td>Относительно размера шрифта корневого элемента (<code>html</code>)</td></tr>
+        <tr><td><code>vw</code></td><td>1% ширины viewport</td></tr>
+        <tr><td><code>vh</code></td><td>1% высоты viewport</td></tr>
+        <tr><td><code>clamp(min, ideal, max)</code></td><td>Размер между min и max, идеально — ideal</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Адаптивные единицы</div>
+          <textarea class="code-editor" id="ex4-code" rows="22"><!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 16px; }
+    h1 {
+      /* clamp: минимум 1.5rem, идеал 5vw, максимум 3rem */
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      color: #2c3e50;
+    }
+    p { font-size: 1rem; line-height: 1.6; }
+    .fluid {
+      font-size: 4vw; /* 4% от ширины экрана */
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <h1>Адаптивный заголовок (clamp)</h1>
+  <p class="fluid">Текст 4vw — меняется с шириной окна</p>
+  <p>Обычный текст 1rem — стабильный размер</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: Responsive Grid -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Адаптивная сетка</h2>
+      <p class="lesson-desc">
+        Комбинация CSS Grid с <code>auto-fill</code>/<code>auto-fit</code> и <code>minmax()</code>
+        создаёт сетку, которая автоматически адаптируется без media queries.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Авто-адаптивная Grid сетка</div>
+          <textarea class="code-editor" id="ex5-code" rows="26"><!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 16px; font-family: Arial, sans-serif; }
+
+    .grid {
+      display: grid;
+      /* auto-fill заполняет колонками минимум 200px */
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: #2980b9;
+      color: white;
+      padding: 24px 16px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+    h2 { margin: 0 0 16px; font-size: 1rem; color: #555; }
+  </style>
+</head>
+<body>
+  <h2>Измените ширину окна — карточки перестраиваются!</h2>
+  <div class="grid">
+    <div class="card">Карточка 1</div>
+    <div class="card">Карточка 2</div>
+    <div class="card">Карточка 3</div>
+    <div class="card">Карточка 4</div>
+    <div class="card">Карточка 5</div>
+    <div class="card">Карточка 6</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Итог курса:</strong> Вы освоили HTML и CSS — основы веб-разработки!
+          Теперь вы умеете создавать структурированные страницы и красиво их оформлять.
+          Следующий шаг — изучение JavaScript для добавления интерактивности.
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 16</h3>
+          <p>Создайте адаптивную страницу с media queries</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте страницу с адаптивным дизайном. Используйте:
+          <ul>
+            <li>Мета-тег viewport</li>
+            <li>Хотя бы одно правило <code>@media</code></li>
+            <li>Относительные единицы (<code>%</code>, <code>em</code>, <code>rem</code>, <code>vw</code>)</li>
+            <li>Свойство <code>max-width</code> для ограничения ширины контейнера</li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch16-exercise-code" rows="16"><!-- Напишите ваш HTML+CSS код здесь -->
+</textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch16-exercise')" data-exercise-id="ch16-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch16-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+
+        <div class="exercise-feedback" id="ch16-exercise-feedback"></div>
+
+        <div class="exercise-preview" id="ch16-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch16-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONGRATULATIONS -->
+    <div style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+                color: white; border-radius: 16px; padding: 40px;
+                text-align: center; margin: 0 24px 32px;">
+      <div style="font-size: 3rem; margin-bottom: 12px;">🎉</div>
+      <h2 style="font-size: 1.6rem; margin-bottom: 8px;">Поздравляем! Курс завершён!</h2>
+      <p style="opacity:0.9; font-size:1.05rem;">
+        Вы прошли все 16 глав — полный курс по HTML и CSS!
+        Теперь вы знаете как создавать структурированные, красивые и адаптивные веб-страницы.
+      </p>
+      <a href="../../index.html" style="display:inline-block; margin-top:16px;
+         background:white; color:#27ae60; padding:12px 28px;
+         border-radius:50px; font-weight:700; text-decoration:none;
+         font-size:0.95rem;">
+        🏠 На главную страницу
+      </a>
+    </div>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="ch15-css-grid.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 15: CSS Grid</span>
+        </div>
+      </a>
+      <a href="../../index.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>К оглавлению</span>
+          <span class="nav-sub">Все главы курса</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

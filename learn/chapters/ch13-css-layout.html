@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 13: CSS Layout — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch13">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 13: CSS Layout</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 13</div>
+      <div class="sidebar-title">CSS Layout</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Display
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Position
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Overflow и visibility
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Z-index
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Float и clearfix
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch13-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📐 Глава 13</div>
+      <h1 class="chapter-title">CSS Layout</h1>
+      <p class="chapter-intro">
+        Layout (компоновка) — это расположение элементов на странице. CSS предоставляет
+        несколько механизмов компоновки: <code>display</code>, <code>position</code>, <code>float</code>.
+        Понимание этих свойств — основа вёрстки веб-страниц.
+      </p>
+    </div>
+
+    <!-- LESSON 1: Display -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Display</h2>
+      <p class="lesson-desc">
+        Свойство <code>display</code> определяет, как элемент отображается в потоке документа.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Значение</th><th>Описание</th><th>Примеры тегов</th></tr>
+        <tr><td><code>block</code></td><td>Занимает всю ширину, новая строка до и после</td><td><code>&lt;div&gt;, &lt;p&gt;, &lt;h1&gt;</code></td></tr>
+        <tr><td><code>inline</code></td><td>Только нужная ширина, не разрывает строку</td><td><code>&lt;span&gt;, &lt;a&gt;, &lt;strong&gt;</code></td></tr>
+        <tr><td><code>inline-block</code></td><td>Как inline, но можно задать ширину/высоту</td><td>—</td></tr>
+        <tr><td><code>none</code></td><td>Элемент скрыт и не занимает место</td><td>—</td></tr>
+        <tr><td><code>flex</code></td><td>Flexbox контейнер</td><td>—</td></tr>
+        <tr><td><code>grid</code></td><td>Grid контейнер</td><td>—</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Значения display</div>
+          <textarea class="code-editor" id="ex1-code" rows="26"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .block1, .block2 {
+    display: block;
+    background: #d6eaf8;
+    padding: 6px 12px;
+    margin: 4px 0;
+  }
+  .inl {
+    display: inline;
+    background: #d5f5e3;
+    padding: 4px 8px;
+  }
+  .inl-block {
+    display: inline-block;
+    background: #fdebd0;
+    padding: 8px 14px;
+    width: 100px;
+    text-align: center;
+    margin: 4px;
+  }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+  <div class="block1">Block 1</div>
+  <div class="block2">Block 2</div>
+  <span class="inl">inline 1</span>
+  <span class="inl">inline 2</span>
+  <span class="inl">inline 3</span>
+  <br><br>
+  <span class="inl-block">inline-block 1</span>
+  <span class="inl-block">inline-block 2</span>
+  <p class="hidden">Скрытый элемент</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: Position -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Position</h2>
+      <p class="lesson-desc">
+        Свойство <code>position</code> управляет позиционированием элементов.
+        Совместно используются свойства <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Значение</th><th>Описание</th></tr>
+        <tr><td><code>static</code></td><td>По умолчанию — элемент в обычном потоке</td></tr>
+        <tr><td><code>relative</code></td><td>Смещение от нормальной позиции</td></tr>
+        <tr><td><code>absolute</code></td><td>Относительно ближайшего positioned родителя</td></tr>
+        <tr><td><code>fixed</code></td><td>Относительно окна браузера, не скроллится</td></tr>
+        <tr><td><code>sticky</code></td><td>Прилипает при прокрутке</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Позиционирование</div>
+          <textarea class="code-editor" id="ex2-code" rows="28"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .container {
+    position: relative;
+    background: #ecf0f1;
+    height: 120px;
+    margin: 12px;
+    border: 1px dashed #bbb;
+  }
+  .rel {
+    position: relative;
+    top: 10px; left: 20px;
+    background: #d6eaf8;
+    padding: 6px 12px;
+    display: inline-block;
+  }
+  .abs {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: #fdebd0;
+    padding: 6px 12px;
+    border: 1px solid #e67e22;
+  }
+  .normal {
+    background: #d5f5e3;
+    padding: 6px 12px;
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <span class="normal">normal</span>
+    <span class="rel">relative (сдвинут)</span>
+    <span class="abs">absolute (угол)</span>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: Overflow and Visibility -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Overflow и visibility</h2>
+      <p class="lesson-desc">
+        Свойство <code>overflow</code> управляет поведением содержимого, которое выходит за пределы элемента.
+        <code>visibility</code> скрывает элемент, но сохраняет его место.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Overflow и visibility</div>
+          <textarea class="code-editor" id="ex3-code" rows="28"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .box {
+    width: 180px; height: 70px;
+    border: 2px solid #aaa;
+    padding: 8px;
+    margin: 8px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 0.85rem;
+  }
+  .ov-visible { overflow: visible; background: #fef9e7; }
+  .ov-hidden  { overflow: hidden;  background: #fdf2f8; }
+  .ov-scroll  { overflow: scroll;  background: #eaf4fd; }
+  .ov-auto    { overflow: auto;    background: #eafaf1; }
+  .vis-hidden { visibility: hidden; background: #f4f6f7; }
+</style>
+</head>
+<body>
+  <div class="box ov-visible">
+    <b>visible</b> — текст выходит за пределы блока без отсечения
+  </div>
+  <div class="box ov-hidden">
+    <b>hidden</b> — лишнее содержимое отрезается и скрывается
+  </div>
+  <div class="box ov-scroll">
+    <b>scroll</b> — полосы прокрутки всегда видны
+  </div>
+  <div class="box ov-auto">
+    <b>auto</b> — полосы прокрутки появляются при необходимости
+  </div>
+  <div class="box vis-hidden">
+    <b>visibility: hidden</b> — скрыт, но место занято
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: Z-index -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Z-index</h2>
+      <p class="lesson-desc">
+        Свойство <code>z-index</code> управляет порядком наложения positioned-элементов.
+        Чем больше значение, тем выше элемент на «стопке». Работает только с
+        элементами, у которых <code>position</code> ≠ <code>static</code>.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Z-index — слои элементов</div>
+          <textarea class="code-editor" id="ex4-code" rows="24"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .container { position: relative; height: 120px; }
+  .layer {
+    position: absolute;
+    width: 120px; height: 80px;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 6px;
+  }
+  .l1 { background: #fadbd8; border-color:#e74c3c; z-index:1; top:10px; left:10px; }
+  .l2 { background: #d6eaf8; border-color:#2980b9; z-index:2; top:30px; left:50px; }
+  .l3 { background: #d5f5e3; border-color:#27ae60; z-index:3; top:50px; left:90px; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="layer l1">z-index:1</div>
+    <div class="layer l2">z-index:2</div>
+    <div class="layer l3">z-index:3</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: Float -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Float и clearfix</h2>
+      <p class="lesson-desc">
+        Свойство <code>float</code> выносит элемент в сторону, позволяя тексту обтекать его.
+        Ранее использовалось для компоновки, сейчас чаще применяется для обтекания изображений.
+        <code>clear</code> отменяет обтекание.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Float и обтекание текста</div>
+          <textarea class="code-editor" id="ex5-code" rows="24"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, sans-serif; padding: 12px; }
+  .img-left {
+    float: left;
+    width: 80px; height: 80px;
+    background: #d6eaf8;
+    border: 2px solid #2980b9;
+    margin: 0 12px 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 6px;
+  }
+  .clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  p { margin: 4px 0; }
+</style>
+</head>
+<body>
+  <div class="clearfix">
+    <div class="img-left">🖼️</div>
+    <p><b>Float: left</b> — изображение слева, текст обтекает справа.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Pellentesque habitant morbi tristique senectus.</p>
+  </div>
+  <p style="clear:both; background:#eafaf1; padding:8px; margin-top:8px;">
+    Этот абзац после clearfix — не обтекает.
+  </p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Flexbox и Grid — современная альтернатива float.</strong>
+          Для создания колонок и сеток сегодня используют Flexbox (Глава 14) или CSS Grid (Глава 15).
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 13</h3>
+          <p>Попрактикуйтесь с позиционированием элементов</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте страницу с несколькими блоками. Используйте:
+          <ul>
+            <li>Тег с <code>display: block</code></li>
+            <li>Тег с <code>display: inline-block</code></li>
+            <li>Элемент с <code>position: relative</code></li>
+            <li>Элемент с <code>position: absolute</code> внутри родителя с <code>position: relative</code></li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch13-exercise-code" rows="16"><!-- Напишите ваш HTML+CSS код здесь -->
+</textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch13-exercise')" data-exercise-id="ch13-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch13-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+
+        <div class="exercise-feedback" id="ch13-exercise-feedback"></div>
+
+        <div class="exercise-preview" id="ch13-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch13-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="ch12-css-typography.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 12: CSS Типографика</span>
+        </div>
+      </a>
+      <a href="ch14-css-flexbox.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">Глава 14: CSS Flexbox</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

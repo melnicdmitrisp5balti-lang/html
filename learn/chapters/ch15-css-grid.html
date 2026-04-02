@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 15: CSS Grid — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch15">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 15: CSS Grid</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 15</div>
+      <div class="sidebar-title">CSS Grid</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Что такое CSS Grid?
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Колонки и строки
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Промежутки и выравнивание
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Размещение элементов
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Именованные области
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch15-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">🔲 Глава 15</div>
+      <h1 class="chapter-title">CSS Grid</h1>
+      <p class="chapter-intro">
+        CSS Grid — двумерная система компоновки, позволяющая работать одновременно
+        со строками и столбцами. Grid идеально подходит для создания сложных макетов
+        страниц, фотогалерей и панелей управления.
+      </p>
+    </div>
+
+    <!-- LESSON 1: What is CSS Grid -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Что такое CSS Grid?</h2>
+      <p class="lesson-desc">
+        Grid включается свойством <code>display: grid</code>. Сетка определяется колонками
+        (<code>grid-template-columns</code>) и строками (<code>grid-template-rows</code>).
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">🔲</span>
+        <div class="callout-body">
+          <strong>Grid vs Flexbox:</strong> Flexbox — одномерный (строки ИЛИ столбцы).
+          Grid — двумерный (строки И столбцы одновременно). Используйте Grid для макетов страниц,
+          Flexbox — для компонентов внутри.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Первая Grid-сетка</div>
+          <textarea class="code-editor" id="ex1-code" rows="22"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+    background: #f0f0f0;
+  }
+  .item {
+    background: #2980b9;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+  }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: Columns and Rows -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Колонки и строки</h2>
+      <p class="lesson-desc">
+        <code>grid-template-columns</code> задаёт ширину каждой колонки.
+        Единица <code>fr</code> (fraction) — доля свободного пространства.
+        Функция <code>repeat()</code> помогает не повторять одинаковые значения.
+        <code>minmax()</code> задаёт минимальный и максимальный размер трека.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Размеры колонок и строк</div>
+          <textarea class="code-editor" id="ex2-code" rows="30"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, sans-serif; font-size:0.85rem; }
+  h4 { margin: 12px 0 4px; }
+  .grid { display:grid; gap:6px; padding:6px; background:#f5f5f5; margin-bottom:8px; }
+  .item {
+    background:#27ae60; color:white;
+    padding:10px; text-align:center;
+    border-radius:4px; font-weight:bold;
+  }
+  .g1 { grid-template-columns: 200px 1fr 2fr; }
+  .g2 { grid-template-columns: repeat(4, 1fr); }
+  .g3 { grid-template-columns: repeat(3, minmax(80px, 1fr)); }
+</style>
+</head>
+<body>
+  <h4>200px 1fr 2fr</h4>
+  <div class="grid g1">
+    <div class="item">200px</div><div class="item">1fr</div><div class="item">2fr</div>
+  </div>
+  <h4>repeat(4, 1fr)</h4>
+  <div class="grid g2">
+    <div class="item">1</div><div class="item">2</div>
+    <div class="item">3</div><div class="item">4</div>
+  </div>
+  <h4>repeat(3, minmax(80px, 1fr))</h4>
+  <div class="grid g3">
+    <div class="item">A</div><div class="item">B</div><div class="item">C</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: Gaps and Alignment -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Промежутки и выравнивание</h2>
+      <p class="lesson-desc">
+        Свойство <code>gap</code> (или <code>column-gap</code> / <code>row-gap</code>) задаёт
+        промежутки между ячейками. <code>justify-items</code> и <code>align-items</code>
+        выравнивают содержимое ячеек по горизонтали и вертикали соответственно.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Gap и выравнивание</div>
+          <textarea class="code-editor" id="ex3-code" rows="26"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 20px;
+    column-gap: 8px;
+    justify-items: center;
+    align-items: end;
+    background: #f5f5f5;
+    padding: 12px;
+    height: 150px;
+  }
+  .item {
+    background: #8e44ad;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  .tall { height: 50px; display:flex; align-items:center; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="item">1</div>
+    <div class="item tall">2 (выше)</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: Placing Items -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Размещение элементов</h2>
+      <p class="lesson-desc">
+        С помощью <code>grid-column</code> и <code>grid-row</code> можно точно разместить
+        элемент в сетке и растянуть его на несколько ячеек.
+        Синтаксис: <code>grid-column: начало / конец</code> или <code>span N</code>.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">grid-column и grid-row</div>
+          <textarea class="code-editor" id="ex4-code" rows="28"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 8px;
+    background: #f5f5f5;
+  }
+  .item {
+    padding: 14px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 4px;
+    color: white;
+  }
+  .a { background: #e74c3c; grid-column: 1 / 3; } /* 2 колонки */
+  .b { background: #2980b9; grid-row: 1 / 3; grid-column: 4; } /* 2 строки */
+  .c { background: #27ae60; grid-column: span 2; } /* span 2 */
+  .d { background: #e67e22; }
+  .e { background: #8e44ad; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="item a">A (1/3 col)</div>
+    <div class="item b">B (2 rows)</div>
+    <div class="item c">C (span 2)</div>
+    <div class="item d">D</div>
+    <div class="item e">E</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: Named Areas -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Именованные области</h2>
+      <p class="lesson-desc">
+        <code>grid-template-areas</code> позволяет задавать макет страницы с помощью
+        наглядных имён. Каждый элемент получает имя через <code>grid-area</code>.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Макет страницы через grid-areas</div>
+          <textarea class="code-editor" id="ex5-code" rows="36"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .page {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "header  header"
+      "sidebar main"
+      "footer  footer";
+    gap: 8px;
+    height: 280px;
+    font-family: Arial, sans-serif;
+  }
+  .page > * {
+    padding: 12px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .header  { grid-area: header;  background: #2c3e50; }
+  .sidebar { grid-area: sidebar; background: #2980b9; }
+  .main    { grid-area: main;    background: #27ae60; }
+  .footer  { grid-area: footer;  background: #7f8c8d; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">Header</div>
+    <div class="sidebar">Sidebar</div>
+    <div class="main">Main Content</div>
+    <div class="footer">Footer</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 15</h3>
+          <p>Создайте сетку карточек с CSS Grid</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте фотогалерею или сетку карточек с помощью CSS Grid. Используйте:
+          <ul>
+            <li>Свойство <code>display: grid</code></li>
+            <li>Свойство <code>grid-template-columns</code> с минимум 3 колонками</li>
+            <li>Свойство <code>gap</code> для промежутков</li>
+            <li>Хотя бы один элемент с <code>grid-column: span 2</code> или <code>grid-row: span 2</code></li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch15-exercise-code" rows="16"><!-- Напишите ваш HTML+CSS код здесь -->
+</textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch15-exercise')" data-exercise-id="ch15-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch15-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+
+        <div class="exercise-feedback" id="ch15-exercise-feedback"></div>
+
+        <div class="exercise-preview" id="ch15-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch15-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="ch14-css-flexbox.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 14: CSS Flexbox</span>
+        </div>
+      </a>
+      <a href="ch16-css-responsive.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">Глава 16: Адаптивный дизайн</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

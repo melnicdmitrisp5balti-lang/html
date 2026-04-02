@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 12: CSS Типографика — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch12">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 12: CSS Типографика</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 12</div>
+      <div class="sidebar-title">CSS Типографика</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Цвет и фон
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Шрифты (font-family)
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Размер и начертание
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Свойства текста
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Google Fonts
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch12-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">🔤 Глава 12</div>
+      <h1 class="chapter-title">CSS Типографика</h1>
+      <p class="chapter-intro">
+        Типографика — оформление текста. CSS предоставляет мощные инструменты для управления
+        цветами, шрифтами, размерами, выравниванием и другими свойствами текста.
+        Хорошая типографика делает сайт читаемым и привлекательным.
+      </p>
+    </div>
+
+    <!-- LESSON 1: Color and Background -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Цвет и фон</h2>
+      <p class="lesson-desc">
+        Свойство <code>color</code> задаёт цвет текста. <code>background-color</code> — цвет фона.
+        Цвет можно указывать разными способами:
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Формат</th><th>Пример</th><th>Описание</th></tr>
+        <tr><td>Имя</td><td><code>red</code></td><td>140 предустановленных имён</td></tr>
+        <tr><td>HEX</td><td><code>#e74c3c</code></td><td>Шестнадцатеричный формат</td></tr>
+        <tr><td>RGB</td><td><code>rgb(231, 76, 60)</code></td><td>Красный, зелёный, синий (0–255)</td></tr>
+        <tr><td>RGBA</td><td><code>rgba(231, 76, 60, 0.5)</code></td><td>RGB + прозрачность (0–1)</td></tr>
+        <tr><td>HSL</td><td><code>hsl(5, 78%, 57%)</code></td><td>Цвет, насыщенность, яркость</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Цвета в CSS</div>
+          <textarea class="code-editor" id="ex1-code" rows="22"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { padding: 16px; }
+  .c1 { color: red; background: lightyellow; padding: 6px; }
+  .c2 { color: #e74c3c; background: #fef9e7; padding: 6px; }
+  .c3 { color: rgb(41,128,185); background: rgb(214,234,248); padding:6px; }
+  .c4 { color: white; background: rgba(39,174,96,0.8); padding: 6px; }
+  .c5 { color: hsl(280,60%,30%); background: hsl(280,60%,90%); padding: 6px; }
+</style>
+</head>
+<body>
+  <p class="c1">Именованный цвет: red</p>
+  <p class="c2">HEX: #e74c3c</p>
+  <p class="c3">RGB: rgb(41,128,185)</p>
+  <p class="c4">RGBA с прозрачностью</p>
+  <p class="c5">HSL цвет</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: Font Family -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Шрифты (font-family)</h2>
+      <p class="lesson-desc">
+        Свойство <code>font-family</code> задаёт шрифт. Указывают несколько шрифтов через запятую —
+        браузер использует первый доступный. Последний всегда должен быть общее семейство
+        (<code>serif</code>, <code>sans-serif</code>, <code>monospace</code>).
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Шрифты и их семейства</div>
+          <textarea class="code-editor" id="ex2-code" rows="20"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  p { font-size: 1.1rem; margin: 8px 0; padding: 8px; background:#f8f9fa; }
+  .f1 { font-family: Georgia, 'Times New Roman', serif; }
+  .f2 { font-family: Arial, Helvetica, sans-serif; }
+  .f3 { font-family: 'Courier New', Courier, monospace; }
+  .f4 { font-family: Impact, fantasy; }
+</style>
+</head>
+<body>
+  <p class="f1">Georgia (serif) — классический шрифт</p>
+  <p class="f2">Arial (sans-serif) — современный шрифт</p>
+  <p class="f3">Courier New (monospace) — для кода</p>
+  <p class="f4">Impact (fantasy) — декоративный</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: Font Size and Weight -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Размер и начертание</h2>
+      <p class="lesson-desc">
+        <code>font-size</code> задаёт размер шрифта, <code>font-weight</code> — жирность,
+        <code>font-style</code> — наклон (курсив).
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значения</th></tr>
+        <tr><td><code>font-size</code></td><td><code>16px</code>, <code>1.2rem</code>, <code>120%</code>, <code>large</code></td></tr>
+        <tr><td><code>font-weight</code></td><td><code>normal</code>, <code>bold</code>, <code>100</code>–<code>900</code></td></tr>
+        <tr><td><code>font-style</code></td><td><code>normal</code>, <code>italic</code>, <code>oblique</code></td></tr>
+        <tr><td><code>font-variant</code></td><td><code>normal</code>, <code>small-caps</code></td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Размеры и начертания шрифта</div>
+          <textarea class="code-editor" id="ex3-code" rows="22"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { padding: 12px; font-family: Arial, sans-serif; }
+  .s1 { font-size: 12px; }
+  .s2 { font-size: 18px; }
+  .s3 { font-size: 1.5rem; }
+  .s4 { font-size: 2em; }
+  .w1 { font-weight: 300; }
+  .w2 { font-weight: normal; }
+  .w3 { font-weight: bold; }
+  .w4 { font-weight: 900; }
+  .italic { font-style: italic; }
+</style>
+</head>
+<body>
+  <p class="s1">font-size: 12px</p>
+  <p class="s2">font-size: 18px</p>
+  <p class="s3">font-size: 1.5rem</p>
+  <p class="w1">font-weight: 300 (светлый)</p>
+  <p class="w3">font-weight: bold</p>
+  <p class="w4">font-weight: 900 (черный)</p>
+  <p class="italic">font-style: italic</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: Text Properties -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Свойства текста</h2>
+      <p class="lesson-desc">
+        CSS предлагает множество свойств для управления внешним видом текста:
+        выравнивание, отступы, межстрочный интервал, трансформация и другие.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Описание</th></tr>
+        <tr><td><code>text-align</code></td><td>Выравнивание: <code>left</code>, <code>center</code>, <code>right</code>, <code>justify</code></td></tr>
+        <tr><td><code>text-decoration</code></td><td>Подчёркивание: <code>underline</code>, <code>line-through</code>, <code>none</code></td></tr>
+        <tr><td><code>text-transform</code></td><td><code>uppercase</code>, <code>lowercase</code>, <code>capitalize</code></td></tr>
+        <tr><td><code>line-height</code></td><td>Межстрочный интервал: <code>1.5</code>, <code>24px</code></td></tr>
+        <tr><td><code>letter-spacing</code></td><td>Интервал между буквами: <code>2px</code></td></tr>
+        <tr><td><code>word-spacing</code></td><td>Интервал между словами</td></tr>
+        <tr><td><code>text-indent</code></td><td>Отступ первой строки: <code>2em</code></td></tr>
+        <tr><td><code>text-shadow</code></td><td>Тень текста: <code>2px 2px 4px grey</code></td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Свойства текста</div>
+          <textarea class="code-editor" id="ex4-code" rows="26"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, sans-serif; padding: 12px; }
+  .center { text-align: center; background:#eaf4fd; padding:8px; margin:4px 0; }
+  .right  { text-align: right;  background:#eafaf1; padding:8px; margin:4px 0; }
+  .uline  { text-decoration: underline; }
+  .strike { text-decoration: line-through; color: grey; }
+  .upper  { text-transform: uppercase; letter-spacing: 2px; font-weight:bold; }
+  .shadow {
+    font-size: 1.4rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    color: #2c3e50;
+  }
+  .lead {
+    line-height: 1.9;
+    text-indent: 2em;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+  <p class="center">Текст по центру</p>
+  <p class="right">Текст вправо</p>
+  <p class="uline">Подчёркнутый текст</p>
+  <p class="strike">Зачёркнутый текст</p>
+  <p class="upper">uppercase</p>
+  <p class="shadow">Текст с тенью</p>
+  <p class="lead">Абзац с увеличенным межстрочным расстоянием и отступом первой строки. Удобно для чтения длинных текстов.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: Google Fonts -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Google Fonts</h2>
+      <p class="lesson-desc">
+        Google Fonts — бесплатный сервис с сотнями красивых шрифтов. Подключите шрифт
+        через <code>&lt;link&gt;</code> в <code>&lt;head&gt;</code> и используйте его в CSS.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">🌐</span>
+        <div class="callout-body">
+          <strong>Как подключить:</strong> Зайдите на <strong>fonts.google.com</strong>, выберите шрифт,
+          скопируйте тег <code>&lt;link&gt;</code> и вставьте в <code>&lt;head&gt;</code> вашей страницы.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Google Fonts</div>
+          <textarea class="code-editor" id="ex5-code" rows="18"><!DOCTYPE html>
+<html>
+<head>
+  <!-- Подключаем шрифт Roboto с Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Roboto', sans-serif; padding: 16px; }
+    h1   { font-weight: 700; color: #2c3e50; }
+    p    { font-weight: 300; color: #555; line-height: 1.6; }
+    .bold { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>Шрифт Roboto (700)</h1>
+  <p>Тонкий текст Roboto (300). Очень читаемый шрифт.</p>
+  <p class="bold">Жирный текст Roboto (700).</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 12</h3>
+          <p>Оформите текстовый блок с помощью CSS-типографики</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте страницу с оформленным текстом. Используйте:
+          <ul>
+            <li>Свойство <code>color</code> для цвета текста</li>
+            <li>Свойство <code>background-color</code> для фона</li>
+            <li>Свойство <code>font-size</code> для размера шрифта</li>
+            <li>Свойство <code>font-weight</code> (bold или число)</li>
+            <li>Свойство <code>text-align</code> для выравнивания</li>
+            <li>Свойство <code>line-height</code> для межстрочного интервала</li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch12-exercise-code" rows="16"><!-- Напишите ваш HTML+CSS код здесь -->
+</textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch12-exercise')" data-exercise-id="ch12-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch12-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+
+        <div class="exercise-feedback" id="ch12-exercise-feedback"></div>
+
+        <div class="exercise-preview" id="ch12-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch12-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="ch11-css-box-model.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 11: Блочная модель CSS</span>
+        </div>
+      </a>
+      <a href="ch13-css-layout.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">Глава 13: CSS Layout</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

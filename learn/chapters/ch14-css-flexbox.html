@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 14: CSS Flexbox — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch14">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 14: CSS Flexbox</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 14</div>
+      <div class="sidebar-title">CSS Flexbox</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Что такое Flexbox?
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> flex-direction и flex-wrap
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> justify-content
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> align-items и align-content
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Свойства flex-элементов
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch14-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">💪 Глава 14</div>
+      <h1 class="chapter-title">CSS Flexbox</h1>
+      <p class="chapter-intro">
+        Flexbox (Flexible Box Layout) — мощный инструмент CSS для создания гибких
+        одномерных макетов (строк или столбцов). С Flexbox легко выравнивать элементы,
+        распределять пространство и создавать адаптивные интерфейсы.
+      </p>
+    </div>
+
+    <!-- LESSON 1: What is Flexbox -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Что такое Flexbox?</h2>
+      <p class="lesson-desc">
+        Чтобы включить Flexbox, достаточно написать <code>display: flex</code> на родительском элементе
+        (flex-контейнер). Все его прямые дочерние элементы автоматически становятся flex-элементами
+        и выстраиваются в ряд.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">📦</span>
+        <div class="callout-body">
+          <strong>Две оси Flexbox:</strong>
+          <strong>главная ось (main axis)</strong> — направление размещения элементов (по умолчанию горизонтально),
+          <strong>поперечная ось (cross axis)</strong> — перпендикулярно главной.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Первый flex-контейнер</div>
+          <textarea class="code-editor" id="ex1-code" rows="22"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .flex-container {
+    display: flex;
+    background: #eaf4fd;
+    border: 2px solid #aed6f1;
+    padding: 12px;
+    gap: 12px;
+  }
+  .flex-item {
+    background: #2980b9;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+</style>
+</head>
+<body>
+  <div class="flex-container">
+    <div class="flex-item">1</div>
+    <div class="flex-item">2</div>
+    <div class="flex-item">3</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: flex-direction and flex-wrap -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — flex-direction и flex-wrap</h2>
+      <p class="lesson-desc">
+        <code>flex-direction</code> задаёт направление главной оси.
+        <code>flex-wrap</code> управляет переносом элементов на новую строку.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>flex-direction</th><th>Описание</th></tr>
+        <tr><td><code>row</code></td><td>Горизонтально слева направо (по умолчанию)</td></tr>
+        <tr><td><code>row-reverse</code></td><td>Горизонтально справа налево</td></tr>
+        <tr><td><code>column</code></td><td>Вертикально сверху вниз</td></tr>
+        <tr><td><code>column-reverse</code></td><td>Вертикально снизу вверх</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">flex-direction и flex-wrap</div>
+          <textarea class="code-editor" id="ex2-code" rows="34"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .fc {
+    display: flex;
+    background: #f0f0f0;
+    padding: 8px; gap: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+  .fc.col { flex-direction: column; }
+  .fc.wrap { flex-wrap: wrap; width: 200px; }
+  .fi {
+    background: #2980b9; color: white;
+    padding: 10px 16px; border-radius: 4px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <p><b>row (по умолчанию)</b></p>
+  <div class="fc">
+    <div class="fi">1</div><div class="fi">2</div><div class="fi">3</div>
+  </div>
+  <p><b>column</b></p>
+  <div class="fc col">
+    <div class="fi">1</div><div class="fi">2</div><div class="fi">3</div>
+  </div>
+  <p><b>flex-wrap: wrap (ширина 200px)</b></p>
+  <div class="fc wrap">
+    <div class="fi">1</div><div class="fi">2</div>
+    <div class="fi">3</div><div class="fi">4</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: justify-content -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — justify-content</h2>
+      <p class="lesson-desc">
+        <code>justify-content</code> выравнивает элементы <em>по главной оси</em>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Значение</th><th>Описание</th></tr>
+        <tr><td><code>flex-start</code></td><td>К началу (по умолчанию)</td></tr>
+        <tr><td><code>flex-end</code></td><td>К концу</td></tr>
+        <tr><td><code>center</code></td><td>По центру</td></tr>
+        <tr><td><code>space-between</code></td><td>Равные промежутки между элементами</td></tr>
+        <tr><td><code>space-around</code></td><td>Равные промежутки вокруг элементов</td></tr>
+        <tr><td><code>space-evenly</code></td><td>Одинаковые промежутки везде</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">justify-content</div>
+          <textarea class="code-editor" id="ex3-code" rows="32"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .fc {
+    display: flex;
+    background: #f5f5f5;
+    padding: 8px;
+    margin-bottom: 6px;
+    border: 1px solid #ddd;
+  }
+  .fi {
+    background: #27ae60; color: white;
+    padding: 8px 16px; border-radius: 4px;
+    font-weight: bold;
+  }
+  .jc-start   { justify-content: flex-start; }
+  .jc-end     { justify-content: flex-end; }
+  .jc-center  { justify-content: center; }
+  .jc-between { justify-content: space-between; }
+  .jc-around  { justify-content: space-around; }
+</style>
+</head>
+<body>
+  <p>flex-start</p>
+  <div class="fc jc-start"><div class="fi">A</div><div class="fi">B</div><div class="fi">C</div></div>
+  <p>flex-end</p>
+  <div class="fc jc-end"><div class="fi">A</div><div class="fi">B</div><div class="fi">C</div></div>
+  <p>center</p>
+  <div class="fc jc-center"><div class="fi">A</div><div class="fi">B</div><div class="fi">C</div></div>
+  <p>space-between</p>
+  <div class="fc jc-between"><div class="fi">A</div><div class="fi">B</div><div class="fi">C</div></div>
+  <p>space-around</p>
+  <div class="fc jc-around"><div class="fi">A</div><div class="fi">B</div><div class="fi">C</div></div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: align-items -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — align-items и align-content</h2>
+      <p class="lesson-desc">
+        <code>align-items</code> выравнивает элементы <em>по поперечной оси</em> (для row — вертикально).
+        <code>align-content</code> работает при нескольких строках (<code>flex-wrap: wrap</code>).
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">align-items</div>
+          <textarea class="code-editor" id="ex4-code" rows="34"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .fc {
+    display: flex;
+    height: 80px;
+    background: #f5f5f5;
+    padding: 4px;
+    margin-bottom: 6px;
+    border: 1px solid #ddd;
+    gap: 6px;
+  }
+  .fi {
+    background: #8e44ad;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  .fi.tall { height: 60px; }
+  .ai-start   { align-items: flex-start; }
+  .ai-end     { align-items: flex-end; }
+  .ai-center  { align-items: center; }
+  .ai-stretch { align-items: stretch; }
+</style>
+</head>
+<body>
+  <p>flex-start</p>
+  <div class="fc ai-start"><div class="fi">A</div><div class="fi tall">B</div><div class="fi">C</div></div>
+  <p>flex-end</p>
+  <div class="fc ai-end"><div class="fi">A</div><div class="fi tall">B</div><div class="fi">C</div></div>
+  <p>center</p>
+  <div class="fc ai-center"><div class="fi">A</div><div class="fi tall">B</div><div class="fi">C</div></div>
+  <p>stretch (по умолчанию)</p>
+  <div class="fc ai-stretch"><div class="fi">A</div><div class="fi">B</div><div class="fi">C</div></div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: Flex Item Properties -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Свойства flex-элементов</h2>
+      <p class="lesson-desc">
+        Свойства, применяемые к <em>самим flex-элементам</em> (не к контейнеру):
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Описание</th></tr>
+        <tr><td><code>flex-grow</code></td><td>Коэффициент роста (0 = не растёт, 1 = растёт)</td></tr>
+        <tr><td><code>flex-shrink</code></td><td>Коэффициент сжатия (по умолчанию 1)</td></tr>
+        <tr><td><code>flex-basis</code></td><td>Базовый размер до распределения пространства</td></tr>
+        <tr><td><code>flex</code></td><td>Сокращение: <code>flex: grow shrink basis</code></td></tr>
+        <tr><td><code>order</code></td><td>Порядок отображения (по умолчанию 0)</td></tr>
+        <tr><td><code>align-self</code></td><td>Выравнивание конкретного элемента по поперечной оси</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">flex-grow и order</div>
+          <textarea class="code-editor" id="ex5-code" rows="28"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  .fc {
+    display: flex;
+    background: #f5f5f5;
+    padding: 10px;
+    gap: 10px;
+    margin-bottom: 14px;
+    border: 1px solid #ddd;
+  }
+  .fi {
+    background: #e67e22; color: white;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .grow1 { flex-grow: 1; }
+  .grow2 { flex-grow: 2; }
+  .order-last { order: 99; background: #e74c3c; }
+  .self-end   { align-self: flex-end; height: 50px; }
+</style>
+</head>
+<body>
+  <p><b>flex-grow (пропорциональный рост)</b></p>
+  <div class="fc">
+    <div class="fi grow1">grow:1</div>
+    <div class="fi grow2">grow:2</div>
+    <div class="fi grow1">grow:1</div>
+  </div>
+  <p><b>order и align-self</b></p>
+  <div class="fc" style="align-items:flex-start; height:60px">
+    <div class="fi">1</div>
+    <div class="fi order-last">3 (order:99)</div>
+    <div class="fi self-end">align-self:end</div>
+    <div class="fi">2</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 14</h3>
+          <p>Создайте навигацию и карточки с помощью Flexbox</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте страницу с навигационным меню и набором карточек.
+          Используйте Flexbox:
+          <ul>
+            <li>Свойство <code>display: flex</code> на контейнере</li>
+            <li>Свойство <code>justify-content</code> для распределения элементов</li>
+            <li>Свойство <code>align-items</code> для вертикального выравнивания</li>
+            <li>Свойство <code>gap</code> для отступов между элементами</li>
+            <li>Свойство <code>flex-wrap: wrap</code> для переноса</li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch14-exercise-code" rows="16"><!-- Напишите ваш HTML+CSS код здесь -->
+</textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch14-exercise')" data-exercise-id="ch14-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch14-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+
+        <div class="exercise-feedback" id="ch14-exercise-feedback"></div>
+
+        <div class="exercise-preview" id="ch14-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch14-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="ch13-css-layout.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 13: CSS Layout</span>
+        </div>
+      </a>
+      <a href="ch15-css-grid.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">Глава 15: CSS Grid</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>
