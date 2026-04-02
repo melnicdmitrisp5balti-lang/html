@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 14 — Анимации (@keyframes) — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css14">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 14: Анимации (@keyframes)</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 14</div>
+      <div class="sidebar-title">Анимации (@keyframes)</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> @keyframes: from/to и проценты
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> animation-name, animation-duration
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> delay, iteration-count, direction
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> timing-function, fill-mode
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Shorthand и несколько анимаций
+      </a>
+      <a class="sidebar-link" data-target="lesson-6">
+        <span class="link-num">6</span> Спиннер, пульс, прыгающий мяч
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css14-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 14</div>
+      <h1 class="chapter-title">Анимации (@keyframes)</h1>
+      <p class="chapter-intro">
+        CSS-анимации позволяют создавать сложные многошаговые эффекты без JavaScript.
+        Ключевые кадры (@keyframes) описывают промежуточные состояния, а свойства animation управляют воспроизведением.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — @keyframes: from/to и проценты</h2>
+      <p class="lesson-desc">
+        Правило <code>@keyframes</code> описывает ключевые кадры анимации.
+        Используйте <code>from</code>/<code>to</code> для двух состояний или проценты для нескольких.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Синтаксис</th><th>Описание</th></tr>
+        <tr><td><code>@keyframes name { from{} to{} }</code></td><td>Анимация от начального до конечного состояния</td></tr>
+        <tr><td><code>@keyframes name { 0% {} 50% {} 100% {} }</code></td><td>Несколько ключевых кадров через проценты</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>from/to vs проценты:</strong> <code>from</code> = <code>0%</code>, <code>to</code> = <code>100%</code>.
+          Используйте проценты для нескольких ключевых кадров:
+          <code>@keyframes bounce { 0%{} 50%{} 100%{} }</code>
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="50"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 24px; display: flex; justify-content: center; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .box {
+    width: 200px;
+    height: 100px;
+    background: linear-gradient(135deg, #3498db, #9b59b6);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    animation: fadeIn 2s ease infinite alternate;
+  }
+</style>
+</head>
+<body>
+  <div class="box">fadeIn анимация</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — animation-name, animation-duration</h2>
+      <p class="lesson-desc">
+        <code>animation-name</code> указывает имя <code>@keyframes</code>, а <code>animation-duration</code>
+        задаёт длительность одного цикла анимации.
+      </p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Регистр важен:</strong> Имя анимации чувствительно к регистру. <code>slidein</code> ≠ <code>SlideIn</code>.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 24px; overflow: hidden; }
+  @keyframes slideIn {
+    from { transform: translateX(-150px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+  }
+  .box {
+    width: 180px;
+    height: 70px;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    animation-name: slideIn;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+</style>
+</head>
+<body>
+  <div class="box">slideIn</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — delay, iteration-count, direction</h2>
+      <p class="lesson-desc">
+        Управляйте задержкой, количеством повторений и направлением анимации
+        с помощью соответствующих свойств.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значения</th><th>Описание</th></tr>
+        <tr><td><code>animation-delay</code></td><td><code>0s</code>, <code>0.5s</code></td><td>Задержка перед стартом</td></tr>
+        <tr><td><code>animation-iteration-count</code></td><td><code>3</code> / <code>infinite</code></td><td>Количество повторений</td></tr>
+        <tr><td><code>animation-direction</code></td><td><code>normal</code> / <code>reverse</code> / <code>alternate</code> / <code>alternate-reverse</code></td><td>Направление воспроизведения</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>alternate:</strong> <code>animation-direction: alternate</code> создаёт эффект маятника —
+          анимация идёт вперёд, потом назад.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="58"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 24px; }
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-50px); }
+  }
+  .balls { display: flex; gap: 24px; align-items: flex-end; height: 100px; padding-top: 50px; }
+  .ball {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    animation: bounce 0.6s ease-in-out infinite alternate;
+  }
+  .ball-1 { background: #e74c3c; animation-delay: 0s; }
+  .ball-2 { background: #f39c12; animation-delay: 0.3s; }
+  .ball-3 { background: #3498db; animation-delay: 0.6s; }
+</style>
+</head>
+<body>
+  <h3>Мячи с разным delay</h3>
+  <div class="balls">
+    <div class="ball ball-1"></div>
+    <div class="ball ball-2"></div>
+    <div class="ball ball-3"></div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — timing-function, fill-mode</h2>
+      <p class="lesson-desc">
+        <code>animation-timing-function</code> управляет скоростью кадров, а <code>animation-fill-mode</code>
+        определяет, какие стили применяются до и после анимации.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значения</th><th>Описание</th></tr>
+        <tr><td><code>animation-timing-function</code></td><td><code>ease</code>, <code>linear</code>, <code>cubic-bezier</code></td><td>Кривая скорости</td></tr>
+        <tr><td><code>animation-fill-mode</code></td><td><code>none</code> / <code>forwards</code> / <code>backwards</code> / <code>both</code></td><td>Стили вне анимации</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>forwards:</strong> <code>animation-fill-mode: forwards</code> — элемент сохраняет стили последнего
+          кадра после завершения анимации. Без этого он вернётся в исходное состояние.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 24px; }
+  @keyframes expand {
+    from { width: 0; opacity: 0; }
+    to   { width: 200px; opacity: 1; }
+  }
+  .bar {
+    height: 36px;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: white;
+    font-size: 13px;
+    overflow: hidden;
+    animation: expand 1s ease-out forwards;
+    animation-play-state: paused;
+  }
+  button {
+    margin-bottom: 16px;
+    padding: 8px 18px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+</style>
+<script>
+  function restart() {
+    var bar = document.querySelector('.bar');
+    bar.style.animation = 'none';
+    bar.offsetHeight; // reflow
+    bar.style.animation = 'expand 1s ease-out forwards';
+  }
+</script>
+</head>
+<body>
+  <button onclick="restart()">▶ Запустить анимацию</button>
+  <div class="bar">fill-mode: forwards</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Shorthand и несколько анимаций</h2>
+      <p class="lesson-desc">
+        Сокращённое свойство <code>animation</code> задаёт все параметры в одну строку.
+        Несколько анимаций перечисляются через запятую.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Синтаксис</th><th>Описание</th></tr>
+        <tr><td><code>animation: name duration timing delay count direction fill-mode</code></td><td>Порядок shorthand</td></tr>
+        <tr><td><code>animation: spin 2s linear infinite, pulse 1s ease-in-out infinite alternate</code></td><td>Несколько анимаций через запятую</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Несколько анимаций:</strong>
+          <code>animation: spin 2s linear infinite, pulse 1s ease-in-out infinite alternate</code>
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="55"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 32px; display: flex; justify-content: center; }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes colorChange {
+    0%   { background: #3498db; }
+    33%  { background: #e74c3c; }
+    66%  { background: #2ecc71; }
+    100% { background: #3498db; }
+  }
+  .box {
+    width: 100px;
+    height: 100px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    animation:
+      spin 3s linear infinite,
+      colorChange 4s ease-in-out infinite;
+  }
+</style>
+</head>
+<body>
+  <div class="box">CSS</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 6 -->
+    <section class="lesson-section" id="lesson-6">
+      <h2 class="lesson-title">Урок 6 — Примеры: спиннер, пульс, прыгающий мяч</h2>
+      <p class="lesson-desc">
+        Три распространённых паттерна CSS-анимации: спиннер загрузки, пульсирующий элемент и прыгающий мяч.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex6-code" rows="65"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 24px; }
+  .demos { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+  .demo-item { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .demo-label { font-size: 13px; color: #666; }
+
+  /* Спиннер */
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #e0e0e0;
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  /* Пульс */
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.5); }
+    70%  { box-shadow: 0 0 0 16px rgba(231, 76, 60, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+  }
+  .pulse {
+    width: 48px;
+    height: 48px;
+    background: #e74c3c;
+    border-radius: 50%;
+    animation: pulse 1.5s ease infinite;
+  }
+
+  /* Прыгающий мяч */
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-40px); }
+  }
+  .ball {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 35% 35%, #f39c12, #e67e22);
+    border-radius: 50%;
+    animation: bounce 0.6s ease-in-out infinite alternate;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+  <div class="demos">
+    <div class="demo-item">
+      <div class="spinner"></div>
+      <span class="demo-label">Спиннер</span>
+    </div>
+    <div class="demo-item">
+      <div class="pulse"></div>
+      <span class="demo-label">Пульс</span>
+    </div>
+    <div class="demo-item">
+      <div class="ball"></div>
+      <span class="demo-label">Мяч</span>
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex6')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex6-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 14</h3>
+          <p>Создайте анимированный загрузочный спиннер</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Напишите HTML-страницу с CSS-анимациями:
+          <ul>
+            <li>Создать круглый элемент (<code>.spinner</code>) с <code>border</code> и цветным <code>border-top</code></li>
+            <li>Написать <code>@keyframes spin</code> с вращением от <code>0deg</code> до <code>360deg</code></li>
+            <li>Применить <code>animation: spin 1s linear infinite</code></li>
+            <li>Добавить второй анимированный элемент (например пульсирующий текст «Загрузка...»)</li>
+            <li>Использовать <code>animation-delay</code> для создания последовательного эффекта</li>
+            <li>Разместить элементы по центру страницы с помощью flexbox</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css14-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css14-exercise')" data-exercise-id="css14-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css14-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css14-exercise-feedback"></div>
+        <div class="exercise-preview" id="css14-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css14-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="css13-transitions.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">CSS Раздел 13: Переходы</span>
+        </div>
+      </a>
+      <a href="css15-filters.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 15: Фильтры и эффекты</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>
