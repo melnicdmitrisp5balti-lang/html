@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 7: Типы Input — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch7">
+
+<div class="sidebar-overlay"></div>
+
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 7: Типы Input</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 7</div>
+      <div class="sidebar-title">Типы Input</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1"><span class="link-num">1</span> text, password, email</a>
+      <a class="sidebar-link" data-target="lesson-2"><span class="link-num">2</span> number, range</a>
+      <a class="sidebar-link" data-target="lesson-3"><span class="link-num">3</span> date, time</a>
+      <a class="sidebar-link" data-target="lesson-4"><span class="link-num">4</span> color, file</a>
+      <a class="sidebar-link" data-target="lesson-5"><span class="link-num">5</span> checkbox, radio</a>
+      <a class="sidebar-link" data-target="lesson-6"><span class="link-num">6</span> submit, reset, button</a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch7-exercise"><span class="link-num">✎</span> Упражнение</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">🎛️ Глава 7</div>
+      <h1 class="chapter-title">Типы Input</h1>
+      <p class="chapter-intro">
+        HTML5 добавил множество новых типов полей ввода. Каждый тип предоставляет
+        встроенную валидацию и специальный интерфейс (особенно на мобильных устройствах).
+        Узнайте о всех доступных типах <code>input</code>.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — text, password, email, url, search</h2>
+      <p class="lesson-desc">
+        Базовые текстовые типы полей: <code>text</code> — обычный текст,
+        <code>password</code> — скрывает введённый текст,
+        <code>email</code> — проверяет формат email (содержит @),
+        <code>url</code> — проверяет формат URL,
+        <code>search</code> — поле поиска (с кнопкой очистки в некоторых браузерах).
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="20"><!DOCTYPE html>
+<html>
+<body>
+  <form>
+    <p>
+      <label>Имя:
+        <input type="text" name="name"
+          placeholder="Иван Петров">
+      </label>
+    </p>
+    <p>
+      <label>Пароль:
+        <input type="password" name="pwd"
+          placeholder="Минимум 8 символов">
+      </label>
+    </p>
+    <p>
+      <label>Email:
+        <input type="email" name="email"
+          placeholder="user@example.com">
+      </label>
+    </p>
+    <p>
+      <label>Сайт:
+        <input type="url" name="website"
+          placeholder="https://example.com">
+      </label>
+    </p>
+    <p>
+      <label>Поиск:
+        <input type="search" name="q"
+          placeholder="Найти...">
+      </label>
+    </p>
+    <button type="submit">Отправить</button>
+  </form>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — number и range</h2>
+      <p class="lesson-desc">
+        <code>type="number"</code> — числовое поле со стрелками.
+        Атрибуты <code>min</code>, <code>max</code>, <code>step</code> задают диапазон и шаг.
+        <code>type="range"</code> — ползунок для выбора значения в диапазоне.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="20"><!DOCTYPE html>
+<html>
+<body>
+  <form>
+    <p>
+      <label>Возраст (1–120):
+        <input type="number"
+          name="age" min="1" max="120"
+          value="25">
+      </label>
+    </p>
+    <p>
+      <label>Цена (шаг 100):
+        <input type="number"
+          name="price" min="0"
+          max="10000" step="100"
+          value="1000">
+      </label>
+    </p>
+    <p>
+      <label>Громкость:
+        <input type="range"
+          name="volume" min="0"
+          max="100" value="50"
+          oninput="this.nextElementSibling.value=this.value">
+        <output>50</output>
+      </label>
+    </p>
+    <p>
+      <label>Рейтинг (1–5):
+        <input type="range"
+          name="rating" min="1"
+          max="5" step="1" value="3"
+          oninput="this.nextElementSibling.value=this.value">
+        <output>3</output>
+      </label>
+    </p>
+  </form>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — date, time, datetime-local, month, week</h2>
+      <p class="lesson-desc">
+        HTML5 предоставляет удобные поля для выбора даты и времени с нативным
+        виджетом браузера (особенно удобно на мобильных устройствах).
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="20"><!DOCTYPE html>
+<html>
+<body>
+  <form>
+    <p>
+      <label>Дата:
+        <input type="date"
+          name="birthday"
+          min="1900-01-01">
+      </label>
+    </p>
+    <p>
+      <label>Время:
+        <input type="time" name="time">
+      </label>
+    </p>
+    <p>
+      <label>Дата и время:
+        <input type="datetime-local"
+               name="meeting">
+      </label>
+    </p>
+    <p>
+      <label>Месяц:
+        <input type="month" name="month">
+      </label>
+    </p>
+    <p>
+      <label>Неделя:
+        <input type="week" name="week">
+      </label>
+    </p>
+    <button type="submit">Записаться</button>
+  </form>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — color и file</h2>
+      <p class="lesson-desc">
+        <code>type="color"</code> — выбор цвета из палитры (возвращает значение в формате HEX).
+        <code>type="file"</code> — загрузка файла с устройства.
+        Атрибут <code>accept</code> ограничивает типы файлов.
+        Атрибут <code>multiple</code> разрешает загружать несколько файлов.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="20"><!DOCTYPE html>
+<html>
+<body>
+  <form>
+    <p>
+      <label>Любимый цвет:
+        <input type="color"
+               name="fav-color"
+               value="#e74c3c">
+      </label>
+    </p>
+    <p>
+      <label>Загрузить фото:
+        <input type="file"
+               name="photo"
+               accept="image/*">
+      </label>
+    </p>
+    <p>
+      <label>Загрузить документы:
+        <input type="file"
+               name="docs"
+               accept=".pdf,.doc,.docx"
+               multiple>
+      </label>
+    </p>
+    <button type="submit">Загрузить</button>
+  </form>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Атрибуты валидации</h2>
+      <p class="lesson-desc">
+        HTML5 позволяет задавать встроенную валидацию без JavaScript.
+        <code>required</code> — поле обязательно для заполнения.
+        <code>minlength</code>/<code>maxlength</code> — ограничение по длине строки.
+        <code>pattern</code> — регулярное выражение для проверки формата.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="22"><!DOCTYPE html>
+<html>
+<body>
+  <form>
+    <p>
+      <label>Логин (обязательно):
+        <input type="text"
+               name="login"
+               required
+               minlength="3"
+               maxlength="20"
+               placeholder="3-20 символов">
+      </label>
+    </p>
+    <p>
+      <label>Email (обязательно):
+        <input type="email"
+               name="email"
+               required
+               placeholder="user@mail.com">
+      </label>
+    </p>
+    <p>
+      <label>Телефон (формат):
+        <input type="tel"
+               name="phone"
+               pattern="\+7[0-9]{10}"
+               placeholder="+79001234567">
+      </label>
+    </p>
+    <button type="submit">
+      Зарегистрироваться
+    </button>
+  </form>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 6 -->
+    <section class="lesson-section" id="lesson-6">
+      <h2 class="lesson-title">Урок 6 — Атрибуты полей: readonly, disabled, autocomplete</h2>
+      <p class="lesson-desc">
+        <code>readonly</code> — поле только для чтения (значение отправляется с формой).
+        <code>disabled</code> — поле отключено (значение не отправляется).
+        <code>autocomplete</code> — управляет автозаполнением браузера.
+        <code>autofocus</code> — поле получает фокус при загрузке страницы.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex6-code" rows="22"><!DOCTYPE html>
+<html>
+<body>
+  <form>
+    <p>
+      <label>Обычное поле:
+        <input type="text"
+               name="normal"
+               value="Можно изменить"
+               autofocus>
+      </label>
+    </p>
+    <p>
+      <label>Только чтение:
+        <input type="text"
+               name="readonly"
+               value="Нельзя изменить"
+               readonly>
+      </label>
+    </p>
+    <p>
+      <label>Отключённое:
+        <input type="text"
+               name="disabled"
+               value="Поле отключено"
+               disabled>
+      </label>
+    </p>
+    <p>
+      <label>Без автозаполнения:
+        <input type="text"
+               name="secret"
+               autocomplete="off"
+               placeholder="Без автозаполнения">
+      </label>
+    </p>
+    <button type="submit">OK</button>
+  </form>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex6')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex6-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 7</h3>
+          <p>Форма с 5 разными типами input</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте форму анкеты пользователя с минимум 5 различными типами полей:
+          <ul>
+            <li>Используйте минимум 5 разных значений атрибута <code>type</code></li>
+            <li>Включите поле <code>type="number"</code></li>
+            <li>Включите поле <code>type="date"</code></li>
+            <li>Можно добавить любые другие типы: email, color, range, file и т.д.</li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch7-exercise-code" rows="20"><!-- Напишите ваш HTML код здесь -->
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Анкета пользователя</h2>
+  <form>
+
+  </form>
+</body>
+</html></textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch7-exercise')" data-exercise-id="ch7-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch7-exercise')">👁 Предпросмотр</button>
+        </div>
+
+        <div class="exercise-feedback" id="ch7-exercise-feedback"></div>
+        <div class="exercise-preview" id="ch7-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch7-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <nav class="chapter-nav">
+      <a href="ch6-forms.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 6: Формы</span>
+        </div>
+      </a>
+      <a href="ch8-semantics.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая →</span>
+          <span class="nav-sub">Глава 8: Семантический HTML</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

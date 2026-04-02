@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 4: Списки — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch4">
+
+<div class="sidebar-overlay"></div>
+
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 4: Списки</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 4</div>
+      <div class="sidebar-title">Списки</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1"><span class="link-num">1</span> Маркированные списки</a>
+      <a class="sidebar-link" data-target="lesson-2"><span class="link-num">2</span> Нумерованные списки</a>
+      <a class="sidebar-link" data-target="lesson-3"><span class="link-num">3</span> Стили списков</a>
+      <a class="sidebar-link" data-target="lesson-4"><span class="link-num">4</span> Вложенные списки</a>
+      <a class="sidebar-link" data-target="lesson-5"><span class="link-num">5</span> Списки определений</a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch4-exercise"><span class="link-num">✎</span> Упражнение</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📋 Глава 4</div>
+      <h1 class="chapter-title">Списки</h1>
+      <p class="chapter-intro">
+        Списки — один из самых часто используемых элементов в HTML. Они помогают
+        структурировать информацию. В HTML есть три вида списков: маркированные,
+        нумерованные и списки определений.
+      </p>
+    </div>
+
+    <!-- LESSON 1: UL -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Маркированные списки &lt;ul&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;ul&gt;</code> (unordered list — неупорядоченный список) создаёт
+        маркированный список. Каждый элемент списка оборачивается в тег <code>&lt;li&gt;</code> (list item).
+        По умолчанию браузер отображает маркеры в виде точек (•).
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="14"><!DOCTYPE html>
+<html>
+<body>
+  <h3>Мои любимые фрукты:</h3>
+  <ul>
+    <li>Яблоко</li>
+    <li>Банан</li>
+    <li>Апельсин</li>
+    <li>Манго</li>
+  </ul>
+
+  <h3>Навыки:</h3>
+  <ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+  </ul>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: OL -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Нумерованные списки &lt;ol&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;ol&gt;</code> (ordered list — упорядоченный список) создаёт
+        нумерованный список. Браузер автоматически нумерует элементы.
+        Атрибут <code>start</code> позволяет начать нумерацию с другого числа.
+        Атрибут <code>reversed</code> делает нумерацию в обратном порядке.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="18"><!DOCTYPE html>
+<html>
+<body>
+  <h3>Рецепт чая:</h3>
+  <ol>
+    <li>Вскипятите воду</li>
+    <li>Положите чайный пакетик</li>
+    <li>Залейте кипятком</li>
+    <li>Подождите 3 минуты</li>
+    <li>Добавьте сахар по вкусу</li>
+  </ol>
+
+  <h3>Топ-3 с 5-го места:</h3>
+  <ol start="5" reversed>
+    <li>Пятое место</li>
+    <li>Четвёртое место</li>
+    <li>Третье место</li>
+  </ol>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: List styles -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Стили списков</h2>
+      <p class="lesson-desc">
+        Атрибут <code>type</code> у <code>&lt;ol&gt;</code> меняет вид нумерации.
+        Для <code>&lt;ul&gt;</code> можно менять маркер через CSS свойство <code>list-style-type</code>.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="20"><!DOCTYPE html>
+<html>
+<body>
+  <ol type="1"><li>Арабские цифры</li>
+    <li>Элемент 2</li></ol>
+
+  <ol type="A"><li>Заглавные буквы</li>
+    <li>Элемент B</li></ol>
+
+  <ol type="a"><li>Строчные буквы</li>
+    <li>Элемент b</li></ol>
+
+  <ol type="I"><li>Римские заглавные</li>
+    <li>Элемент II</li></ol>
+
+  <ul style="list-style-type: square">
+    <li>Квадратные маркеры</li>
+    <li>Элемент 2</li>
+  </ul>
+
+  <ul style="list-style-type: circle">
+    <li>Круглые маркеры</li>
+  </ul>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: Nested lists -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Вложенные списки</h2>
+      <p class="lesson-desc">
+        Списки можно вкладывать друг в друга. Для этого нужно поместить новый список
+        <code>&lt;ul&gt;</code> или <code>&lt;ol&gt;</code> внутрь элемента <code>&lt;li&gt;</code>.
+        Такой подход используется для создания многоуровневых меню и иерархических данных.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="22"><!DOCTYPE html>
+<html>
+<body>
+  <h3>Программирование:</h3>
+  <ul>
+    <li>Frontend
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+      </ul>
+    </li>
+    <li>Backend
+      <ul>
+        <li>Python</li>
+        <li>Node.js</li>
+        <li>PHP</li>
+      </ul>
+    </li>
+    <li>База данных
+      <ul>
+        <li>MySQL</li>
+        <li>MongoDB</li>
+      </ul>
+    </li>
+  </ul>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: Definition lists -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Списки определений &lt;dl&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;dl&gt;</code> (description list) создаёт список определений или пар "термин–описание".
+        <code>&lt;dt&gt;</code> — термин (definition term),
+        <code>&lt;dd&gt;</code> — описание (definition description).
+        Используется для словарей, FAQ, глоссариев.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="18"><!DOCTYPE html>
+<html>
+<body>
+  <h3>Словарь HTML-тегов:</h3>
+  <dl>
+    <dt><strong>HTML</strong></dt>
+    <dd>HyperText Markup Language —
+    язык разметки гипертекста</dd>
+
+    <dt><strong>CSS</strong></dt>
+    <dd>Cascading Style Sheets —
+    каскадные таблицы стилей</dd>
+
+    <dt><strong>DOM</strong></dt>
+    <dd>Document Object Model —
+    объектная модель документа</dd>
+  </dl>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 4</h3>
+          <p>Создайте вложенный список</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте список меню сайта с вложенными подпунктами:
+          <ul>
+            <li>Создайте маркированный список <code>&lt;ul&gt;</code></li>
+            <li>Создайте нумерованный список <code>&lt;ol&gt;</code></li>
+            <li>Добавьте минимум 3 элемента <code>&lt;li&gt;</code></li>
+            <li>Один из элементов <code>&lt;li&gt;</code> должен содержать вложенный список (<code>&lt;ul&gt;</code> или <code>&lt;ol&gt;</code> внутри <code>&lt;li&gt;</code>)</li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch4-exercise-code" rows="18"><!-- Напишите ваш HTML код здесь -->
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Меню сайта</h2>
+
+</body>
+</html></textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch4-exercise')" data-exercise-id="ch4-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch4-exercise')">👁 Предпросмотр</button>
+        </div>
+
+        <div class="exercise-feedback" id="ch4-exercise-feedback"></div>
+        <div class="exercise-preview" id="ch4-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch4-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <nav class="chapter-nav">
+      <a href="ch3-links-images.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 3: Ссылки и изображения</span>
+        </div>
+      </a>
+      <a href="ch5-tables.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая →</span>
+          <span class="nav-sub">Глава 5: Таблицы</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

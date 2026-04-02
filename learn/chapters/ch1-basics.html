@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 1: Основы HTML — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch1">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 1: Основы HTML</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 1</div>
+      <div class="sidebar-title">Основы HTML</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Что такое HTML?
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Структура документа
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Заголовки h1–h6
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Параграфы
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Комментарии
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch1-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 Глава 1</div>
+      <h1 class="chapter-title">Основы HTML</h1>
+      <p class="chapter-intro">
+        HTML (HyperText Markup Language) — это язык разметки, на котором создаются веб-страницы.
+        В этой главе вы узнаете, что такое HTML, как устроен HTML-документ, и научитесь
+        работать с основными тегами: заголовками, параграфами и комментариями.
+      </p>
+    </div>
+
+    <!-- LESSON 1: What is HTML -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Что такое HTML?</h2>
+      <p class="lesson-desc">
+        HTML — это язык разметки, используемый для создания структуры веб-страниц.
+        Он описывает содержимое страницы с помощью <strong>тегов</strong>.
+        Теги — это специальные слова, заключённые в угловые скобки: <code>&lt;тег&gt;</code>.
+        Большинство тегов имеют открывающий <code>&lt;тег&gt;</code> и закрывающий <code>&lt;/тег&gt;</code>.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>HTML — это не язык программирования!</strong>
+          HTML описывает структуру и содержимое страницы, но не содержит логики. Для логики используется JavaScript.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="8"><!DOCTYPE html>
+<html>
+<head>
+  <title>Моя первая страница</title>
+</head>
+<body>
+  <h1>Привет, мир!</h1>
+  <p>Это моя первая HTML страница.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: Document Structure -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Структура HTML-документа</h2>
+      <p class="lesson-desc">
+        Каждый HTML-документ имеет стандартную структуру. Вот основные части:
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Элемент</th><th>Описание</th></tr>
+        <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>Объявляет тип документа HTML5</td></tr>
+        <tr><td><code>&lt;html&gt;</code></td><td>Корневой элемент HTML-страницы</td></tr>
+        <tr><td><code>&lt;head&gt;</code></td><td>Содержит мета-информацию (невидимую для пользователя)</td></tr>
+        <tr><td><code>&lt;title&gt;</code></td><td>Заголовок страницы (отображается на вкладке браузера)</td></tr>
+        <tr><td><code>&lt;meta charset&gt;</code></td><td>Кодировка документа (UTF-8 поддерживает все языки)</td></tr>
+        <tr><td><code>&lt;body&gt;</code></td><td>Всё видимое содержимое страницы</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="14"><!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" 
+        content="width=device-width">
+  <title>Структура документа</title>
+</head>
+<body>
+  <h1>Заголовок страницы</h1>
+  <p>Это содержимое страницы,
+  которое видит пользователь.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Совет:</strong> Всегда указывайте <code>&lt;meta charset="UTF-8"&gt;</code> для корректного
+          отображения русских букв и других специальных символов.
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: Headings -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Заголовки h1–h6</h2>
+      <p class="lesson-desc">
+        HTML предоставляет 6 уровней заголовков — от <code>&lt;h1&gt;</code> (самый большой и важный)
+        до <code>&lt;h6&gt;</code> (самый маленький). Заголовки помогают структурировать контент
+        и важны для SEO (поисковой оптимизации).
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="12"><!DOCTYPE html>
+<html>
+<body>
+  <h1>Заголовок первого уровня</h1>
+  <h2>Заголовок второго уровня</h2>
+  <h3>Заголовок третьего уровня</h3>
+  <h4>Заголовок четвёртого уровня</h4>
+  <h5>Заголовок пятого уровня</h5>
+  <h6>Заголовок шестого уровня</h6>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Правило:</strong> На каждой странице должен быть только один тег <code>&lt;h1&gt;</code> —
+          это главный заголовок страницы. Используйте его один раз!
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: Paragraphs -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Параграфы</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;p&gt;</code> создаёт параграф текста. Браузер автоматически добавляет
+        отступы до и после параграфа. Пустые строки в HTML игнорируются — для разделения
+        текста используйте тег <code>&lt;p&gt;</code>.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="14"><!DOCTYPE html>
+<html>
+<body>
+  <h2>О HTML</h2>
+
+  <p>HTML (HyperText Markup Language) —
+  стандартный язык разметки для создания
+  веб-страниц.</p>
+
+  <p>Был создан Тимом Бернерсом-Ли
+  в 1991 году. С тех пор прошло
+  много версий.</p>
+
+  <p>Текущая версия — HTML5.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: Comments -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Комментарии</h2>
+      <p class="lesson-desc">
+        Комментарии в HTML записываются между <code>&lt;!--</code> и <code>--&gt;</code>.
+        Всё что написано внутри комментария, браузер игнорирует и не отображает.
+        Комментарии помогают объяснять код другим разработчикам (и себе в будущем!).
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="14"><!DOCTYPE html>
+<html>
+<body>
+  <!-- Это комментарий. Он не виден
+       на странице. -->
+
+  <h1>Видимый заголовок</h1>
+
+  <!-- TODO: добавить навигацию -->
+
+  <p>Этот текст виден пользователю.</p>
+
+  <!-- <p>Этот параграф скрыт.</p> -->
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 1</h3>
+          <p>Создайте полноценную HTML-страницу с нуля</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте HTML-страницу о вашем любимом фильме или книге. Страница должна содержать:
+          <ul>
+            <li>Полную структуру HTML-документа (<code>&lt;!DOCTYPE&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>)</li>
+            <li>Тег <code>&lt;h1&gt;</code> с названием фильма/книги</li>
+            <li>Тег <code>&lt;h2&gt;</code> с подзаголовком (например "О фильме")</li>
+            <li>Минимум один параграф <code>&lt;p&gt;</code> с описанием</li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch1-exercise-code" rows="16"><!-- Напишите ваш HTML код здесь -->
+</textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch1-exercise')" data-exercise-id="ch1-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch1-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+
+        <div class="exercise-feedback" id="ch1-exercise-feedback"></div>
+
+        <div class="exercise-preview" id="ch1-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch1-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="../../index.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">К оглавлению</span>
+        </div>
+      </a>
+      <a href="ch2-text.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">Глава 2: Форматирование текста</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>
