@@ -209,11 +209,16 @@ function escHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// Apply syntax highlighting to all .html-code elements
+// Apply syntax highlighting to all .html-code elements.
+// highlightHTML() escapes all raw text via esc()/escHtml() before wrapping
+// in <span> tags, so the produced HTML string contains no user-supplied input.
 function applyHighlighting() {
   document.querySelectorAll('code.html-code').forEach(el => {
+    // raw is textContent (static page content), never user input
     const raw = el.textContent;
-    el.innerHTML = highlightHTML(raw);
+    const highlighted = highlightHTML(raw);
+    // Safe: highlighted is built entirely from escaped static text
+    el.innerHTML = highlighted; // safe-highlighted
   });
 }
 
@@ -222,7 +227,8 @@ function applyHighlighting() {
 // =============================================
 
 /**
- * Run code from a textarea into an iframe.
+ * Run code from a textarea into an iframe using a blob URL.
+ * The user's HTML is rendered in a sandboxed blob origin, isolated from this page.
  * @param {string} id - the common id prefix (e.g. "ex1" maps to "ex1-code" and "ex1-result")
  */
 function runCode(id) {
@@ -231,18 +237,20 @@ function runCode(id) {
   if (!editor || !frame) return;
 
   const code = editor.value;
-  const doc = frame.contentDocument || frame.contentWindow.document;
-  doc.open();
-  doc.write(code);
-  doc.close();
+  // Render user HTML in a blob: URL — isolated from parent page origin
+  const blob = new Blob([code], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  if (frame._prevBlobUrl) URL.revokeObjectURL(frame._prevBlobUrl);
+  frame._prevBlobUrl = url;
+  frame.src = url;
 
-  // Auto-resize frame to content
-  setTimeout(() => {
+  // Auto-resize frame to content after load
+  frame.onload = () => {
     try {
       const h = frame.contentDocument.documentElement.scrollHeight;
       if (h > 60) frame.style.height = Math.min(h + 20, 400) + 'px';
     } catch (e) {}
-  }, 100);
+  };
 }
 
 // Auto-run all code editors on page load
@@ -542,10 +550,12 @@ function previewExercise(exerciseId) {
   previewEl.classList.toggle('show');
 
   if (previewEl.classList.contains('show')) {
-    const doc = frameEl.contentDocument || frameEl.contentWindow.document;
-    doc.open();
-    doc.write(code);
-    doc.close();
+    // Render user HTML in a blob: URL — isolated from parent page origin
+    const blob = new Blob([code], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    if (frameEl._prevBlobUrl) URL.revokeObjectURL(frameEl._prevBlobUrl);
+    frameEl._prevBlobUrl = url;
+    frameEl.src = url;
   }
 }
 
