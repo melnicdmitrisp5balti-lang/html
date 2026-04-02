@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTML Учебник — Интерактивный курс</title>
+  <title>HTML &amp; CSS Учебник — Интерактивный курс</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -299,8 +299,8 @@
 <!-- HERO HEADER -->
 <header class="hero">
   <div class="hero-badge">🎓 Бесплатный курс</div>
-  <h1>HTML <span>Учебник</span></h1>
-  <p>Интерактивный курс для изучения HTML с нуля. Пишите код прямо в браузере и сразу видите результат.</p>
+  <h1>HTML <span>&amp; CSS</span> Учебник</h1>
+  <p>Интерактивный курс для изучения HTML и CSS с нуля. Пишите код прямо в браузере и сразу видите результат.</p>
   <div class="hero-actions">
     <a href="learn/chapters/ch1-basics.html" class="btn-hero btn-hero-primary">▶ Начать обучение</a>
     <a href="#chapters" class="btn-hero btn-hero-secondary">📋 Все главы</a>
@@ -310,15 +310,15 @@
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat-item">
-    <div class="stat-num">9</div>
+    <div class="stat-num">16</div>
     <div class="stat-label">Глав</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">47</div>
+    <div class="stat-num">81</div>
     <div class="stat-label">Уроков</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">9</div>
+    <div class="stat-num">16</div>
     <div class="stat-label">Упражнений</div>
   </div>
   <div class="stat-item">
@@ -339,7 +339,11 @@
 <!-- CHAPTERS SECTION -->
 <div class="section-title" id="chapters">
   <h2>Содержание курса</h2>
-  <p>От основ до продвинутых тем — всё что нужно для работы с HTML</p>
+  <p>HTML и CSS — от основ до адаптивного дизайна</p>
+</div>
+
+<div style="max-width:1200px;margin:0 auto;padding:0 20px 8px;">
+  <h3 style="font-size:1.1rem;color:#2c3e50;border-left:4px solid #e74c3c;padding-left:12px;margin:0;">🌐 HTML — Язык разметки</h3>
 </div>
 
 <div class="chapters-grid">
@@ -555,6 +559,177 @@
 
 </div>
 
+<!-- CSS SECTION HEADER -->
+<div style="max-width:1200px;margin:8px auto 0;padding:0 20px 8px;">
+  <h3 style="font-size:1.1rem;color:#2c3e50;border-left:4px solid #2980b9;padding-left:12px;margin:0;">🎨 CSS — Каскадные таблицы стилей</h3>
+</div>
+
+<!-- CSS CHAPTERS GRID -->
+<div class="chapters-grid">
+
+  <a class="chapter-card" href="learn/chapters/ch10-css-basics.html" id="card-ch10">
+    <div class="card-header">
+      <div class="card-icon">🎨</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 10</div>
+        <div class="card-title">Основы CSS</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Что такое CSS, способы подключения, селекторы, свойства, значения и каскадность.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">селекторы</span>
+      <span class="tag">.class</span>
+      <span class="tag">#id</span>
+      <span class="tag">специфичность</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch10">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch11-css-box-model.html" id="card-ch11">
+    <div class="card-header">
+      <div class="card-icon">📦</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 11</div>
+        <div class="card-title">Блочная модель CSS</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Padding, margin, border, width, height и box-sizing — фундамент вёрстки.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">padding</span>
+      <span class="tag">margin</span>
+      <span class="tag">border</span>
+      <span class="tag">box-sizing</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch11">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch12-css-typography.html" id="card-ch12">
+    <div class="card-header">
+      <div class="card-icon">🔤</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 12</div>
+        <div class="card-title">CSS Типографика</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Цвета, шрифты, размеры, выравнивание текста, межстрочный интервал и Google Fonts.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">color</span>
+      <span class="tag">font-family</span>
+      <span class="tag">font-size</span>
+      <span class="tag">text-align</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch12">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch13-css-layout.html" id="card-ch13">
+    <div class="card-header">
+      <div class="card-icon">📐</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 13</div>
+        <div class="card-title">CSS Layout</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Display, position (relative/absolute/fixed), z-index, overflow и float.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">display</span>
+      <span class="tag">position</span>
+      <span class="tag">z-index</span>
+      <span class="tag">float</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch13">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch14-css-flexbox.html" id="card-ch14">
+    <div class="card-header">
+      <div class="card-icon">💪</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 14</div>
+        <div class="card-title">CSS Flexbox</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Гибкая одномерная вёрстка: flex-direction, justify-content, align-items и flex-grow.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">display:flex</span>
+      <span class="tag">justify-content</span>
+      <span class="tag">align-items</span>
+      <span class="tag">flex-grow</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch14">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch15-css-grid.html" id="card-ch15">
+    <div class="card-header">
+      <div class="card-icon">🔲</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 15</div>
+        <div class="card-title">CSS Grid</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Двумерная сетка: grid-template-columns, grid-area, именованные области и fr единица.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">display:grid</span>
+      <span class="tag">grid-template</span>
+      <span class="tag">grid-area</span>
+      <span class="tag">fr</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch15">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch16-css-responsive.html" id="card-ch16">
+    <div class="card-header">
+      <div class="card-icon">📱</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 16</div>
+        <div class="card-title">Адаптивный дизайн</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Media queries, viewport, относительные единицы и auto-fill Grid для мобильных сайтов.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">@media</span>
+      <span class="tag">viewport</span>
+      <span class="tag">rem/vw</span>
+      <span class="tag">clamp()</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch16">🆕 Новая</span>
+    </div>
+  </a>
+
+</div>
+
 <!-- FEATURES -->
 <div class="features-section">
   <div style="text-align:center;margin-bottom:40px;">
@@ -591,14 +766,15 @@
 </div>
 
 <footer>
-  <p>HTML Учебник &copy; 2024 — <strong>Интерактивный курс HTML</strong> — Создано для изучения веб-разработки</p>
+  <p>HTML &amp; CSS Учебник &copy; 2024 — <strong>Интерактивный курс HTML и CSS</strong> — Создано для изучения веб-разработки</p>
 </footer>
 
 <script>
   // Load progress from localStorage and update UI
   function loadProgress() {
     const progress = JSON.parse(localStorage.getItem('htmlCourseProgress') || '{}');
-    const chapters = ['ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9'];
+    const chapters = ['ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9',
+                      'ch10','ch11','ch12','ch13','ch14','ch15','ch16'];
     let completed = 0;
 
     chapters.forEach(ch => {
@@ -613,13 +789,14 @@
       }
     });
 
-    const pct = Math.round((completed / 9) * 100);
+    const total = 16;
+    const pct = Math.round((completed / total) * 100);
     document.getElementById('main-progress').style.width = pct + '%';
     document.getElementById('stat-done').textContent = completed;
     document.getElementById('progress-text').textContent =
       completed === 0 ? 'Начните обучение чтобы отслеживать прогресс' :
-      completed === 9 ? '🎉 Курс пройден! Отличная работа!' :
-      `Выполнено ${completed} из 9 глав (${pct}%)`;
+      completed === total ? '🎉 Курс пройден! Отличная работа!' :
+      `Выполнено ${completed} из ${total} глав (${pct}%)`;
   }
 
   loadProgress();

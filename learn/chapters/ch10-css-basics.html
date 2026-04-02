@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 10: Основы CSS — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch10">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 10: Основы CSS</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 10</div>
+      <div class="sidebar-title">Основы CSS</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Что такое CSS?
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Способы подключения CSS
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Селекторы
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Свойства и значения
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Каскадность и специфичность
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch10-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">🎨 Глава 10</div>
+      <h1 class="chapter-title">Основы CSS</h1>
+      <p class="chapter-intro">
+        CSS (Cascading Style Sheets — Каскадные таблицы стилей) — язык, который отвечает за внешний вид
+        HTML-страниц: цвета, шрифты, расположение элементов. В этой главе вы узнаете, как работает
+        CSS, как его подключать и как писать правила стилей.
+      </p>
+    </div>
+
+    <!-- LESSON 1: What is CSS -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Что такое CSS?</h2>
+      <p class="lesson-desc">
+        CSS описывает, <em>как</em> должны выглядеть HTML-элементы. Без CSS страница выглядит как
+        простой текст на белом фоне. CSS добавляет цвета, шрифты, отступы и многое другое.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>HTML vs CSS:</strong> HTML — это <em>структура</em> (что показывать),
+          CSS — это <em>стиль</em> (как это выглядит). Разделение структуры и стиля — основа современной веб-разработки.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML + CSS</div>
+          <textarea class="code-editor" id="ex1-code" rows="14"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    h1 { color: #e74c3c; }
+    p  { color: #2c3e50; font-size: 1.1rem; }
+    body { background: #f0f4f8; padding: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Заголовок со стилем</h1>
+  <p>Этот текст оформлен через CSS.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: Ways to add CSS -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Способы подключения CSS</h2>
+      <p class="lesson-desc">
+        Существует три способа добавить CSS на страницу. Каждый имеет своё применение:
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Способ</th><th>Синтаксис</th><th>Где использовать</th></tr>
+        <tr>
+          <td><strong>Внутренний</strong> (inline)</td>
+          <td><code>&lt;p style="color:red"&gt;</code></td>
+          <td>Для одного элемента</td>
+        </tr>
+        <tr>
+          <td><strong>Внутристраничный</strong></td>
+          <td><code>&lt;style&gt;...&lt;/style&gt;</code> в <code>&lt;head&gt;</code></td>
+          <td>Для одной страницы</td>
+        </tr>
+        <tr>
+          <td><strong>Внешний</strong> (рекомендуется)</td>
+          <td><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></td>
+          <td>Для всего сайта</td>
+        </tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Три способа CSS</div>
+          <textarea class="code-editor" id="ex2-code" rows="18"><!DOCTYPE html>
+<html>
+<head>
+  <!-- Внутристраничный CSS -->
+  <style>
+    .internal { color: #27ae60; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <!-- 1. Inline (встроенный) CSS -->
+  <p style="color: #e74c3c; font-size: 1.2rem;">
+    Inline стиль — прямо в теге
+  </p>
+
+  <!-- 2. Внутристраничный CSS -->
+  <p class="internal">
+    Стиль из тега &lt;style&gt;
+  </p>
+
+  <!-- 3. Внешний файл подключается через link -->
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Лучшая практика:</strong> Всегда используйте внешний CSS-файл.
+          Это упрощает поддержку кода и позволяет применять одни стили ко всем страницам сайта.
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: Selectors -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Селекторы CSS</h2>
+      <p class="lesson-desc">
+        Селектор указывает, к каким HTML-элементам применить стиль.
+        Существуют разные виды селекторов:
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Селектор</th><th>Пример</th><th>Что выбирает</th></tr>
+        <tr><td>Элемент</td><td><code>p { }</code></td><td>Все теги <code>&lt;p&gt;</code></td></tr>
+        <tr><td>Класс</td><td><code>.title { }</code></td><td>Элементы с <code>class="title"</code></td></tr>
+        <tr><td>ID</td><td><code>#header { }</code></td><td>Элемент с <code>id="header"</code></td></tr>
+        <tr><td>Универсальный</td><td><code>* { }</code></td><td>Все элементы</td></tr>
+        <tr><td>Группа</td><td><code>h1, h2 { }</code></td><td>Все h1 и h2</td></tr>
+        <tr><td>Потомок</td><td><code>div p { }</code></td><td><code>&lt;p&gt;</code> внутри <code>&lt;div&gt;</code></td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Виды селекторов</div>
+          <textarea class="code-editor" id="ex3-code" rows="26"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  /* Элемент */
+  h2 { color: #2c3e50; }
+
+  /* Класс */
+  .highlight { background: #ffe066; padding: 2px 6px; }
+
+  /* ID */
+  #special { color: #e74c3c; font-weight: bold; }
+
+  /* Группа */
+  h3, h4 { color: #27ae60; }
+
+  /* Потомок */
+  .box p { font-style: italic; }
+</style>
+</head>
+<body>
+  <h2>Заголовок (элемент)</h2>
+  <p class="highlight">Текст с классом highlight</p>
+  <p id="special">Элемент с ID special</p>
+  <h3>h3 в группе</h3>
+  <h4>h4 в группе</h4>
+  <div class="box">
+    <p>Параграф внутри .box (потомок)</p>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: Properties and Values -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Свойства и значения</h2>
+      <p class="lesson-desc">
+        CSS-правило состоит из <strong>свойства</strong> и <strong>значения</strong>, разделённых двоеточием.
+        Несколько объявлений в фигурных скобках образуют блок:
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">📐</span>
+        <div class="callout-body">
+          <strong>Синтаксис:</strong>
+          <code>селектор { свойство: значение; свойство: значение; }</code>
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Основные свойства CSS</div>
+          <textarea class="code-editor" id="ex4-code" rows="26"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, sans-serif; padding: 16px; }
+
+  .card {
+    color: #2c3e50;
+    background-color: #ecf0f1;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    width: 300px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .card.blue {
+    background-color: #d6eaf8;
+    border-color: #2980b9;
+  }
+</style>
+</head>
+<body>
+  <div class="card">Стандартная карточка</div>
+  <div class="card blue">Синяя карточка</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: Cascade and Specificity -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Каскадность и специфичность</h2>
+      <p class="lesson-desc">
+        «Каскадные» в названии CSS означает, что правила применяются в определённом порядке.
+        Если к одному элементу применяются несколько правил, побеждает то, которое имеет
+        <strong>большую специфичность</strong> (приоритет).
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Вид селектора</th><th>Вес (специфичность)</th></tr>
+        <tr><td><code>* { }</code> — универсальный</td><td>0</td></tr>
+        <tr><td><code>p { }</code> — элемент</td><td>1</td></tr>
+        <tr><td><code>.class { }</code> — класс</td><td>10</td></tr>
+        <tr><td><code>#id { }</code> — идентификатор</td><td>100</td></tr>
+        <tr><td><code>style="..."</code> — inline</td><td>1000</td></tr>
+        <tr><td><code>!important</code></td><td>Высший приоритет</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">Специфичность на практике</div>
+          <textarea class="code-editor" id="ex5-code" rows="22"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  p      { color: grey; }       /* вес 1   */
+  .blue  { color: blue; }       /* вес 10  */
+  #red   { color: red; }        /* вес 100 */
+</style>
+</head>
+<body>
+  <!-- только элемент p — серый -->
+  <p>Обычный параграф (серый)</p>
+
+  <!-- класс .blue — синий (10 > 1) -->
+  <p class="blue">Параграф с классом (синий)</p>
+
+  <!-- ID #red — красный (100 > 10 > 1) -->
+  <p class="blue" id="red">Параграф с ID (красный)</p>
+
+  <!-- inline побеждает всё -->
+  <p class="blue" id="red" style="color:green">
+    Inline стиль (зелёный)
+  </p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Совет:</strong> Избегайте <code>!important</code> — он нарушает предсказуемость каскада.
+          Лучше повышайте специфичность через более точные селекторы.
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 10</h3>
+          <p>Напишите CSS-стили для HTML-страницы</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте HTML-страницу и оформите её с помощью CSS. Страница должна содержать:
+          <ul>
+            <li>Тег <code>&lt;style&gt;</code> с CSS-правилами</li>
+            <li>Стиль для элемента (например <code>body</code> или <code>h1</code>) с цветом текста</li>
+            <li>Стиль через класс (<code>.имя</code>) с фоновым цветом</li>
+            <li>Стиль через ID (<code>#имя</code>)</li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch10-exercise-code" rows="16"><!-- Напишите ваш HTML+CSS код здесь -->
+</textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch10-exercise')" data-exercise-id="ch10-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch10-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+
+        <div class="exercise-feedback" id="ch10-exercise-feedback"></div>
+
+        <div class="exercise-preview" id="ch10-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch10-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="ch9-media.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 9: Медиа</span>
+        </div>
+      </a>
+      <a href="ch11-css-box-model.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">Глава 11: Блочная модель CSS</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>
