@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 13: Атрибуты и Data-атрибуты — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch13">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 13: Атрибуты и Data-атрибуты</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 13</div>
+      <div class="sidebar-title">Атрибуты и Data-атрибуты</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Глобальные атрибуты
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Data-атрибуты
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> ARIA-атрибуты
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Data-атрибуты и JavaScript
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch13-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 Глава 13</div>
+      <h1 class="chapter-title">Атрибуты и Data-атрибуты</h1>
+      <p class="chapter-intro">
+        Атрибуты добавляют элементам дополнительные сведения и поведение. Одни атрибуты
+        специфичны для конкретных тегов (<code>href</code> у ссылки, <code>src</code> у
+        изображения), другие — <strong>глобальные</strong> и работают на любом элементе.
+        В этой главе вы изучите глобальные атрибуты, узнаете, как хранить произвольные данные
+        в <code>data-*</code> атрибутах, познакомитесь с основами доступности через
+        ARIA-атрибуты и научитесь работать с data-атрибутами через JavaScript.
+      </p>
+    </div>
+
+    <!-- LESSON 1: Global attributes -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Глобальные атрибуты</h2>
+      <p class="lesson-desc">
+        Глобальные атрибуты можно применить к <em>любому</em> HTML-элементу. Они являются
+        базой для стилизации, скриптинга, доступности и интернационализации.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Атрибут</th><th>Описание</th><th>Пример</th></tr>
+        <tr>
+          <td><code>id</code></td>
+          <td>Уникальный идентификатор на странице</td>
+          <td><code>id="header"</code></td>
+        </tr>
+        <tr>
+          <td><code>class</code></td>
+          <td>Класс (один или несколько, через пробел)</td>
+          <td><code>class="btn btn-primary"</code></td>
+        </tr>
+        <tr>
+          <td><code>style</code></td>
+          <td>Встроенные CSS-стили</td>
+          <td><code>style="color: red;"</code></td>
+        </tr>
+        <tr>
+          <td><code>title</code></td>
+          <td>Всплывающая подсказка при наведении</td>
+          <td><code>title="Нажмите для подтверждения"</code></td>
+        </tr>
+        <tr>
+          <td><code>lang</code></td>
+          <td>Язык содержимого элемента</td>
+          <td><code>lang="en"</code></td>
+        </tr>
+        <tr>
+          <td><code>dir</code></td>
+          <td>Направление текста: ltr, rtl, auto</td>
+          <td><code>dir="rtl"</code></td>
+        </tr>
+        <tr>
+          <td><code>hidden</code></td>
+          <td>Скрывает элемент (логический атрибут)</td>
+          <td><code>hidden</code></td>
+        </tr>
+        <tr>
+          <td><code>tabindex</code></td>
+          <td>Порядок перехода по Tab; -1 исключает из табуляции</td>
+          <td><code>tabindex="0"</code></td>
+        </tr>
+        <tr>
+          <td><code>contenteditable</code></td>
+          <td>Разрешает редактирование содержимого</td>
+          <td><code>contenteditable="true"</code></td>
+        </tr>
+        <tr>
+          <td><code>draggable</code></td>
+          <td>Делает элемент перетаскиваемым</td>
+          <td><code>draggable="true"</code></td>
+        </tr>
+        <tr>
+          <td><code>spellcheck</code></td>
+          <td>Проверка орфографии в редактируемых элементах</td>
+          <td><code>spellcheck="false"</code></td>
+        </tr>
+        <tr>
+          <td><code>translate</code></td>
+          <td>Разрешить/запретить перевод браузером</td>
+          <td><code>translate="no"</code></td>
+        </tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="28"><!DOCTYPE html>
+<html lang="ru">
+<head>
+  <style>
+    #hero { background:#dbeafe; padding:12px; }
+    .highlight { background: yellow; }
+    [hidden] { display: none; }
+  </style>
+</head>
+<body>
+  <!-- id и class -->
+  <div id="hero" class="highlight">
+    Это главный блок (id=hero)
+  </div>
+
+  <!-- title (наведите мышь!) -->
+  <p>
+    <span title="Hypertext Markup Language">
+      HTML</span> — язык разметки.
+  </p>
+
+  <!-- lang для иноязычного текста -->
+  <p>По-английски: 
+    <span lang="en">Hello, World!</span>
+  </p>
+
+  <!-- contenteditable -->
+  <p contenteditable="true"
+    style="border:1px dashed #999;
+           padding:4px; border-radius:4px;">
+    ✏️ Этот текст можно редактировать
+  </p>
+
+  <!-- hidden -->
+  <p hidden>Этот параграф скрыт</p>
+  <p>Следующий параграф виден.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>id должен быть уникальным!</strong> На одной странице не может быть двух
+          элементов с одинаковым <code>id</code>. Нарушение этого правила приводит к ошибкам
+          в JavaScript и CSS, а также к проблемам с доступностью.
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: data-* attributes -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Data-атрибуты (data-*)</h2>
+      <p class="lesson-desc">
+        Data-атрибуты позволяют хранить <strong>произвольные данные</strong> прямо в HTML-элементах.
+        Они начинаются с <code>data-</code>, за которым следует любое имя: <code>data-user-id</code>,
+        <code>data-price</code>, <code>data-color</code>. Данные невидимы пользователю, не влияют
+        на отображение, но доступны JavaScript через <code>dataset</code>.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Правило именования:</strong> имя после <code>data-</code> должно состоять только из
+          строчных букв, цифр и дефисов. В JavaScript дефисы преобразуются в camelCase:
+          <code>data-user-id</code> → <code>dataset.userId</code>.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="32"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .product {
+      border:1px solid #e2e8f0;
+      border-radius:8px;
+      padding:12px;
+      margin:8px 0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .product[data-available="false"] {
+      opacity: 0.5;
+    }
+    .product[data-category="sale"]
+    .name { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <h2>Каталог товаров</h2>
+
+  <div class="product"
+    data-id="101"
+    data-price="2990"
+    data-category="electronics"
+    data-available="true">
+    <span class="name">
+      Беспроводные наушники</span>
+    <span>2 990 ₽</span>
+  </div>
+
+  <div class="product"
+    data-id="102"
+    data-price="1490"
+    data-category="sale"
+    data-available="true">
+    <span class="name">
+      Чехол для телефона</span>
+    <span>1 490 ₽</span>
+  </div>
+
+  <div class="product"
+    data-id="103"
+    data-price="5990"
+    data-category="electronics"
+    data-available="false">
+    <span class="name">
+      Умные часы (нет в наличии)</span>
+    <span>5 990 ₽</span>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: ARIA attributes -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — ARIA-атрибуты и доступность</h2>
+      <p class="lesson-desc">
+        <strong>ARIA</strong> (Accessible Rich Internet Applications) — набор атрибутов,
+        улучшающих доступность для людей с ограниченными возможностями. Они сообщают
+        скринридерам (программам для озвучивания экрана) о роли, состоянии и свойствах элементов.
+        Семантические HTML-теги уже имеют встроенную доступность, но ARIA помогает, когда
+        семантики недостаточно.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Атрибут</th><th>Назначение</th></tr>
+        <tr>
+          <td><code>aria-label</code></td>
+          <td>Текстовая метка элемента (для скринридера, когда нет видимого текста)</td>
+        </tr>
+        <tr>
+          <td><code>aria-labelledby</code></td>
+          <td>Ссылка на id элемента, который служит меткой</td>
+        </tr>
+        <tr>
+          <td><code>aria-describedby</code></td>
+          <td>Ссылка на id элемента с подробным описанием</td>
+        </tr>
+        <tr>
+          <td><code>aria-hidden="true"</code></td>
+          <td>Скрыть элемент от скринридера (декоративные иконки)</td>
+        </tr>
+        <tr>
+          <td><code>aria-expanded</code></td>
+          <td>Состояние раскрывающегося элемента (true/false)</td>
+        </tr>
+        <tr>
+          <td><code>aria-checked</code></td>
+          <td>Состояние чекбокса/переключателя</td>
+        </tr>
+        <tr>
+          <td><code>aria-disabled</code></td>
+          <td>Элемент недоступен для взаимодействия</td>
+        </tr>
+        <tr>
+          <td><code>aria-live</code></td>
+          <td>Динамически обновляемая область (polite, assertive)</td>
+        </tr>
+        <tr>
+          <td><code>role</code></td>
+          <td>Явная роль элемента: button, navigation, dialog, alert...</td>
+        </tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="32"><!DOCTYPE html>
+<html lang="ru">
+<head>
+  <style>
+    .icon-btn {
+      background: none; border: none;
+      font-size: 1.4em; cursor: pointer;
+      padding: 8px; border-radius: 50%;
+    }
+    .icon-btn:hover { background: #f1f5f9; }
+    .alert {
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      padding: 12px;
+      border-radius: 8px;
+    }
+    nav ul { list-style: none;
+             padding: 0; display: flex;
+             gap: 16px; }
+  </style>
+</head>
+<body>
+  <!-- Кнопка без видимого текста -->
+  <button class="icon-btn"
+    aria-label="Закрыть диалог">
+    ✕
+  </button>
+
+  <!-- Навигация -->
+  <nav aria-label="Основная навигация">
+    <ul>
+      <li><a href="#">Главная</a></li>
+      <li><a href="#">О нас</a></li>
+    </ul>
+  </nav>
+
+  <!-- Декоративная иконка -->
+  <p>
+    <span aria-hidden="true">⭐</span>
+    Рейтинг: 4.8 из 5
+  </p>
+
+  <!-- Уведомление об ошибке -->
+  <div class="alert" role="alert"
+    aria-live="assertive">
+    ⚠️ Введите корректный email адрес.
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Золотое правило:</strong> «Не используй ARIA, если можно использовать семантический HTML».
+          Кнопку лучше сделать через <code>&lt;button&gt;</code>, чем через
+          <code>&lt;div role="button"&gt;</code>. Нативные теги автоматически доступны с клавиатуры.
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: data-* with JavaScript -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Data-атрибуты и JavaScript</h2>
+      <p class="lesson-desc">
+        JavaScript читает и записывает data-атрибуты через свойство <code>dataset</code>.
+        Это удобный способ передавать данные из HTML в скрипты без необходимости делать
+        AJAX-запросы или хранить данные в глобальных переменных. Data-атрибуты также
+        работают как хуки для CSS-стилей через CSS-селекторы атрибутов.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>dataset и camelCase:</strong><br>
+          <code>data-user-id</code> → <code>element.dataset.userId</code><br>
+          <code>data-max-value</code> → <code>element.dataset.maxValue</code><br>
+          <code>data-price</code> → <code>element.dataset.price</code>
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="42"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .tab-btn {
+      padding: 8px 16px;
+      border: 1px solid #d1d5db;
+      background: white;
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+    }
+    .tab-btn[data-active="true"] {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+    }
+    .tab-content {
+      display: none;
+      padding: 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 0 6px 6px 6px;
+    }
+    .tab-content[data-active="true"] {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <button class="tab-btn"
+      data-tab="about"
+      data-active="true"
+      onclick="showTab(this)">
+      О нас
+    </button>
+    <button class="tab-btn"
+      data-tab="services"
+      onclick="showTab(this)">
+      Услуги
+    </button>
+    <button class="tab-btn"
+      data-tab="contacts"
+      onclick="showTab(this)">
+      Контакты
+    </button>
+  </div>
+
+  <div class="tab-content"
+    data-tab="about" data-active="true">
+    <h3>О нас</h3>
+    <p>Мы делаем крутые сайты с 2010.</p>
+  </div>
+  <div class="tab-content"
+    data-tab="services">
+    <h3>Услуги</h3>
+    <p>Разработка, дизайн, SEO.</p>
+  </div>
+  <div class="tab-content"
+    data-tab="contacts">
+    <h3>Контакты</h3>
+    <p>info@example.com</p>
+  </div>
+
+  <script>
+    function showTab(btn) {
+      const tab = btn.dataset.tab;
+
+      document.querySelectorAll('.tab-btn')
+        .forEach(b =>
+          b.dataset.active = "false");
+      document.querySelectorAll('.tab-content')
+        .forEach(c =>
+          c.dataset.active = "false");
+
+      btn.dataset.active = "true";
+      document.querySelector(
+        `.tab-content[data-tab="${tab}"]`
+      ).dataset.active = "true";
+    }
+  </script>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 13</h3>
+          <p>Разметьте карточки товаров с data-атрибутами</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте HTML-страницу с тремя карточками товаров,
+          используя атрибуты и принципы доступности:
+          <ul>
+            <li>Каждая карточка (<code>&lt;div&gt;</code> или <code>&lt;article&gt;</code>) должна иметь уникальный <code>id</code></li>
+            <li>Каждая карточка должна иметь атрибуты <code>data-price</code> и <code>data-category</code></li>
+            <li>Кнопка «Купить» в каждой карточке должна иметь <code>aria-label</code> с названием товара</li>
+            <li>Одна из карточек должна быть скрыта атрибутом <code>hidden</code></li>
+            <li>Добавьте <code>title</code> хотя бы одному элементу с подсказкой</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch13-exercise-code" rows="16"><!-- Напишите ваш HTML код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch13-exercise')" data-exercise-id="ch13-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch13-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="ch13-exercise-feedback"></div>
+        <div class="exercise-preview" id="ch13-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch13-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="ch12-entities.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая глава</span>
+          <span class="nav-sub">Глава 12: Спецсимволы, Meta-теги и HEAD</span>
+        </div>
+      </a>
+      <a href="../css/css1-selectors.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующий раздел →</span>
+          <span class="nav-sub">CSS: Урок 1 — Селекторы</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

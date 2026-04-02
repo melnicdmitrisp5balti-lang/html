@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 10: Контейнеры и блочные элементы — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch10">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 10: Контейнеры и блочные элементы</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 10</div>
+      <div class="sidebar-title">Контейнеры и блочные элементы</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Элемент &lt;div&gt;
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> &lt;section&gt; и &lt;article&gt;
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> &lt;blockquote&gt;
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> &lt;pre&gt; и &lt;code&gt;
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> &lt;address&gt;
+      </a>
+      <a class="sidebar-link" data-target="lesson-6">
+        <span class="link-num">6</span> &lt;details&gt; и &lt;summary&gt;
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch10-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 Глава 10</div>
+      <h1 class="chapter-title">Контейнеры и блочные элементы</h1>
+      <p class="chapter-intro">
+        Блочные элементы — это строительные блоки HTML-страниц. Они занимают всю доступную ширину
+        и начинаются с новой строки. В этой главе вы изучите универсальный контейнер
+        <code>&lt;div&gt;</code>, семантические блоки <code>&lt;section&gt;</code> и
+        <code>&lt;article&gt;</code>, а также специализированные блочные элементы:
+        цитаты, предварительно форматированный текст, контактные данные и раскрывающиеся блоки.
+      </p>
+    </div>
+
+    <!-- LESSON 1: div -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Элемент &lt;div&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;div&gt;</code> (от <em>division</em> — раздел) — это универсальный
+        блочный контейнер без семантического значения. Он используется для группировки
+        элементов с целью применения стилей или скриптов. <code>&lt;div&gt;</code> занимает
+        всю доступную ширину и создаёт новую строку до и после себя.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Когда использовать &lt;div&gt;?</strong>
+          Используйте <code>&lt;div&gt;</code>, когда нет подходящего семантического элемента.
+          Если содержимое имеет смысловое значение — предпочтите семантические теги
+          (<code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;nav&gt;</code> и т.д.).
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="22"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 8px;
+      max-width: 280px;
+    }
+    .card-title { color: #2563eb; }
+    .card-body  { color: #555; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-title">
+      <h3>Карточка товара</h3>
+    </div>
+    <div class="card-body">
+      <p>Описание товара. Цена: 1500 ₽</p>
+      <div>
+        <button>Купить</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: section vs article -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — &lt;section&gt; и &lt;article&gt;</h2>
+      <p class="lesson-desc">
+        <code>&lt;section&gt;</code> и <code>&lt;article&gt;</code> — семантические блочные
+        элементы HTML5. <code>&lt;section&gt;</code> обозначает тематически объединённый раздел
+        страницы. <code>&lt;article&gt;</code> представляет самостоятельный, независимый контент
+        (статью, пост, комментарий), который можно вырвать из контекста страницы.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Элемент</th><th>Когда использовать</th><th>Пример</th></tr>
+        <tr>
+          <td><code>&lt;section&gt;</code></td>
+          <td>Раздел страницы с общей темой</td>
+          <td>«О нас», «Услуги», «Контакты»</td>
+        </tr>
+        <tr>
+          <td><code>&lt;article&gt;</code></td>
+          <td>Самостоятельный контент</td>
+          <td>Статья, пост в блоге, отзыв</td>
+        </tr>
+        <tr>
+          <td><code>&lt;div&gt;</code></td>
+          <td>Нет семантики</td>
+          <td>Обёртка для стилей/скриптов</td>
+        </tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="30"><!DOCTYPE html>
+<html>
+<body>
+  <section>
+    <h2>Последние новости</h2>
+
+    <article>
+      <h3>HTML6 в разработке</h3>
+      <p>Опубликовано: 15 января 2025</p>
+      <p>Рабочая группа W3C начала работу
+      над спецификацией HTML6...</p>
+    </article>
+
+    <article>
+      <h3>CSS Grid получил обновление</h3>
+      <p>Опубликовано: 10 января 2025</p>
+      <p>Браузеры добавили поддержку
+      новых возможностей Grid Layout...</p>
+    </article>
+  </section>
+
+  <section>
+    <h2>О сайте</h2>
+    <p>Мы публикуем новости
+    о веб-технологиях с 2020 года.</p>
+  </section>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Правило большого пальца:</strong> Спросите себя: «Можно ли этот контент опубликовать
+          отдельно в RSS-ленте или другом сайте?» Если да — используйте <code>&lt;article&gt;</code>.
+          Если это просто раздел страницы — используйте <code>&lt;section&gt;</code>.
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: blockquote -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — &lt;blockquote&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;blockquote&gt;</code> используется для длинных цитат из внешнего источника.
+        Браузер отображает его с отступами. Атрибут <code>cite</code> указывает URL источника
+        цитаты (не отображается визуально, но полезен для поисковиков). Для указания автора
+        используют тег <code>&lt;cite&gt;</code> внутри <code>&lt;footer&gt;</code>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Атрибут</th><th>Описание</th></tr>
+        <tr><td><code>cite</code></td><td>URL источника цитаты (необязательный)</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="22"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    blockquote {
+      border-left: 4px solid #2563eb;
+      background: #f0f4ff;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    blockquote footer {
+      margin-top: 8px;
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <p>Как сказал великий учёный:</p>
+
+  <blockquote cite="https://example.com">
+    <p>«Воображение важнее знания.
+    Знание ограничено, тогда как
+    воображение охватывает весь мир.»</p>
+    <footer>— <cite>Альберт Эйнштейн</cite>
+    </footer>
+  </blockquote>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: pre + code -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — &lt;pre&gt; и &lt;code&gt;</h2>
+      <p class="lesson-desc">
+        <code>&lt;pre&gt;</code> (preformatted) сохраняет все пробелы, переносы строк и
+        форматирование как есть — браузер не сворачивает пробелы. Обычно используется вместе
+        с <code>&lt;code&gt;</code> для отображения блоков программного кода. Одиночный
+        <code>&lt;code&gt;</code> (строчный) показывает короткие фрагменты кода внутри текста.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          В тексте внутри <code>&lt;pre&gt;</code> нужно экранировать <code>&lt;</code> как
+          <code>&amp;lt;</code> и <code>&gt;</code> как <code>&amp;gt;</code>, иначе браузер
+          распознает их как HTML-теги.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="24"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    code { font-family: monospace; }
+  </style>
+</head>
+<body>
+  <p>Используйте функцию
+  <code>console.log()</code>
+  для вывода в консоль.</p>
+
+  <pre><code>function greet(name) {
+  const msg = "Привет, " + name;
+  console.log(msg);
+  return msg;
+}
+
+greet("Мир");</code></pre>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: address -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — &lt;address&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;address&gt;</code> используется для контактной информации автора или
+        организации. Содержимое обычно отображается курсивом. Элемент может содержать
+        физический адрес, email, телефон, ссылки на профили в социальных сетях — всё, что
+        связано с контактными данными. Используйте его в <code>&lt;footer&gt;</code> статьи
+        или страницы.
+      </p>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Важно:</strong> Тег <code>&lt;address&gt;</code> не предназначен для произвольных
+          почтовых адресов в тексте — только для контактных данных владельца/автора текущего документа.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="22"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    address {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 16px;
+      border-radius: 8px;
+      font-style: normal;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <article>
+    <h2>Контакты компании</h2>
+    <address>
+      <strong>ООО «Веб Студия»</strong><br>
+      📍 г. Москва, ул. Арбат, д. 12<br>
+      📞 <a href="tel:+74951234567">
+         +7 (495) 123-45-67</a><br>
+      ✉️ <a href="mailto:info@web.ru">
+         info@web.ru</a>
+    </address>
+  </article>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 6: details + summary -->
+    <section class="lesson-section" id="lesson-6">
+      <h2 class="lesson-title">Урок 6 — &lt;details&gt; и &lt;summary&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;details&gt;</code> создаёт раскрывающийся виджет без JavaScript.
+        Внутри него <code>&lt;summary&gt;</code> задаёт видимый заголовок/кнопку.
+        По умолчанию содержимое скрыто; атрибут <code>open</code> делает его видимым
+        сразу при загрузке страницы. Отлично подходит для FAQ, спойлеров, дополнительных деталей.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Атрибут</th><th>Описание</th></tr>
+        <tr><td><code>open</code></td><td>Блок открыт по умолчанию (логический атрибут)</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex6-code" rows="28"><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    details {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 8px 16px;
+      margin: 8px 0;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      padding: 4px 0;
+    }
+    details[open] summary {
+      color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <h2>Часто задаваемые вопросы</h2>
+
+  <details open>
+    <summary>Что такое HTML?</summary>
+    <p>HTML — язык разметки для создания
+    веб-страниц. Расшифровывается как
+    HyperText Markup Language.</p>
+  </details>
+
+  <details>
+    <summary>Нужно ли знать CSS?</summary>
+    <p>Да! CSS отвечает за внешний вид
+    страниц. Вместе HTML и CSS — основа
+    веб-разработки.</p>
+  </details>
+
+  <details>
+    <summary>Сложно ли учить HTML?</summary>
+    <p>Нет, HTML — один из самых доступных
+    языков для начинающих.</p>
+  </details>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex6')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex6-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 10</h3>
+          <p>Создайте страницу статьи с контейнерами</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте HTML-страницу статьи о любой теме, используя блочные элементы:
+          <ul>
+            <li>Тег <code>&lt;article&gt;</code> как основной контейнер статьи</li>
+            <li>Тег <code>&lt;section&gt;</code> внутри статьи для разделения на части</li>
+            <li>Тег <code>&lt;blockquote&gt;</code> с цитатой (любой)</li>
+            <li>Тег <code>&lt;details&gt;</code> с <code>&lt;summary&gt;</code> для дополнительной информации</li>
+            <li>Тег <code>&lt;address&gt;</code> с контактными данными автора</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch10-exercise-code" rows="16"><!-- Напишите ваш HTML код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch10-exercise')" data-exercise-id="ch10-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch10-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="ch10-exercise-feedback"></div>
+        <div class="exercise-preview" id="ch10-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch10-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="ch9-media.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая глава</span>
+          <span class="nav-sub">Глава 9: Медиаэлементы</span>
+        </div>
+      </a>
+      <a href="ch11-inline.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">Глава 11: Встроенные элементы</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>
