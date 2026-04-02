@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 9 — Display и видимость — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css9">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 9: Display и видимость</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 9</div>
+      <div class="sidebar-title">Display и видимость</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> block, inline, inline-block
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> none vs visibility: hidden
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> display: flex (введение)
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> display: grid (введение)
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> display: table
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css9-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 9</div>
+      <h1 class="chapter-title">Display и видимость</h1>
+      <p class="chapter-intro">
+        Свойство <code>display</code> — одно из самых важных в CSS. Оно определяет,
+        как элемент участвует в потоке документа: занимает ли всю строку, встраивается ли
+        в текст или полностью исчезает. Правильное значение <code>display</code>
+        даёт точный контроль над расположением и видимостью любого элемента.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — display: block, inline, inline-block</h2>
+      <p class="lesson-desc">
+        Три базовых значения <code>display</code> определяют фундаментальное поведение элементов.
+        <code>block</code> занимает всю ширину и создаёт перенос строки.
+        <code>inline</code> встраивается в текст, игнорируя <code>width</code> и <code>height</code>.
+        <code>inline-block</code> сочетает оба: встраивается в строку, но принимает размеры.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Значение</th><th>Занимает строку</th><th>width / height</th><th>Типичные теги</th></tr>
+        <tr><td><code>block</code></td><td>Всю доступную ширину</td><td>✅ Работают</td><td>div, p, h1–h6, section</td></tr>
+        <tr><td><code>inline</code></td><td>Только по содержимому</td><td>❌ Игнорируются</td><td>span, a, strong, em</td></tr>
+        <tr><td><code>inline-block</code></td><td>По содержимому (встроен)</td><td>✅ Работают</td><td>img, button (CSS)</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex1-code" rows="56"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f8f9fa; }
+  h4 { margin: 0 0 6px; font-size: 13px; color: #555; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+  .demo { margin-bottom: 20px; }
+
+  /* block — каждый на новой строке, вся ширина */
+  .block-el {
+    display: block;
+    background: #3f51b5;
+    color: #fff;
+    padding: 8px 14px;
+    margin-bottom: 4px;
+    font-size: 13px;
+    border-radius: 4px;
+    width: 200px; /* работает */
+  }
+
+  /* inline — в строке, width/height игнорируются */
+  .inline-el {
+    display: inline;
+    background: #e53935;
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    width: 200px;  /* игнорируется! */
+    height: 60px;  /* игнорируется! */
+  }
+
+  /* inline-block — в строке, но с размерами */
+  .ib-el {
+    display: inline-block;
+    background: #43a047;
+    color: #fff;
+    padding: 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    width: 100px;  /* работает! */
+    height: 60px;  /* работает! */
+    text-align: center;
+    vertical-align: top;
+  }
+</style>
+</head>
+<body>
+  <div class="demo">
+    <h4>display: block — каждый на новой строке</h4>
+    <div class="block-el">Блок A (width: 200px ✅)</div>
+    <div class="block-el">Блок B (width: 200px ✅)</div>
+  </div>
+
+  <div class="demo">
+    <h4>display: inline — встраивается в текст, width игнорируется</h4>
+    Текст перед
+    <span class="inline-el">inline A</span>
+    <span class="inline-el">inline B</span>
+    текст после — всё в одной строке
+  </div>
+
+  <div class="demo">
+    <h4>display: inline-block — в строке, но с width и height</h4>
+    <div class="ib-el">ib A<br>w:100px<br>h:60px</div>
+    <div class="ib-el">ib B<br>w:100px<br>h:60px</div>
+    <div class="ib-el">ib C<br>w:100px<br>h:60px</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — display: none vs visibility: hidden</h2>
+      <p class="lesson-desc">
+        Оба способа скрывают элемент визуально, но по-разному влияют на раскладку.
+        <code>display: none</code> полностью убирает элемент из потока — как будто его нет.
+        <code>visibility: hidden</code> скрывает элемент, но оставляет занятое им место.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Элемент виден?</th><th>Место в потоке?</th><th>Доступен для AT?</th></tr>
+        <tr><td><code>display: none</code></td><td>❌ Нет</td><td>❌ Удалено</td><td>❌ Нет</td></tr>
+        <tr><td><code>visibility: hidden</code></td><td>❌ Нет</td><td>✅ Сохранено</td><td>❌ Нет</td></tr>
+        <tr><td><code>opacity: 0</code></td><td>❌ Нет</td><td>✅ Сохранено</td><td>✅ Да</td></tr>
+      </table>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>display: none и доступность:</strong> Элементы с <code>display: none</code>
+          невидимы для скринридеров. Для скрытия только визуально (с сохранением доступности)
+          используйте класс <code>visually-hidden</code> с <code>position: absolute; clip: rect(0,0,0,0)</code>.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex2-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f8f9fa; }
+  h4 { margin: 0 0 6px; font-size: 13px; color: #555; }
+  .row { display: flex; align-items: stretch; gap: 4px; margin-bottom: 20px; }
+  .el {
+    padding: 12px 16px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .visible   { background: #43a047; }
+  .d-none    { display: none; }            /* убирает из потока */
+  .vis-hidden{ visibility: hidden; }       /* скрыт, место есть */
+  .placeholder {
+    background: #ef5350; border: 2px dashed #c62828;
+    opacity: .6;
+  }
+
+  .annot { font-size: 11px; color: #888; padding: 0 2px; align-self: center; }
+</style>
+</head>
+<body>
+  <h4>display: none — место полностью удалено</h4>
+  <div class="row">
+    <div class="el visible">Блок 1</div>
+    <div class="el visible d-none">Я скрыт (display:none)</div>
+    <div class="el visible">Блок 3</div>
+    <div class="annot">← Блок 2 исчез, Блок 3 занял его место</div>
+  </div>
+
+  <h4>visibility: hidden — место сохранено</h4>
+  <div class="row">
+    <div class="el visible">Блок 1</div>
+    <div class="el placeholder vis-hidden">Я скрыт (vis:hidden)</div>
+    <div class="el visible">Блок 3</div>
+    <div class="annot">← Блок 2 невидим, но место занято</div>
+  </div>
+
+  <h4>opacity: 0 — невидим, место есть, интерактивен</h4>
+  <div class="row">
+    <div class="el visible">Блок 1</div>
+    <div class="el visible" style="opacity:0;">opacity:0</div>
+    <div class="el visible">Блок 3</div>
+    <div class="annot">← Блок 2 прозрачный, место занято, события работают</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — display: flex (введение)</h2>
+      <p class="lesson-desc">
+        <code>display: flex</code> превращает элемент во flex-контейнер, а его прямые дочерние элементы
+        становятся flex-элементами. Это мощный инструмент для создания одномерных раскладок —
+        строк или столбцов. Подробное изучение Flexbox — в следующем разделе!
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Flexbox отменяет float:</strong> Дочерние элементы flex-контейнера
+          не нужно «флоатить» для горизонтальной раскладки. <code>display: flex</code> сам
+          расставляет их в ряд и управляет выравниванием.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex3-code" rows="46"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f8f9fa; }
+  h4 { font-size: 13px; color: #555; margin: 0 0 8px; }
+
+  .flex-row {
+    display: flex;                 /* flex-контейнер */
+    gap: 10px;
+    background: #e8eaf6;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  .flex-col {
+    display: flex;
+    flex-direction: column;        /* вертикально */
+    gap: 8px;
+    background: #fce4ec;
+    padding: 12px;
+    border-radius: 8px;
+    width: 160px;
+  }
+  .item {
+    background: #3f51b5;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .item:nth-child(2) { background: #7986cb; }
+  .item:nth-child(3) { background: #9fa8da; color: #333; }
+</style>
+</head>
+<body>
+  <h4>flex-direction: row (по умолчанию)</h4>
+  <div class="flex-row">
+    <div class="item">A</div>
+    <div class="item">B</div>
+    <div class="item">C</div>
+  </div>
+
+  <h4>flex-direction: column</h4>
+  <div class="flex-col">
+    <div class="item">A</div>
+    <div class="item">B</div>
+    <div class="item">C</div>
+  </div>
+
+  <p style="font-size:12px;color:#888;margin-top:8px;">
+    Подробнее о Flexbox — в CSS Разделе 10! 🚀
+  </p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — display: grid (введение)</h2>
+      <p class="lesson-desc">
+        <code>display: grid</code> создаёт двумерную сетку из строк и столбцов.
+        В отличие от Flexbox, Grid позволяет управлять одновременно горизонтальной
+        и вертикальной осями. Подробное изучение CSS Grid — в разделе 11.
+      </p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Flex vs Grid:</strong> Используйте Flexbox для одномерных раскладок
+          (меню в строку, карточки в ряд), а Grid — для двумерных сеток
+          (весь макет страницы, фотогалереи).
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex4-code" rows="44"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f8f9fa; }
+  h4 { font-size: 13px; color: #555; margin: 0 0 8px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  /* 3 равные колонки */
+    gap: 10px;
+    background: #e8f5e9;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  .grid-auto {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+    background: #fff3e0;
+    padding: 12px;
+    border-radius: 8px;
+  }
+  .cell {
+    background: #43a047;
+    color: #fff;
+    padding: 14px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .cell:nth-child(even) { background: #66bb6a; }
+  .wide { grid-column: span 2; background: #2e7d32; }
+</style>
+</head>
+<body>
+  <h4>grid-template-columns: 1fr 1fr 1fr (3 равные колонки)</h4>
+  <div class="grid">
+    <div class="cell">1</div>
+    <div class="cell">2</div>
+    <div class="cell">3</div>
+    <div class="cell wide">4 (span 2)</div>
+    <div class="cell">5</div>
+  </div>
+
+  <h4>auto-fill + minmax — адаптивная сетка</h4>
+  <div class="grid-auto">
+    <div class="cell">A</div><div class="cell">B</div>
+    <div class="cell">C</div><div class="cell">D</div>
+    <div class="cell">E</div><div class="cell">F</div>
+  </div>
+  <p style="font-size:12px;color:#888;margin-top:8px;">
+    Подробнее о CSS Grid — в CSS Разделе 11! 🗓
+  </p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — display: table и table-cell</h2>
+      <p class="lesson-desc">
+        CSS позволяет имитировать поведение HTML-таблиц без использования тегов
+        <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code> и <code>&lt;td&gt;</code>.
+        Это полезно для выравнивания данных в столбцы и для вертикального центрирования
+        в контейнерах с неизвестной высотой.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Значение display</th><th>Аналог HTML-тега</th><th>Описание</th></tr>
+        <tr><td><code>table</code></td><td><code>&lt;table&gt;</code></td><td>Контейнер таблицы</td></tr>
+        <tr><td><code>table-row</code></td><td><code>&lt;tr&gt;</code></td><td>Строка таблицы</td></tr>
+        <tr><td><code>table-cell</code></td><td><code>&lt;td&gt;</code></td><td>Ячейка таблицы</td></tr>
+        <tr><td><code>table-header-group</code></td><td><code>&lt;thead&gt;</code></td><td>Группа заголовка</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex5-code" rows="54"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f8f9fa; }
+  h4 { font-size: 13px; color: #555; margin: 0 0 8px; }
+
+  .css-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    margin-bottom: 20px;
+  }
+  .css-thead { display: table-header-group; }
+  .css-tbody { display: table-row-group; }
+  .css-tr    { display: table-row; }
+  .css-th, .css-td { display: table-cell; padding: 10px 14px; font-size: 13px; }
+  .css-th {
+    background: #3f51b5; color: #fff;
+    font-weight: bold; text-align: left;
+  }
+  .css-tr:nth-child(even) .css-td { background: #f5f5f5; }
+  .css-tr:hover .css-td { background: #e8eaf6; }
+
+  /* Вертикальное центрирование через table-cell */
+  .center-wrap {
+    display: table;
+    width: 100%; height: 80px;
+    background: #e3f2fd;
+    border-radius: 8px;
+    border: 2px solid #1976d2;
+  }
+  .center-cell {
+    display: table-cell;
+    vertical-align: middle;  /* вертикальное центрирование! */
+    text-align: center;
+    font-size: 13px; font-weight: bold; color: #1565c0;
+  }
+</style>
+</head>
+<body>
+  <h4>CSS-таблица без &lt;table&gt;</h4>
+  <div class="css-table">
+    <div class="css-thead">
+      <div class="css-tr">
+        <div class="css-th">Язык</div>
+        <div class="css-th">Год</div>
+        <div class="css-th">Создатель</div>
+      </div>
+    </div>
+    <div class="css-tbody">
+      <div class="css-tr">
+        <div class="css-td">HTML</div>
+        <div class="css-td">1993</div>
+        <div class="css-td">Тим Бернерс-Ли</div>
+      </div>
+      <div class="css-tr">
+        <div class="css-td">CSS</div>
+        <div class="css-td">1996</div>
+        <div class="css-td">Хокон Ли</div>
+      </div>
+      <div class="css-tr">
+        <div class="css-td">JavaScript</div>
+        <div class="css-td">1995</div>
+        <div class="css-td">Брендан Айк</div>
+      </div>
+    </div>
+  </div>
+
+  <h4>Вертикальное центрирование через table-cell</h4>
+  <div class="center-wrap">
+    <div class="center-cell">
+      Текст вертикально по центру через display: table-cell + vertical-align: middle
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 9</h3>
+          <p>Создайте навигационное меню с display: inline-block</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Напишите HTML+CSS горизонтальное навигационное меню, в котором:
+          <ul>
+            <li>Меню должно содержать минимум 5 пунктов</li>
+            <li>Использовать <code>display: inline-block</code> для горизонтального расположения пунктов</li>
+            <li>Добавить <code>:hover</code> эффект для пунктов меню</li>
+            <li>Задать одинаковые размеры (<code>width</code> и <code>height</code>) всем пунктам меню</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css9-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css9-exercise')" data-exercise-id="css9-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css9-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css9-exercise-feedback"></div>
+        <div class="exercise-preview" id="css9-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css9-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="css8-positioning.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">CSS Раздел 8: Позиционирование</span>
+        </div>
+      </a>
+      <a href="css10-flexbox.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 10: Flexbox</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

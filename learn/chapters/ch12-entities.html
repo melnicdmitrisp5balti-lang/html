@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 12: Спецсимволы, Meta-теги и HEAD — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch12">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 12: Спецсимволы, Meta-теги и HEAD</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 12</div>
+      <div class="sidebar-title">Спецсимволы, Meta-теги и HEAD</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> HTML-сущности
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Основные meta-теги
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Open Graph и соцсети
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> &lt;title&gt;, &lt;link&gt; и фавикон
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch12-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 Глава 12</div>
+      <h1 class="chapter-title">Спецсимволы, Meta-теги и HEAD</h1>
+      <p class="chapter-intro">
+        Секция <code>&lt;head&gt;</code> HTML-документа содержит мета-информацию, невидимую
+        пользователю, но критически важную для браузеров, поисковиков и социальных сетей.
+        В этой главе вы узнаете, как правильно использовать HTML-сущности для спецсимволов,
+        как настроить meta-теги для SEO, как выглядит ваш сайт при отправке в мессенджер,
+        и как добавить фавикон.
+      </p>
+    </div>
+
+    <!-- LESSON 1: HTML entities -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — HTML-сущности (символы)</h2>
+      <p class="lesson-desc">
+        Некоторые символы в HTML зарезервированы (например <code>&lt;</code> и <code>&gt;</code>
+        используются для тегов). Чтобы вывести их как текст, используются <strong>HTML-сущности</strong>
+        (entities) — специальные коды вида <code>&amp;имя;</code> или <code>&amp;#номер;</code>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Символ</th><th>Сущность (имя)</th><th>Сущность (код)</th><th>Описание</th></tr>
+        <tr><td>&amp;</td><td><code>&amp;amp;</code></td><td><code>&amp;#38;</code></td><td>Амперсанд</td></tr>
+        <tr><td>&lt;</td><td><code>&amp;lt;</code></td><td><code>&amp;#60;</code></td><td>Меньше</td></tr>
+        <tr><td>&gt;</td><td><code>&amp;gt;</code></td><td><code>&amp;#62;</code></td><td>Больше</td></tr>
+        <tr><td>&quot;</td><td><code>&amp;quot;</code></td><td><code>&amp;#34;</code></td><td>Кавычка</td></tr>
+        <tr><td>&nbsp;</td><td><code>&amp;nbsp;</code></td><td><code>&amp;#160;</code></td><td>Неразрывный пробел</td></tr>
+        <tr><td>&copy;</td><td><code>&amp;copy;</code></td><td><code>&amp;#169;</code></td><td>Копирайт ©</td></tr>
+        <tr><td>&reg;</td><td><code>&amp;reg;</code></td><td><code>&amp;#174;</code></td><td>Зарегистрировано ®</td></tr>
+        <tr><td>&trade;</td><td><code>&amp;trade;</code></td><td><code>&amp;#8482;</code></td><td>Торговая марка ™</td></tr>
+        <tr><td>&euro;</td><td><code>&amp;euro;</code></td><td><code>&amp;#8364;</code></td><td>Евро €</td></tr>
+        <tr><td>&mdash;</td><td><code>&amp;mdash;</code></td><td><code>&amp;#8212;</code></td><td>Длинное тире —</td></tr>
+        <tr><td>&laquo;</td><td><code>&amp;laquo;</code></td><td><code>&amp;#171;</code></td><td>Левая «ёлочка»</td></tr>
+        <tr><td>&raquo;</td><td><code>&amp;raquo;</code></td><td><code>&amp;#187;</code></td><td>Правая «ёлочка»</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>&amp;nbsp;</strong> — неразрывный пробел. Браузер не переносит строку в этом месте.
+          Используйте его, например, между числом и единицей измерения: <code>100&amp;nbsp;км</code>,
+          <code>20&amp;nbsp;°C</code>.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="22"><!DOCTYPE html>
+<html>
+<body>
+  <!-- Зарезервированные символы -->
+  <p>Тег параграфа: &lt;p&gt;текст&lt;/p&gt;</p>
+  <p>Условие: a &lt; b &amp;&amp; b &gt; 0</p>
+
+  <!-- Типографика -->
+  <p>&laquo;Война и мир&raquo; &mdash;
+  роман Льва&nbsp;Толстого.</p>
+
+  <!-- Символы -->
+  <p>&copy; 2025 Моя Компания&nbsp;&reg;</p>
+  <p>Новый iPhone&trade; &mdash;
+  цена от 99&nbsp;999&nbsp;&#x20BD;</p>
+
+  <!-- Математика -->
+  <p>2&sup2; + 3&sup2; = 13</p>
+  <p>Угол: 90&deg;, 
+  температура: &minus;15&nbsp;&deg;C</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: Meta tags -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Основные meta-теги</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;meta&gt;</code> — самозакрывающийся элемент внутри <code>&lt;head&gt;</code>,
+        передающий метаданные браузеру и поисковым системам. Правильно настроенные meta-теги
+        улучшают SEO, корректное отображение на мобильных устройствах и видимость в поиске.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Meta-тег</th><th>Назначение</th></tr>
+        <tr>
+          <td><code>&lt;meta charset="UTF-8"&gt;</code></td>
+          <td>Кодировка — всегда ставьте первым в &lt;head&gt;</td>
+        </tr>
+        <tr>
+          <td><code>&lt;meta name="viewport" ...&gt;</code></td>
+          <td>Масштаб на мобильных устройствах</td>
+        </tr>
+        <tr>
+          <td><code>&lt;meta name="description" ...&gt;</code></td>
+          <td>Описание страницы в результатах поиска (до 160 символов)</td>
+        </tr>
+        <tr>
+          <td><code>&lt;meta name="keywords" ...&gt;</code></td>
+          <td>Ключевые слова (устарело, но иногда используется)</td>
+        </tr>
+        <tr>
+          <td><code>&lt;meta name="robots" ...&gt;</code></td>
+          <td>Инструкции для поисковых роботов</td>
+        </tr>
+        <tr>
+          <td><code>&lt;meta name="author" ...&gt;</code></td>
+          <td>Автор страницы</td>
+        </tr>
+        <tr>
+          <td><code>&lt;meta http-equiv="refresh" ...&gt;</code></td>
+          <td>Автоматическое обновление / перенаправление</td>
+        </tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="22"><!DOCTYPE html>
+<html lang="ru">
+<head>
+  <!-- Обязательные -->
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,
+             initial-scale=1.0">
+
+  <!-- SEO -->
+  <meta name="description"
+    content="Бесплатный онлайн-курс
+    по HTML для начинающих. Изучите
+    основы веб-разработки за 2 недели.">
+
+  <meta name="keywords"
+    content="HTML, веб-разработка,
+    обучение, курс">
+
+  <meta name="author"
+    content="Иван Иванов">
+
+  <!-- Поисковые роботы -->
+  <meta name="robots"
+    content="index, follow">
+
+  <title>HTML Учебник для начинающих</title>
+</head>
+<body>
+  <h1>Содержимое страницы</h1>
+  <p>Meta-теги не видны здесь,
+  но браузер и поисковики их читают!</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Viewport обязателен!</strong> Без <code>&lt;meta name="viewport"&gt;</code>
+          сайт на мобильных устройствах будет выглядеть как уменьшенная версия
+          десктопного сайта — текст будет нечитаемо маленьким.
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: Open Graph -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Open Graph и социальные сети</h2>
+      <p class="lesson-desc">
+        Протокол <strong>Open Graph</strong> (OG) разработан Facebook и принят всеми крупными
+        соцсетями и мессенджерами. Когда вы отправляете ссылку в Telegram, VK или Twitter —
+        именно OG-теги определяют, как будет выглядеть превью: заголовок, описание и картинка.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>OG-тег</th><th>Назначение</th></tr>
+        <tr><td><code>og:title</code></td><td>Заголовок для превью (может отличаться от &lt;title&gt;)</td></tr>
+        <tr><td><code>og:description</code></td><td>Описание для превью</td></tr>
+        <tr><td><code>og:image</code></td><td>Изображение превью (рекомендуется 1200×630 px)</td></tr>
+        <tr><td><code>og:url</code></td><td>Канонический URL страницы</td></tr>
+        <tr><td><code>og:type</code></td><td>Тип контента: website, article, video.movie</td></tr>
+        <tr><td><code>og:site_name</code></td><td>Название сайта</td></tr>
+        <tr><td><code>og:locale</code></td><td>Язык контента: ru_RU, en_US</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="28"><!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,
+             initial-scale=1.0">
+
+  <!-- SEO description -->
+  <meta name="description"
+    content="Изучите HTML с нуля
+    бесплатно — интерактивный курс.">
+
+  <!-- Open Graph -->
+  <meta property="og:title"
+    content="HTML Учебник — Глава 12">
+  <meta property="og:description"
+    content="Узнайте всё о meta-тегах,
+    спецсимволах и заголовке страницы.">
+  <meta property="og:image"
+    content="https://example.com/og.png">
+  <meta property="og:url"
+    content="https://example.com/ch12">
+  <meta property="og:type"
+    content="article">
+  <meta property="og:locale"
+    content="ru_RU">
+  <meta property="og:site_name"
+    content="HTML Учебник">
+
+  <title>Meta-теги и HEAD — HTML Учебник</title>
+</head>
+<body>
+  <h1>Open Graph настроен!</h1>
+  <p>При отправке ссылки в мессенджер
+  появится красивое превью.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          Проверить, как выглядит ваш сайт при шаринге, можно с помощью инструментов:
+          <strong>Facebook Sharing Debugger</strong>, <strong>Twitter Card Validator</strong>
+          или просто отправив ссылку в Telegram.
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: title, link, favicon -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — &lt;title&gt;, &lt;link&gt; и фавикон</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;title&gt;</code> задаёт заголовок страницы на вкладке браузера и в
+        результатах поиска (до 60 символов). Тег <code>&lt;link&gt;</code> связывает
+        документ с внешними ресурсами: таблицами стилей, фавиконом, шрифтами. Фавикон
+        (favicon) — маленькая иконка сайта, отображаемая на вкладке.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Атрибут &lt;link&gt;</th><th>Описание</th></tr>
+        <tr><td><code>rel="stylesheet"</code></td><td>Подключить CSS-файл</td></tr>
+        <tr><td><code>rel="icon"</code></td><td>Фавикон (вкладка браузера)</td></tr>
+        <tr><td><code>rel="apple-touch-icon"</code></td><td>Иконка для iOS (при добавлении на экран)</td></tr>
+        <tr><td><code>rel="canonical"</code></td><td>Канонический URL (для SEO)</td></tr>
+        <tr><td><code>rel="preconnect"</code></td><td>Предварительное соединение (ускоряет загрузку)</td></tr>
+        <tr><td><code>rel="preload"</code></td><td>Предзагрузка ресурса</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="30"><!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,
+             initial-scale=1.0">
+
+  <!-- Заголовок страницы -->
+  <title>Иван Иванов — Портфолио</title>
+
+  <!-- Фавиконы -->
+  <link rel="icon" type="image/png"
+    sizes="32x32"
+    href="/favicon-32x32.png">
+  <link rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png">
+
+  <!-- CSS -->
+  <link rel="stylesheet"
+    href="styles/main.css">
+
+  <!-- Google Fonts (предсоединение) -->
+  <link rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+  <!-- Канонический URL -->
+  <link rel="canonical"
+    href="https://ivan.dev/">
+</head>
+<body>
+  <h1>Портфолио</h1>
+  <p>Содержимое страницы...</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Форматы фавиконов:</strong> Современные браузеры поддерживают
+          <code>.ico</code>, <code>.png</code> и <code>.svg</code>. SVG-фавикон —
+          самый универсальный: выглядит чётко на любом размере экрана.
+          Создайте файл <code>favicon.svg</code> и подключите:
+          <code>&lt;link rel="icon" type="image/svg+xml" href="/favicon.svg"&gt;</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 12</h3>
+          <p>Создайте полный &lt;head&gt; для реального сайта</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте полноценный HTML-документ с правильно заполненным
+          <code>&lt;head&gt;</code> для вашего воображаемого сайта:
+          <ul>
+            <li>Тег <code>&lt;meta charset="UTF-8"&gt;</code></li>
+            <li>Тег <code>&lt;meta name="viewport"&gt;</code> с правильным content</li>
+            <li>Тег <code>&lt;meta name="description"&gt;</code> с описанием (до 160 символов)</li>
+            <li>Хотя бы два OG-тега (<code>og:title</code> и <code>og:description</code>)</li>
+            <li>В тексте страницы используйте минимум одну HTML-сущность (например <code>&amp;copy;</code>, <code>&amp;mdash;</code> или <code>&amp;nbsp;</code>)</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch12-exercise-code" rows="16"><!-- Напишите ваш HTML код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch12-exercise')" data-exercise-id="ch12-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch12-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="ch12-exercise-feedback"></div>
+        <div class="exercise-preview" id="ch12-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch12-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="ch11-inline.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая глава</span>
+          <span class="nav-sub">Глава 11: Встроенные элементы</span>
+        </div>
+      </a>
+      <a href="ch13-data-attrs.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">Глава 13: Атрибуты и Data-атрибуты</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

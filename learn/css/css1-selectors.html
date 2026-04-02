@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 1 — Селекторы — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css1">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 1: Селекторы</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 1</div>
+      <div class="sidebar-title">Селекторы</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Простые селекторы
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Комбинированные селекторы
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Псевдоклассы
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Псевдоэлементы
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Селекторы атрибутов
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css1-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 1</div>
+      <h1 class="chapter-title">Селекторы</h1>
+      <p class="chapter-intro">
+        CSS-селекторы — это шаблоны, которые позволяют выбирать HTML-элементы для применения стилей.
+        Зная селекторы, вы сможете точечно оформлять любые элементы страницы: по тегу, классу, идентификатору,
+        атрибуту, состоянию или положению в дереве документа. В этом разделе вы освоите все основные виды
+        CSS-селекторов от простых до мощных комбинаций.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Простые селекторы</h2>
+      <p class="lesson-desc">
+        Простые селекторы выбирают элементы по одному критерию: имени тега, классу, идентификатору
+        или универсальному символу <code>*</code>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Селектор</th><th>Пример</th><th>Описание</th></tr>
+        <tr><td>Тег</td><td><code>p { }</code></td><td>Выбирает все элементы <code>&lt;p&gt;</code></td></tr>
+        <tr><td>Класс</td><td><code>.box { }</code></td><td>Выбирает элементы с <code>class="box"</code></td></tr>
+        <tr><td>ID</td><td><code>#header { }</code></td><td>Выбирает элемент с <code>id="header"</code></td></tr>
+        <tr><td>Универсальный</td><td><code>* { }</code></td><td>Выбирает все элементы на странице</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>ID vs Класс:</strong> ID должен быть уникальным на странице (один элемент), тогда как класс
+          может использоваться у множества элементов одновременно.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="40"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  /* Универсальный селектор */
+  * {
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+
+  /* Селектор тега */
+  p {
+    background: #e8f4fd;
+    padding: 8px 12px;
+    border-left: 4px solid #3498db;
+    margin: 6px 0;
+  }
+
+  /* Селектор класса */
+  .highlight {
+    background: #fef9e7;
+    border-left: 4px solid #f39c12;
+    padding: 8px 12px;
+    margin: 6px 0;
+  }
+
+  /* Селектор ID */
+  #special {
+    background: #eafaf1;
+    border-left: 4px solid #27ae60;
+    padding: 8px 12px;
+    margin: 6px 0;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <p>Этот параграф стилизован селектором тега &lt;p&gt;</p>
+  <div class="highlight">Этот div стилизован классом .highlight</div>
+  <div id="special">Этот div стилизован по ID #special</div>
+  <p class="highlight">Параграф с классом highlight (оба правила)</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Комбинированные селекторы</h2>
+      <p class="lesson-desc">
+        Комбинированные селекторы описывают отношения между элементами в HTML-дереве.
+        Они позволяют точно указать, какой именно элемент нужно выбрать в зависимости от его окружения.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Комбинатор</th><th>Синтаксис</th><th>Описание</th></tr>
+        <tr><td>Потомок</td><td><code>div p</code></td><td>Все <code>&lt;p&gt;</code> внутри <code>&lt;div&gt;</code> (на любом уровне)</td></tr>
+        <tr><td>Дочерний</td><td><code>div &gt; p</code></td><td>Только прямые <code>&lt;p&gt;</code> внутри <code>&lt;div&gt;</code></td></tr>
+        <tr><td>Соседний</td><td><code>h2 + p</code></td><td>Первый <code>&lt;p&gt;</code> сразу после <code>&lt;h2&gt;</code></td></tr>
+        <tr><td>Общий сосед</td><td><code>h2 ~ p</code></td><td>Все <code>&lt;p&gt;</code> на том же уровне после <code>&lt;h2&gt;</code></td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Совет:</strong> Используйте дочерний комбинатор <code>&gt;</code> вместо пробела, когда нужно
+          стилизовать только прямых потомков и не затрагивать глубоко вложенные элементы.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 10px; }
+
+  /* Потомок: все p внутри .container */
+  .container p {
+    color: #2980b9;
+    margin: 4px 0;
+  }
+
+  /* Дочерний: только прямые p в .direct */
+  .direct > p {
+    background: #d5f5e3;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  /* Соседний: p сразу после h3 */
+  h3 + p {
+    font-weight: bold;
+    color: #8e44ad;
+  }
+
+  /* Общий сосед: все p после h3 в том же уровне */
+  h3 ~ p {
+    border-left: 3px solid #e74c3c;
+    padding-left: 8px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <p>Потомок .container — синий</p>
+    <div>
+      <p>Тоже потомок .container (глубже) — синий</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="direct">
+    <p>Прямой дочерний — зелёный фон</p>
+    <div>
+      <p>Не прямой — зелёного фона нет</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <h3>Заголовок</h3>
+  <p>Первый после h3 — жирный и фиолетовый (h3 + p)</p>
+  <p>Второй после h3 — только красная черта (h3 ~ p)</p>
+  <p>Третий после h3 — только красная черта (h3 ~ p)</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Псевдоклассы</h2>
+      <p class="lesson-desc">
+        Псевдоклассы позволяют выбирать элементы на основе их состояния или положения в документе.
+        Они записываются через двоеточие: <code>:hover</code>, <code>:focus</code>, <code>:nth-child()</code>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Псевдокласс</th><th>Описание</th></tr>
+        <tr><td><code>:hover</code></td><td>При наведении курсора</td></tr>
+        <tr><td><code>:focus</code></td><td>Когда элемент в фокусе (поле ввода)</td></tr>
+        <tr><td><code>:first-child</code></td><td>Первый дочерний элемент</td></tr>
+        <tr><td><code>:last-child</code></td><td>Последний дочерний элемент</td></tr>
+        <tr><td><code>:nth-child(n)</code></td><td>N-й дочерний элемент (можно: 2n, 2n+1, odd, even)</td></tr>
+        <tr><td><code>:not(selector)</code></td><td>Все элементы кроме указанного</td></tr>
+        <tr><td><code>:checked</code></td><td>Отмеченный checkbox или radio</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>:nth-child — мощный инструмент:</strong> <code>:nth-child(odd)</code> выбирает нечётные элементы,
+          <code>:nth-child(even)</code> — чётные. Это удобно для создания «зебры» в таблицах.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="56"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 10px; }
+
+  /* :hover — кнопка меняет цвет */
+  .btn {
+    background: #3498db;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 4px;
+    transition: background 0.2s;
+  }
+  .btn:hover {
+    background: #1a5276;
+  }
+
+  /* :focus — поле ввода */
+  input {
+    border: 2px solid #ccc;
+    padding: 6px 10px;
+    border-radius: 4px;
+    outline: none;
+    width: 200px;
+    display: block;
+    margin: 8px 0;
+  }
+  input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52,152,219,0.2);
+  }
+
+  /* :nth-child — зебра в списке */
+  ul { list-style: none; padding: 0; margin: 10px 0; }
+  ul li {
+    padding: 6px 12px;
+    background: #f8f9fa;
+  }
+  ul li:nth-child(even) {
+    background: #d6eaf8;
+  }
+  ul li:first-child {
+    font-weight: bold;
+    background: #2980b9;
+    color: white;
+  }
+  ul li:not(:first-child):hover {
+    background: #aed6f1;
+  }
+</style>
+</head>
+<body>
+  <button class="btn">Наведи на меня!</button>
+  <button class="btn">Ещё кнопка</button>
+
+  <input type="text" placeholder="Нажми для фокуса">
+  <input type="text" placeholder="Второе поле">
+
+  <ul>
+    <li>Заголовок (first-child)</li>
+    <li>Пункт 2 (even — синий)</li>
+    <li>Пункт 3 (odd)</li>
+    <li>Пункт 4 (even — синий)</li>
+    <li>Пункт 5 (odd)</li>
+  </ul>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Псевдоэлементы</h2>
+      <p class="lesson-desc">
+        Псевдоэлементы обозначаются двойным двоеточием <code>::</code> и позволяют стилизовать
+        определённую часть элемента или добавлять контент, не изменяя HTML.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Псевдоэлемент</th><th>Описание</th></tr>
+        <tr><td><code>::before</code></td><td>Вставляет содержимое перед содержимым элемента</td></tr>
+        <tr><td><code>::after</code></td><td>Вставляет содержимое после содержимого элемента</td></tr>
+        <tr><td><code>::first-line</code></td><td>Стилизует первую строку текста</td></tr>
+        <tr><td><code>::first-letter</code></td><td>Стилизует первую букву текста</td></tr>
+        <tr><td><code>::placeholder</code></td><td>Стилизует текст-подсказку в поле ввода</td></tr>
+        <tr><td><code>::selection</code></td><td>Стилизует выделенный пользователем текст</td></tr>
+      </table>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Важно:</strong> Псевдоэлементы <code>::before</code> и <code>::after</code> требуют
+          свойство <code>content</code> (даже пустое <code>content: ""</code>), иначе они не отображаются.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="56"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; }
+
+  /* ::before — декоративный значок */
+  .tip::before {
+    content: "💡 ";
+    font-size: 1.1em;
+  }
+  .tip {
+    background: #fef9e7;
+    border: 1px solid #f39c12;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 8px 0;
+  }
+
+  /* ::after — метка обязательного поля */
+  .required::after {
+    content: " *";
+    color: #e74c3c;
+    font-weight: bold;
+  }
+
+  /* ::first-line — первая строка абзаца */
+  .article p::first-line {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 1.05em;
+  }
+
+  /* ::placeholder — подсказка */
+  input::placeholder {
+    color: #aab7b8;
+    font-style: italic;
+  }
+  input {
+    border: 1px solid #bdc3c7;
+    padding: 7px 10px;
+    border-radius: 4px;
+    width: 220px;
+    outline: none;
+    display: block;
+    margin: 6px 0;
+  }
+
+  /* ::selection — выделение */
+  p::selection {
+    background: #d2b4de;
+    color: #4a235a;
+  }
+
+  label { font-size: 0.9em; color: #555; }
+</style>
+</head>
+<body>
+  <div class="tip">Это совет со значком ::before</div>
+
+  <p>
+    <label class="required">Имя пользователя</label>
+    <input type="text" placeholder="Введите имя...">
+  </p>
+  <p>
+    <label class="required">Email</label>
+    <input type="text" placeholder="example@mail.com">
+  </p>
+
+  <div class="article">
+    <p>Первая строка этого абзаца выделена жирным и другим
+    цветом благодаря псевдоэлементу ::first-line. Остальные
+    строки выглядят обычно. Выдели этот текст мышью!</p>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Селекторы атрибутов</h2>
+      <p class="lesson-desc">
+        Селекторы атрибутов позволяют выбирать элементы по наличию или значению HTML-атрибута.
+        Они очень полезны для стилизации ссылок, полей форм и кастомных data-атрибутов.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Синтаксис</th><th>Описание</th></tr>
+        <tr><td><code>[attr]</code></td><td>Элементы с атрибутом <code>attr</code> (любое значение)</td></tr>
+        <tr><td><code>[attr="val"]</code></td><td>Точное совпадение значения</td></tr>
+        <tr><td><code>[attr^="val"]</code></td><td>Значение начинается с <code>val</code></td></tr>
+        <tr><td><code>[attr$="val"]</code></td><td>Значение заканчивается на <code>val</code></td></tr>
+        <tr><td><code>[attr*="val"]</code></td><td>Значение содержит подстроку <code>val</code></td></tr>
+        <tr><td><code>[attr~="val"]</code></td><td>Значение содержит слово <code>val</code> (через пробел)</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Практическое применение:</strong> Используйте <code>a[href^="https"]</code> для стилизации
+          только внешних ссылок, а <code>a[href$=".pdf"]</code> для ссылок на PDF-документы.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="58"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 14px; }
+
+  a { display: block; padding: 5px 10px; margin: 3px 0;
+      border-radius: 4px; text-decoration: none; color: #333; }
+
+  /* Любая ссылка с href */
+  a[href] { background: #eaf2ff; }
+
+  /* Внешние ссылки (начинаются с https) */
+  a[href^="https"]::before { content: "🌐 "; }
+  a[href^="https"] { color: #1a5276; border-left: 3px solid #2980b9; }
+
+  /* Ссылки на почту */
+  a[href^="mailto"]::before { content: "✉️ "; }
+  a[href^="mailto"] { color: #1e8449; border-left: 3px solid #27ae60; }
+
+  /* Ссылки на PDF */
+  a[href$=".pdf"]::after { content: " (PDF)"; font-size: 0.8em; color: #e74c3c; }
+  a[href$=".pdf"] { border-left: 3px solid #e74c3c; }
+
+  /* Поля форм по типу */
+  input { display: block; margin: 5px 0; padding: 6px 10px;
+          border: 2px solid #ccc; border-radius: 4px; }
+  input[type="text"]  { border-color: #3498db; }
+  input[type="email"] { border-color: #27ae60; }
+  input[type="password"] { border-color: #e74c3c; }
+
+  hr { margin: 12px 0; }
+</style>
+</head>
+<body>
+  <a href="https://example.com">Внешняя ссылка (https)</a>
+  <a href="https://github.com">Ещё внешняя ссылка</a>
+  <a href="mailto:info@example.com">Написать письмо</a>
+  <a href="report.pdf">Скачать отчёт</a>
+
+  <hr>
+
+  <input type="text"     placeholder="Текст (синяя рамка)">
+  <input type="email"    placeholder="Email (зелёная рамка)">
+  <input type="password" placeholder="Пароль (красная рамка)">
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 1</h3>
+          <p>Создайте страницу, используя разные типы CSS-селекторов</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Напишите HTML-страницу с CSS-стилями, которая демонстрирует работу различных селекторов:
+          <ul>
+            <li>Использовать минимум 3 разных типа селекторов (тег, класс, ID)</li>
+            <li>Применить псевдокласс <code>:hover</code> к одному из элементов</li>
+            <li>Добавить псевдоэлемент <code>::before</code> или <code>::after</code> с декоративным содержимым</li>
+            <li>Использовать комбинированный селектор (потомок или дочерний)</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css1-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css1-exercise')" data-exercise-id="css1-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css1-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css1-exercise-feedback"></div>
+        <div class="exercise-preview" id="css1-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css1-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="../chapters/ch13-data-attrs.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">Глава 13: Атрибуты данных</span>
+        </div>
+      </a>
+      <a href="css2-cascade.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 2: Каскад и специфичность</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 4 — Цвета и фоны — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css4">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 4: Цвета и фоны</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 4</div>
+      <div class="sidebar-title">Цвета и фоны</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Форматы цветов
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Свойства фона
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Градиенты
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Множественные фоны
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> opacity vs rgba
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css4-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 4</div>
+      <h1 class="chapter-title">Цвета и фоны</h1>
+      <p class="chapter-intro">
+        Цвета и фоны — это основа визуальной привлекательности веб-страниц. CSS предоставляет
+        множество способов задавать цвета: именованные цвета, HEX, RGB, HSL — и каждый из них
+        удобен в разных ситуациях. Фоновые свойства позволяют добавлять не только цвет, но и
+        изображения, градиенты и сложные многослойные композиции.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Форматы цветов</h2>
+      <p class="lesson-desc">
+        CSS поддерживает несколько форматов записи цвета. Выбор формата зависит от задачи:
+        именованные — для стандартных цветов, HEX — для точного дизайна, HSL — для удобного
+        создания цветовых схем, RGBA/HSLA — когда нужна прозрачность.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Формат</th><th>Пример</th><th>Особенность</th></tr>
+        <tr><td>Именованный</td><td><code>color: tomato</code></td><td>140+ стандартных имён</td></tr>
+        <tr><td>HEX</td><td><code>color: #e74c3c</code></td><td>Компактно, широко используется</td></tr>
+        <tr><td>HEX с прозрачностью</td><td><code>color: #e74c3ccc</code></td><td>Последние 2 цифры — альфа-канал</td></tr>
+        <tr><td>RGB</td><td><code>color: rgb(231, 76, 60)</code></td><td>Красный, Зелёный, Синий (0–255)</td></tr>
+        <tr><td>RGBA</td><td><code>color: rgba(231,76,60, 0.5)</code></td><td>+ альфа-канал (0–1)</td></tr>
+        <tr><td>HSL</td><td><code>color: hsl(6, 78%, 57%)</code></td><td>Тон, Насыщенность, Светлота</td></tr>
+        <tr><td>HSLA</td><td><code>color: hsla(6, 78%, 57%, 0.5)</code></td><td>+ альфа-канал</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>HSL — для дизайнеров:</strong> В формате HSL легко создавать оттенки одного цвета —
+          меняйте только светлоту (L): <code>hsl(200, 70%, 30%)</code> — тёмный,
+          <code>hsl(200, 70%, 60%)</code> — средний, <code>hsl(200, 70%, 85%)</code> — светлый.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 12px; }
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 6px 0;
+  }
+  .color-box {
+    width: 60px; height: 40px;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.1);
+    flex-shrink: 0;
+  }
+  .label { font-size: 13px; color: #555; }
+  code { background: #f0f0f0; padding: 1px 5px;
+         border-radius: 3px; font-size: 12px; }
+
+  .c1 { background: tomato; }
+  .c2 { background: #3498db; }
+  .c3 { background: rgb(39, 174, 96); }
+  .c4 { background: rgba(155, 89, 182, 0.6); }
+  .c5 { background: hsl(45, 100%, 50%); }
+  .c6 { background: hsla(6, 78%, 57%, 0.5); }
+</style>
+</head>
+<body>
+  <div class="swatch">
+    <div class="color-box c1"></div>
+    <span class="label">Именованный: <code>tomato</code></span>
+  </div>
+  <div class="swatch">
+    <div class="color-box c2"></div>
+    <span class="label">HEX: <code>#3498db</code></span>
+  </div>
+  <div class="swatch">
+    <div class="color-box c3"></div>
+    <span class="label">RGB: <code>rgb(39, 174, 96)</code></span>
+  </div>
+  <div class="swatch">
+    <div class="color-box c4"></div>
+    <span class="label">RGBA: <code>rgba(155,89,182, 0.6)</code></span>
+  </div>
+  <div class="swatch">
+    <div class="color-box c5"></div>
+    <span class="label">HSL: <code>hsl(45, 100%, 50%)</code></span>
+  </div>
+  <div class="swatch">
+    <div class="color-box c6"></div>
+    <span class="label">HSLA: <code>hsla(6, 78%, 57%, 0.5)</code></span>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Свойства фона</h2>
+      <p class="lesson-desc">
+        CSS предоставляет целый набор свойств для управления фоном элемента.
+        Помимо цвета, можно задавать фоновое изображение, управлять его размером,
+        позицией и повторением.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значения</th><th>Описание</th></tr>
+        <tr><td><code>background-color</code></td><td>цвет</td><td>Цвет фона</td></tr>
+        <tr><td><code>background-image</code></td><td><code>url()</code>, <code>none</code></td><td>Фоновое изображение</td></tr>
+        <tr><td><code>background-size</code></td><td><code>cover</code>, <code>contain</code>, px/%</td><td>Размер изображения</td></tr>
+        <tr><td><code>background-position</code></td><td><code>center</code>, <code>top left</code>, px/%</td><td>Позиция изображения</td></tr>
+        <tr><td><code>background-repeat</code></td><td><code>no-repeat</code>, <code>repeat-x/y</code></td><td>Повторение фона</td></tr>
+        <tr><td><code>background</code></td><td>сокращение</td><td>Все свойства в одном</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>cover vs contain:</strong> <code>cover</code> — изображение заполняет весь блок
+          (может обрезаться). <code>contain</code> — изображение помещается целиком (могут быть пустые полосы).
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="46"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 10px; }
+  .box {
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  }
+
+  .bg1 {
+    background-color: #2ecc71;
+  }
+
+  .bg2 {
+    /* Сокращение background */
+    background: #e74c3c url('https://picsum.photos/seed/a/400/100')
+                no-repeat center / cover;
+  }
+
+  .bg3 {
+    background-color: #3498db;
+    background-image: url('https://picsum.photos/seed/b/60/60');
+    background-size: 60px 60px;
+    background-repeat: repeat;
+    background-position: top left;
+  }
+</style>
+</head>
+<body>
+  <div class="box bg1">background-color: #2ecc71</div>
+
+  <div class="box bg2">
+    background: url(...) no-repeat center / cover
+  </div>
+
+  <div class="box bg3">
+    background-repeat: repeat (паттерн из маленьких фото)
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Градиенты</h2>
+      <p class="lesson-desc">
+        CSS-градиенты — это плавный переход между двумя и более цветами.
+        Они создаются функциями <code>linear-gradient()</code> и <code>radial-gradient()</code>
+        и используются как значение <code>background-image</code>.
+      </p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Направление в linear-gradient:</strong> <code>to right</code>, <code>to bottom right</code>,
+          или угол в градусах: <code>45deg</code>, <code>135deg</code>. Угол 0deg — снизу вверх,
+          90deg — слева направо.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="62"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 10px; }
+  .grad {
+    height: 80px;
+    border-radius: 8px;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  }
+
+  /* Горизонтальный */
+  .g1 {
+    background: linear-gradient(to right, #e74c3c, #f39c12);
+  }
+
+  /* Вертикальный */
+  .g2 {
+    background: linear-gradient(to bottom, #3498db, #1a5276);
+  }
+
+  /* Диагональный с тремя цветами */
+  .g3 {
+    background: linear-gradient(135deg, #8e44ad, #3498db, #1abc9c);
+  }
+
+  /* Radial gradient */
+  .g4 {
+    background: radial-gradient(circle at center,
+      #f39c12 0%, #e74c3c 50%, #8e44ad 100%);
+  }
+
+  /* Conic gradient (поддерживается современными браузерами) */
+  .g5 {
+    background: conic-gradient(
+      #e74c3c 0deg, #f39c12 90deg,
+      #2ecc71 180deg, #3498db 270deg, #e74c3c 360deg
+    );
+  }
+</style>
+</head>
+<body>
+  <div class="grad g1">linear-gradient(to right, красный → оранжевый)</div>
+  <div class="grad g2">linear-gradient(to bottom, синий → тёмно-синий)</div>
+  <div class="grad g3">linear-gradient(135deg, три цвета)</div>
+  <div class="grad g4">radial-gradient(circle): жёлтый → красный → фиолетовый</div>
+  <div class="grad g5">conic-gradient: цветовое колесо</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Множественные фоны</h2>
+      <p class="lesson-desc">
+        CSS позволяет задавать несколько фоновых слоёв через запятую.
+        Первый слой в списке — самый верхний. Свойство <code>background-attachment</code>
+        управляет поведением фона при прокрутке страницы.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>background-attachment</th><th>Описание</th></tr>
+        <tr><td><code>scroll</code></td><td>Фон прокручивается вместе с элементом (по умолчанию)</td></tr>
+        <tr><td><code>fixed</code></td><td>Фон фиксируется относительно окна браузера (параллакс-эффект)</td></tr>
+        <tr><td><code>local</code></td><td>Фон прокручивается вместе с содержимым элемента</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Слои фона:</strong> Порядок слоёв в <code>background</code> через запятую соответствует
+          их порядку в каждом отдельном свойстве. Первый слой — сверху, последний — снизу.
+          <code>background-color</code> всегда под всеми слоями.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="48"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 10px; }
+
+  .multi-bg {
+    height: 160px;
+    border-radius: 10px;
+    /* Слой 1 (верхний): градиент-оверлей */
+    /* Слой 2 (нижний): паттерн из изображений */
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.0) 0%,
+        rgba(0, 0, 0, 0.65) 100%
+      ),
+      url('https://picsum.photos/seed/bg4/600/160');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+  }
+
+  .stripe-bg {
+    height: 80px;
+    border-radius: 8px;
+    margin-top: 10px;
+    /* Два градиентных слоя создают полосатый фон */
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.15) 10px,
+        rgba(255,255,255,0.15) 20px
+      ),
+      linear-gradient(to right, #8e44ad, #3498db);
+  }
+</style>
+</head>
+<body>
+  <div class="multi-bg">
+    Градиент поверх фото — тёмный оверлей снизу
+  </div>
+
+  <div class="stripe-bg"></div>
+  <p style="font-size:12px;color:#666;">↑ Полосатый фон: два слоя linear-gradient</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — opacity vs rgba прозрачность</h2>
+      <p class="lesson-desc">
+        Прозрачность в CSS можно задать двумя способами: через свойство <code>opacity</code>
+        или через цвет с альфа-каналом (<code>rgba</code> / <code>hsla</code>).
+        Разница критически важна: <code>opacity</code> делает прозрачным весь элемент
+        включая потомков, тогда как <code>rgba</code> влияет только на цвет фона/текста.
+      </p>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Ловушка opacity:</strong> При <code>opacity: 0.5</code> на родительском элементе
+          все дочерние элементы тоже становятся полупрозрачными — и это нельзя отменить у потомков.
+          Если нужен прозрачный фон, но непрозрачный текст — используйте <code>background: rgba(...)</code>.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: sans-serif;
+    background: linear-gradient(135deg, #1abc9c, #3498db);
+    padding: 20px;
+    min-height: 100vh;
+  }
+
+  .card-wrap {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    width: 200px;
+    padding: 16px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+  }
+
+  /* opacity: 0.7 — весь блок полупрозрачный,
+     включая текст! */
+  .opacity-card {
+    background: #2c3e50;
+    opacity: 0.7;
+  }
+
+  /* rgba — только фон полупрозрачный,
+     текст остаётся непрозрачным */
+  .rgba-card {
+    background: rgba(44, 62, 80, 0.7);
+  }
+
+  /* Наглядное сравнение: текст в opacity-card
+     тоже будет 70% непрозрачным */
+  .opacity-card strong,
+  .rgba-card strong {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+  <div class="card-wrap">
+    <div class="card opacity-card">
+      <strong>opacity: 0.7</strong>
+      Весь блок прозрачный — и фон, и текст.
+      Текст тоже 70% непрозрачный.
+    </div>
+
+    <div class="card rgba-card">
+      <strong>rgba(…, 0.7)</strong>
+      Только фон полупрозрачный.
+      Текст остаётся полностью непрозрачным!
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 4</h3>
+          <p>Создайте красочную карточку с градиентным фоном</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте HTML-страницу с карточкой, которая использует возможности CSS-цветов и фонов:
+          <ul>
+            <li>Создать карточку с градиентным фоном (использовать <code>linear-gradient</code>)</li>
+            <li>Применить цвет в формате <code>rgba()</code> для полупрозрачного оверлея</li>
+            <li>Использовать <code>hsl()</code> для задания цвета текста</li>
+            <li>Добавить <code>background-size: cover</code> или <code>contain</code> с <code>background-position</code></li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css4-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css4-exercise')" data-exercise-id="css4-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css4-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css4-exercise-feedback"></div>
+        <div class="exercise-preview" id="css4-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css4-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="css3-inheritance.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">CSS Раздел 3: Наследование</span>
+        </div>
+      </a>
+      <a href="css5-text.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 5: Текст и шрифты</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 16 — Тени — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css16">
+
+<div class="sidebar-overlay"></div>
+
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 16: Тени</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 16</div>
+      <div class="sidebar-title">Тени</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1"><span class="link-num">1</span> box-shadow: основы</a>
+      <a class="sidebar-link" data-target="lesson-2"><span class="link-num">2</span> Множественные тени и inset</a>
+      <a class="sidebar-link" data-target="lesson-3"><span class="link-num">3</span> text-shadow</a>
+      <a class="sidebar-link" data-target="lesson-4"><span class="link-num">4</span> drop-shadow фильтр</a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css16-exercise"><span class="link-num">✎</span> Упражнение</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 16</div>
+      <h1 class="chapter-title">Тени</h1>
+      <p class="chapter-intro">
+        Тени — важный инструмент дизайна. CSS предоставляет <code>box-shadow</code> для теней блоков,
+        <code>text-shadow</code> для теней текста и <code>filter: drop-shadow()</code> для теней
+        произвольных фигур. Тени добавляют глубину и объём интерфейсу.
+      </p>
+    </div>
+
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — box-shadow: основы</h2>
+      <p class="lesson-desc">
+        Свойство <code>box-shadow</code> добавляет тень к блочному элементу.
+        Синтаксис: <code>box-shadow: offset-x offset-y blur spread color;</code>
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Параметр</th><th>Описание</th><th>Пример</th></tr>
+        <tr><td>offset-x</td><td>Смещение по горизонтали</td><td>4px</td></tr>
+        <tr><td>offset-y</td><td>Смещение по вертикали</td><td>4px</td></tr>
+        <tr><td>blur</td><td>Размытие (чем больше — тем мягче)</td><td>10px</td></tr>
+        <tr><td>spread</td><td>Размер тени (опционально)</td><td>2px</td></tr>
+        <tr><td>color</td><td>Цвет тени</td><td>rgba(0,0,0,0.3)</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="28"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 30px; background: #f0f2f5; }
+  .box { width: 150px; height: 80px; background: white;
+         border-radius: 8px; display: inline-flex;
+         align-items: center; justify-content: center;
+         margin: 15px; font-size: 13px; text-align: center; }
+
+  .shadow-sm  { box-shadow: 2px 2px 5px rgba(0,0,0,0.2); }
+  .shadow-md  { box-shadow: 4px 4px 12px rgba(0,0,0,0.25); }
+  .shadow-lg  { box-shadow: 8px 8px 24px rgba(0,0,0,0.3); }
+  .shadow-col { box-shadow: 4px 4px 12px rgba(231,76,60,0.5); }
+</style>
+</head>
+<body>
+  <div class="box shadow-sm">Маленькая<br>тень</div>
+  <div class="box shadow-md">Средняя<br>тень</div>
+  <div class="box shadow-lg">Большая<br>тень</div>
+  <div class="box shadow-col">Цветная<br>тень</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Множественные тени и inset</h2>
+      <p class="lesson-desc">
+        Можно задать несколько теней через запятую. Ключевое слово <code>inset</code>
+        делает тень внутренней (вдавленной).
+      </p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">Тени перечисляются через запятую. Первая тень — самая верхняя (ближайшая к элементу).</div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="28"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 30px; background: #ecf0f1; }
+  .box { width: 160px; height: 90px; background: white;
+         border-radius: 10px; display: inline-flex;
+         align-items: center; justify-content: center;
+         margin: 15px; font-size: 13px; text-align: center; }
+
+  .multi   { box-shadow: 3px 3px 8px rgba(0,0,0,0.2),
+                         -3px -3px 8px rgba(255,255,255,0.9); }
+  .inset   { box-shadow: inset 4px 4px 10px rgba(0,0,0,0.2); }
+  .neumorp { background: #e0e5ec;
+             box-shadow: 6px 6px 12px #b8bec7, -6px -6px 12px #ffffff; }
+</style>
+</head>
+<body>
+  <div class="box multi">Двойная тень</div>
+  <div class="box inset">Inset (внутри)</div>
+  <div class="box neumorp">Neumorphism</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — text-shadow</h2>
+      <p class="lesson-desc">
+        Свойство <code>text-shadow</code> добавляет тень к тексту.
+        Синтаксис такой же: <code>text-shadow: offset-x offset-y blur color;</code>
+        (без параметра spread).
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="28"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 20px; background: #1a1a2e; }
+  h2 { font-size: 36px; margin: 20px 0; }
+
+  .ts1 { color: white;
+         text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+  .ts2 { color: #e74c3c;
+         text-shadow: 0 0 15px rgba(231,76,60,0.8),
+                      0 0 30px rgba(231,76,60,0.5); }
+  .ts3 { color: white;
+         text-shadow: 1px 1px 0 #333, 2px 2px 0 #555,
+                      3px 3px 0 #777, 4px 4px 0 #999; }
+  .ts4 { color: transparent;
+         -webkit-text-stroke: 2px #27ae60;
+         text-shadow: 4px 4px 0 #27ae60; }
+</style>
+</head>
+<body>
+  <h2 class="ts1">Обычная тень</h2>
+  <h2 class="ts2">Свечение</h2>
+  <h2 class="ts3">3D эффект</h2>
+  <h2 class="ts4">Контур</h2>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — filter: drop-shadow()</h2>
+      <p class="lesson-desc">
+        <code>filter: drop-shadow()</code> — это фильтр, который добавляет тень к реальной форме
+        элемента (включая прозрачные области PNG-изображений), в отличие от <code>box-shadow</code>,
+        который следует прямоугольнику.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>box-shadow vs drop-shadow:</strong> box-shadow добавляет тень к прямоугольнику,
+          drop-shadow — к реальному контуру элемента (например, треугольнику из clip-path).
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="28"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 30px; display: flex; gap: 30px; }
+  .shape { width: 100px; height: 100px; background: #3498db;
+           display: flex; align-items: center; justify-content: center;
+           color: white; font-size: 12px; text-align: center; }
+
+  .box-sh  { box-shadow: 5px 5px 15px rgba(0,0,0,0.4); }
+  .drop-sh { filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.4)); }
+
+  .triangle {
+    width: 0; height: 0;
+    background: transparent;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid #e74c3c;
+  }
+  .tri-drop { filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.5)); }
+</style>
+</head>
+<body>
+  <div>
+    <p>box-shadow</p>
+    <div class="shape box-sh">box-shadow</div>
+  </div>
+  <div>
+    <p>drop-shadow</p>
+    <div class="shape drop-sh">drop-shadow</div>
+  </div>
+  <div>
+    <p>Треугольник + drop-shadow</p>
+    <div class="triangle tri-drop"></div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 16</h3>
+          <p>Создайте карточку с красивыми тенями</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте стильную карточку товара с использованием теней.
+          <ul>
+            <li>Используйте <code>box-shadow</code> с размытием не менее 15px</li>
+            <li>Добавьте эффект при наведении: тень должна увеличиваться (используйте transition)</li>
+            <li>Заголовок карточки должен иметь <code>text-shadow</code></li>
+            <li>Добавьте внутреннюю тень (<code>inset</code>) к какому-либо элементу</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css16-exercise-code" rows="16"><!-- Напишите ваш HTML/CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css16-exercise')" data-exercise-id="css16-exercise">🔍 Проверить</button>
+          <button class="preview-btn" onclick="previewExercise('css16-exercise')">👁 Предпросмотр</button>
+        </div>
+        <div class="exercise-feedback" id="css16-exercise-feedback"></div>
+        <div class="exercise-preview" id="css16-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css16-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <nav class="chapter-nav">
+      <a href="css15-filters.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущий раздел</span>
+          <span class="nav-sub">CSS 15: Фильтры и эффекты</span>
+        </div>
+      </a>
+      <a href="css17-media.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующий раздел →</span>
+          <span class="nav-sub">CSS 17: Медиа-запросы</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 13 — Переходы (Transitions) — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css13">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 13: Переходы (Transitions)</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 13</div>
+      <div class="sidebar-title">Переходы (Transitions)</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> transition-property, duration, delay
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> transition-timing-function
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Shorthand и несколько свойств
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Кнопки с hover-эффектами
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Меню с анимированным подчёркиванием
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css13-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 13</div>
+      <h1 class="chapter-title">Переходы (Transitions)</h1>
+      <p class="chapter-intro">
+        CSS-переходы позволяют плавно анимировать изменения свойств без JavaScript. Достаточно указать,
+        какое свойство анимировать, как долго и по какой кривой времени — и браузер автоматически создаст
+        плавный эффект между двумя состояниями элемента.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — transition-property, duration, delay</h2>
+      <p class="lesson-desc">
+        Три ключевых свойства перехода: <code>transition-property</code> задаёт, что анимировать,
+        <code>transition-duration</code> — длительность, <code>transition-delay</code> — задержку перед стартом.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Пример</th><th>Описание</th></tr>
+        <tr><td><code>transition-property</code></td><td><code>background</code></td><td>Какое CSS-свойство анимировать</td></tr>
+        <tr><td><code>transition-duration</code></td><td><code>0.5s</code></td><td>Длительность перехода</td></tr>
+        <tr><td><code>transition-delay</code></td><td><code>0.2s</code></td><td>Задержка перед началом перехода</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Совет:</strong> <code>transition-property: all</code> анимирует все изменяемые свойства,
+          но лучше указывать конкретные для производительности.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="50"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; }
+  .box-wrap { display: flex; gap: 16px; flex-wrap: wrap; }
+  .box {
+    width: 120px;
+    height: 80px;
+    background: #3498db;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px;
+    transition-property: background, padding;
+    transition-duration: 0.2s;
+  }
+  .box-medium {
+    transition-duration: 0.8s;
+  }
+  .box-slow {
+    transition-duration: 1.5s;
+  }
+  .box:hover {
+    background: #e74c3c;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+  <h3>Наведите курсор на блоки</h3>
+  <div class="box-wrap">
+    <div class="box">Быстрый<br>0.2s</div>
+    <div class="box box-medium">Средний<br>0.8s</div>
+    <div class="box box-slow">Медленный<br>1.5s</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — transition-timing-function</h2>
+      <p class="lesson-desc">
+        <code>transition-timing-function</code> определяет скорость изменения свойства во времени —
+        ускорение, замедление или постоянная скорость.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Значение</th><th>Описание</th></tr>
+        <tr><td><code>ease</code></td><td>Медленно → быстро → медленно (по умолчанию)</td></tr>
+        <tr><td><code>linear</code></td><td>Постоянная скорость</td></tr>
+        <tr><td><code>ease-in</code></td><td>Медленный старт, быстрый финиш</td></tr>
+        <tr><td><code>ease-out</code></td><td>Быстрый старт, медленный финиш</td></tr>
+        <tr><td><code>ease-in-out</code></td><td>Медленный старт и финиш</td></tr>
+        <tr><td><code>cubic-bezier(...)</code></td><td>Полный контроль через кривую Безье</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Совет:</strong> <code>ease</code> — стандарт для большинства интерфейсов.
+          <code>linear</code> — для непрерывных анимаций (спиннер). <code>cubic-bezier</code> даёт полный контроль.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="55"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; }
+  .track { background: #f0f0f0; border-radius: 4px; margin: 10px 0; padding: 8px; position: relative; height: 44px; }
+  .item {
+    width: 80px;
+    height: 36px;
+    border-radius: 6px;
+    color: white;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    transition: transform 1.2s;
+  }
+  .track:hover .item { transform: translateX(200px); }
+  .ease      { background: #3498db; transition-timing-function: ease; }
+  .linear    { background: #2ecc71; transition-timing-function: linear; }
+  .ease-in   { background: #e67e22; transition-timing-function: ease-in; }
+  .ease-out  { background: #9b59b6; transition-timing-function: ease-out; }
+  .ease-io   { background: #e74c3c; transition-timing-function: ease-in-out; }
+</style>
+</head>
+<body>
+  <h3>Наведите на дорожку</h3>
+  <div class="track"><div class="item ease">ease</div></div>
+  <div class="track"><div class="item linear">linear</div></div>
+  <div class="track"><div class="item ease-in">ease-in</div></div>
+  <div class="track"><div class="item ease-out">ease-out</div></div>
+  <div class="track"><div class="item ease-io">ease-in-out</div></div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Shorthand и несколько свойств</h2>
+      <p class="lesson-desc">
+        Сокращённое свойство <code>transition</code> объединяет все четыре свойства в одну строку.
+        Несколько переходов перечисляются через запятую.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Синтаксис</th><th>Описание</th></tr>
+        <tr><td><code>transition: property duration timing-function delay</code></td><td>Порядок shorthand</td></tr>
+        <tr><td><code>transition: color 0.3s, background 0.5s, transform 0.2s</code></td><td>Несколько свойств через запятую</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Несколько свойств:</strong> Для анимации нескольких свойств перечислите их через запятую:
+          <code>transition: color 0.3s, background 0.5s, transform 0.2s</code>
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 24px; display: flex; justify-content: center; }
+  .btn {
+    padding: 14px 32px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition:
+      background 0.3s ease,
+      transform 0.2s ease,
+      box-shadow 0.3s ease;
+  }
+  .btn:hover {
+    background: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(41, 128, 185, 0.4);
+  }
+  .btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+</style>
+</head>
+<body>
+  <button class="btn">Наведи на меня!</button>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Кнопки с hover-эффектами</h2>
+      <p class="lesson-desc">
+        Практические примеры кнопок с разными transition-эффектами: скольжение фона, увеличение, граница, тень.
+      </p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Важно:</strong> Добавляйте <code>transition</code> ТОЛЬКО на исходный элемент, не на <code>:hover</code> —
+          иначе обратный переход не будет плавным.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="60"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 24px; }
+  .btn-wrap { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn { padding: 12px 24px; font-size: 15px; cursor: pointer; border-radius: 6px; border: none; }
+
+  /* Скользящий фон */
+  .btn-slide {
+    background: #3498db;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s ease;
+  }
+  .btn-slide:hover { background: #1a5276; }
+
+  /* Увеличение */
+  .btn-grow {
+    background: #2ecc71;
+    color: white;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn-grow:hover {
+    transform: scale(1.12);
+    box-shadow: 0 6px 18px rgba(46, 204, 113, 0.45);
+  }
+
+  /* Граница */
+  .btn-border {
+    background: transparent;
+    color: #e74c3c;
+    border: 2px solid #e74c3c;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .btn-border:hover { background: #e74c3c; color: white; }
+
+  /* Тень */
+  .btn-shadow {
+    background: #9b59b6;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .btn-shadow:hover {
+    box-shadow: 0 10px 28px rgba(155, 89, 182, 0.5);
+    transform: translateY(-4px);
+  }
+</style>
+</head>
+<body>
+  <h3>Наведите курсор на кнопки</h3>
+  <div class="btn-wrap">
+    <button class="btn btn-slide">Slide</button>
+    <button class="btn btn-grow">Grow</button>
+    <button class="btn btn-border">Border</button>
+    <button class="btn btn-shadow">Shadow</button>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Меню с анимированным подчёркиванием</h2>
+      <p class="lesson-desc">
+        Классический паттерн навигации: псевдоэлемент <code>::after</code> с шириной 0,
+        которая расширяется до 100% при наведении через transition.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="55"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 24px; background: #f8f9fa; }
+  nav { display: flex; gap: 8px; background: white; padding: 12px 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .nav-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    padding: 6px 4px;
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #3498db;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover { color: #3498db; }
+  .nav-link:hover::after { width: 100%; }
+</style>
+</head>
+<body>
+  <nav>
+    <a class="nav-link" href="#">Главная</a>
+    <a class="nav-link" href="#">О нас</a>
+    <a class="nav-link" href="#">Услуги</a>
+    <a class="nav-link" href="#">Портфолио</a>
+    <a class="nav-link" href="#">Контакты</a>
+  </nav>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 13</h3>
+          <p>Создайте интерактивный набор кнопок с transition-эффектами</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Напишите HTML-страницу с CSS-стилями, которая демонстрирует работу CSS-переходов:
+          <ul>
+            <li>Создать минимум 4 кнопки с разными transition-эффектами (цвет, трансформация, тень, граница)</li>
+            <li>Каждая кнопка должна использовать разную <code>transition-timing-function</code></li>
+            <li>Добавить <code>transition-delay</code> хотя бы для одной кнопки</li>
+            <li>Использовать shorthand запись <code>transition</code> с несколькими свойствами</li>
+            <li>Кнопки должны плавно возвращаться в исходное состояние при убирании курсора</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css13-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css13-exercise')" data-exercise-id="css13-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css13-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css13-exercise-feedback"></div>
+        <div class="exercise-preview" id="css13-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css13-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="css12-transforms.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">CSS Раздел 12: Трансформации</span>
+        </div>
+      </a>
+      <a href="css14-animations.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 14: Анимации</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

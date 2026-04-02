@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 10 — Flexbox — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css10">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 10: Flexbox</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 10</div>
+      <div class="sidebar-title">Flexbox</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> flex-direction
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> justify-content
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> align-items
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> flex-wrap и align-content
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> flex-grow, shrink, basis
+      </a>
+      <a class="sidebar-link" data-target="lesson-6">
+        <span class="link-num">6</span> order и align-self
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css10-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 10</div>
+      <h1 class="chapter-title">Flexbox</h1>
+      <p class="chapter-intro">
+        Flexbox (Flexible Box Layout) — мощная модель раскладки CSS для создания
+        гибких одномерных интерфейсов. Она решает классические проблемы вёрстки:
+        горизонтальное и вертикальное выравнивание, равномерное распределение пространства,
+        адаптивные сетки карточек. Flexbox стал стандартом современной веб-разработки.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — flex container: flex-direction</h2>
+      <p class="lesson-desc">
+        Добавив <code>display: flex</code> к контейнеру, вы создаёте flex-контейнер.
+        Его дочерние элементы становятся flex-элементами и по умолчанию выстраиваются
+        в горизонтальный ряд. <code>flex-direction</code> управляет главной осью:
+        <code>row</code> — горизонтально, <code>column</code> — вертикально.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Значение</th><th>Направление</th><th>Описание</th></tr>
+        <tr><td><code>row</code></td><td>→</td><td>Слева направо (по умолчанию)</td></tr>
+        <tr><td><code>row-reverse</code></td><td>←</td><td>Справа налево</td></tr>
+        <tr><td><code>column</code></td><td>↓</td><td>Сверху вниз</td></tr>
+        <tr><td><code>column-reverse</code></td><td>↑</td><td>Снизу вверх</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex1-code" rows="62"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; padding: 14px; background: #f8f9fa; }
+  h4 { font-size: 12px; color: #555; margin-bottom: 6px; font-weight: bold; }
+
+  .container {
+    display: flex;
+    background: #e8eaf6;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    gap: 8px;
+    border: 2px solid #9fa8da;
+  }
+  .item {
+    background: #3f51b5;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 40px;
+  }
+  .item:nth-child(2) { background: #5c6bc0; }
+  .item:nth-child(3) { background: #7986cb; }
+  .item:nth-child(4) { background: #9fa8da; color: #333; }
+
+  .row      { flex-direction: row; }
+  .row-rev  { flex-direction: row-reverse; }
+  .col      { flex-direction: column; width: 120px; }
+  .col-rev  { flex-direction: column-reverse; width: 120px; }
+
+  .label { font-size: 10px; background: #3f51b5; color: #fff; padding: 2px 6px; border-radius: 3px; margin-bottom: 4px; display: inline-block; }
+</style>
+</head>
+<body>
+  <h4><span class="label">row</span> — слева направо (по умолчанию)</h4>
+  <div class="container row">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+  </div>
+
+  <h4><span class="label" style="background:#e53935">row-reverse</span> — справа налево</h4>
+  <div class="container row-rev" style="border-color:#ef9a9a;">
+    <div class="item" style="background:#e53935">1</div>
+    <div class="item" style="background:#ef5350">2</div>
+    <div class="item" style="background:#ef9a9a;color:#333">3</div>
+    <div class="item" style="background:#ffcdd2;color:#333">4</div>
+  </div>
+
+  <div style="display:flex;gap:16px;">
+    <div>
+      <h4><span class="label" style="background:#43a047">column</span> — сверху вниз</h4>
+      <div class="container col" style="border-color:#a5d6a7;">
+        <div class="item" style="background:#43a047">1</div>
+        <div class="item" style="background:#66bb6a">2</div>
+        <div class="item" style="background:#a5d6a7;color:#333">3</div>
+      </div>
+    </div>
+    <div>
+      <h4><span class="label" style="background:#fb8c00">col-reverse</span> — снизу вверх</h4>
+      <div class="container col-rev" style="border-color:#ffe082;">
+        <div class="item" style="background:#fb8c00">1</div>
+        <div class="item" style="background:#ffa726">2</div>
+        <div class="item" style="background:#ffe082;color:#333">3</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — justify-content</h2>
+      <p class="lesson-desc">
+        <code>justify-content</code> управляет распределением flex-элементов <strong>по главной оси</strong>
+        (горизонтально для <code>row</code>, вертикально для <code>column</code>).
+        Это свойство решает вопрос «куда девать свободное пространство».
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Значение</th><th>Поведение</th></tr>
+        <tr><td><code>flex-start</code></td><td>Элементы прижаты к началу (по умолчанию)</td></tr>
+        <tr><td><code>flex-end</code></td><td>Элементы прижаты к концу</td></tr>
+        <tr><td><code>center</code></td><td>Элементы по центру</td></tr>
+        <tr><td><code>space-between</code></td><td>Равные пробелы между элементами, без крайних</td></tr>
+        <tr><td><code>space-around</code></td><td>Равные пробелы вокруг каждого элемента</td></tr>
+        <tr><td><code>space-evenly</code></td><td>Абсолютно равные пробелы везде</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex2-code" rows="68"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; padding: 12px; background: #f8f9fa; }
+
+  .row {
+    display: flex;
+    background: #e3f2fd;
+    border: 2px solid #90caf9;
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 10px;
+    height: 52px;
+    align-items: center;
+  }
+  .item {
+    background: #1976d2;
+    color: #fff;
+    width: 44px; height: 36px;
+    border-radius: 5px;
+    font-size: 12px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .label {
+    font-size: 11px; color: #0d47a1;
+    margin-bottom: 3px; font-weight: bold;
+  }
+
+  .jc-start   { justify-content: flex-start; }
+  .jc-end     { justify-content: flex-end; }
+  .jc-center  { justify-content: center; }
+  .jc-between { justify-content: space-between; }
+  .jc-around  { justify-content: space-around; }
+  .jc-evenly  { justify-content: space-evenly; }
+</style>
+</head>
+<body>
+  <div class="label">flex-start (по умолчанию)</div>
+  <div class="row jc-start">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+  </div>
+  <div class="label">flex-end</div>
+  <div class="row jc-end">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+  </div>
+  <div class="label">center</div>
+  <div class="row jc-center">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+  </div>
+  <div class="label">space-between</div>
+  <div class="row jc-between">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+  </div>
+  <div class="label">space-around</div>
+  <div class="row jc-around">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+  </div>
+  <div class="label">space-evenly</div>
+  <div class="row jc-evenly">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — align-items</h2>
+      <p class="lesson-desc">
+        <code>align-items</code> управляет выравниванием flex-элементов <strong>по поперечной оси</strong>
+        (вертикально для <code>row</code>). Это ключевое свойство для вертикального центрирования,
+        которое раньше было сложной задачей в CSS.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Значение</th><th>Поведение</th></tr>
+        <tr><td><code>stretch</code></td><td>Растянуть по высоте контейнера (по умолчанию)</td></tr>
+        <tr><td><code>flex-start</code></td><td>Прижать к верхнему краю</td></tr>
+        <tr><td><code>flex-end</code></td><td>Прижать к нижнему краю</td></tr>
+        <tr><td><code>center</code></td><td>Вертикально по центру</td></tr>
+        <tr><td><code>baseline</code></td><td>По базовой линии текста</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Идеальное центрирование:</strong> <code>display: flex; justify-content: center; align-items: center</code> —
+          три строки CSS решают задачу, которая раньше требовала хаков с <code>position</code> или таблицами.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex3-code" rows="70"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; padding: 12px; background: #f8f9fa; }
+
+  .row {
+    display: flex;
+    gap: 8px;
+    background: #fce4ec;
+    border: 2px solid #f48fb1;
+    border-radius: 6px;
+    padding: 6px;
+    margin-bottom: 10px;
+    height: 80px;
+  }
+  .item {
+    background: #e91e63;
+    color: #fff; border-radius: 5px;
+    font-size: 11px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 10px; flex-shrink: 0;
+  }
+  /* Разные высоты для наглядности */
+  .item:nth-child(1) { height: 30px; align-self: auto; }
+  .item:nth-child(2) { height: 50px; background: #c2185b; }
+  .item:nth-child(3) { height: 20px; background: #ad1457; }
+
+  .ai-stretch  { align-items: stretch; }
+  .ai-start    { align-items: flex-start; }
+  .ai-end      { align-items: flex-end; }
+  .ai-center   { align-items: center; }
+  .ai-baseline { align-items: baseline; }
+
+  .label { font-size: 11px; color: #880e4f; margin-bottom: 3px; font-weight: bold; }
+
+  /* Для stretch — без фиксированной высоты у элементов */
+  .stretch-item {
+    background: #e91e63; color: #fff; border-radius: 5px;
+    font-size: 11px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 10px; flex-shrink: 0; width: 50px;
+  }
+  .stretch-item:nth-child(2) { background: #c2185b; }
+  .stretch-item:nth-child(3) { background: #ad1457; }
+</style>
+</head>
+<body>
+  <div class="label">stretch (по умолчанию) — растягиваются до высоты контейнера</div>
+  <div class="row ai-stretch">
+    <div class="stretch-item">1</div>
+    <div class="stretch-item">2</div>
+    <div class="stretch-item">3</div>
+  </div>
+  <div class="label">flex-start — прижаты к верху</div>
+  <div class="row ai-start">
+    <div class="item">1 (30px)</div>
+    <div class="item">2 (50px)</div>
+    <div class="item">3 (20px)</div>
+  </div>
+  <div class="label">flex-end — прижаты к низу</div>
+  <div class="row ai-end">
+    <div class="item">1 (30px)</div>
+    <div class="item">2 (50px)</div>
+    <div class="item">3 (20px)</div>
+  </div>
+  <div class="label">center — вертикально по центру ✨</div>
+  <div class="row ai-center">
+    <div class="item">1 (30px)</div>
+    <div class="item">2 (50px)</div>
+    <div class="item">3 (20px)</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — flex-wrap и align-content</h2>
+      <p class="lesson-desc">
+        По умолчанию flex-элементы помещаются в одну строку, сжимаясь при нехватке места.
+        <code>flex-wrap: wrap</code> разрешает перенос на новую строку.
+        <code>align-content</code> управляет расположением строк по поперечной оси —
+        аналог <code>justify-content</code>, но для строк в многострочном контейнере.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значения</th><th>Описание</th></tr>
+        <tr><td><code>flex-wrap</code></td><td><code>nowrap</code>, <code>wrap</code>, <code>wrap-reverse</code></td><td>Разрешить перенос строк</td></tr>
+        <tr><td><code>align-content</code></td><td><code>flex-start</code>, <code>center</code>, <code>space-between</code>...</td><td>Выравнивание строк (при wrap)</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex4-code" rows="56"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; padding: 12px; background: #f8f9fa; }
+  h4 { font-size: 12px; color: #555; margin-bottom: 6px; font-weight: bold; }
+
+  .wrap-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: #e8f5e9;
+    border: 2px solid #a5d6a7;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 14px;
+    width: 280px;
+  }
+  .nowrap-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    background: #ffebee;
+    border: 2px solid #ef9a9a;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 14px;
+    width: 280px;
+    overflow: hidden;
+  }
+  .item {
+    background: #43a047;
+    color: #fff; width: 70px; height: 50px;
+    border-radius: 5px; font-size: 11px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nowrap-container .item { background: #e53935; }
+  .ac-container {
+    display: flex; flex-wrap: wrap;
+    align-content: space-between;
+    height: 160px; gap: 4px;
+    background: #e3f2fd; border: 2px solid #90caf9;
+    border-radius: 8px; padding: 8px;
+    width: 280px;
+  }
+  .ac-item {
+    background: #1976d2; color: #fff;
+    width: 60px; height: 40px; border-radius: 5px;
+    font-size: 11px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+  }
+</style>
+</head>
+<body>
+  <h4>flex-wrap: nowrap (по умолчанию) — элементы сжимаются</h4>
+  <div class="nowrap-container">
+    <div class="item">1</div><div class="item">2</div>
+    <div class="item">3</div><div class="item">4</div><div class="item">5</div>
+  </div>
+
+  <h4>flex-wrap: wrap — перенос на новую строку</h4>
+  <div class="wrap-container">
+    <div class="item">1</div><div class="item">2</div>
+    <div class="item">3</div><div class="item">4</div><div class="item">5</div>
+  </div>
+
+  <h4>align-content: space-between (при wrap)</h4>
+  <div class="ac-container">
+    <div class="ac-item">1</div><div class="ac-item">2</div>
+    <div class="ac-item">3</div><div class="ac-item">4</div>
+    <div class="ac-item">5</div><div class="ac-item">6</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — flex-grow, flex-shrink, flex-basis</h2>
+      <p class="lesson-desc">
+        Эти три свойства управляют поведением отдельного flex-элемента.
+        <code>flex-grow</code> — насколько элемент растёт занимая свободное место.
+        <code>flex-shrink</code> — насколько сжимается при нехватке места.
+        <code>flex-basis</code> — начальный размер до распределения пространства.
+        Шорткат <code>flex: grow shrink basis</code> задаёт их вместе.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значение по умолчанию</th><th>Описание</th></tr>
+        <tr><td><code>flex-grow</code></td><td><code>0</code></td><td>Коэффициент роста (0 = не растёт)</td></tr>
+        <tr><td><code>flex-shrink</code></td><td><code>1</code></td><td>Коэффициент сжатия (1 = сжимается)</td></tr>
+        <tr><td><code>flex-basis</code></td><td><code>auto</code></td><td>Базовый размер элемента</td></tr>
+        <tr><td><code>flex: 1</code></td><td>—</td><td>Равно <code>flex: 1 1 0</code> — равномерный рост</td></tr>
+        <tr><td><code>flex: auto</code></td><td>—</td><td>Равно <code>flex: 1 1 auto</code></td></tr>
+        <tr><td><code>flex: none</code></td><td>—</td><td>Равно <code>flex: 0 0 auto</code> — не гибкий</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex5-code" rows="60"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; padding: 14px; background: #f8f9fa; }
+  h4 { font-size: 12px; color: #555; margin-bottom: 5px; font-weight: bold; }
+
+  .container {
+    display: flex;
+    background: #f3e5f5;
+    border: 2px solid #ce93d8;
+    border-radius: 8px;
+    padding: 8px; gap: 6px;
+    margin-bottom: 14px;
+    min-height: 52px;
+    align-items: stretch;
+  }
+  .item {
+    color: #fff; border-radius: 5px;
+    font-size: 11px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 6px 4px;
+    min-height: 36px;
+  }
+
+  /* flex-grow: различные коэффициенты */
+  .grow0 { flex: 0 1 auto;    background: #9c27b0; min-width: 60px; }
+  .grow1 { flex: 1 1 auto;    background: #7b1fa2; }
+  .grow2 { flex: 2 1 auto;    background: #6a1b9a; }
+  .grow3 { flex: 3 1 auto;    background: #4a148c; }
+
+  /* flex-basis */
+  .basis-auto  { flex: 0 0 auto;  background: #e91e63; }
+  .basis-100   { flex: 0 0 100px; background: #c2185b; }
+  .basis-150   { flex: 0 0 150px; background: #880e4f; }
+</style>
+</head>
+<body>
+  <h4>flex-grow: свободное пространство делится пропорционально</h4>
+  <div class="container">
+    <div class="item grow0">grow:0<br>(фикс)</div>
+    <div class="item grow1">grow:1<br>(1 доля)</div>
+    <div class="item grow2">grow:2<br>(2 доли)</div>
+    <div class="item grow3">grow:3<br>(3 доли)</div>
+  </div>
+
+  <h4>flex-basis: начальный размер до роста/сжатия</h4>
+  <div class="container">
+    <div class="item basis-auto">basis:<br>auto</div>
+    <div class="item basis-100">basis:<br>100px</div>
+    <div class="item basis-150">basis:<br>150px</div>
+  </div>
+
+  <h4>flex: 1 на всех — равное распределение</h4>
+  <div class="container" style="background:#e8f5e9;border-color:#a5d6a7;">
+    <div class="item" style="flex:1;background:#43a047;">flex:1</div>
+    <div class="item" style="flex:1;background:#388e3c;">flex:1</div>
+    <div class="item" style="flex:1;background:#2e7d32;">flex:1</div>
+    <div class="item" style="flex:1;background:#1b5e20;">flex:1</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 6 -->
+    <section class="lesson-section" id="lesson-6">
+      <h2 class="lesson-title">Урок 6 — order и align-self</h2>
+      <p class="lesson-desc">
+        <code>order</code> позволяет изменять порядок отображения flex-элементов без изменения HTML.
+        По умолчанию все элементы имеют <code>order: 0</code>; меньшие значения отображаются первыми.
+        <code>align-self</code> переопределяет <code>align-items</code> для конкретного элемента.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Применяется к</th><th>Описание</th></tr>
+        <tr><td><code>order</code></td><td>flex-элемент</td><td>Целое число; меньше = раньше (по умолч. 0)</td></tr>
+        <tr><td><code>align-self</code></td><td>flex-элемент</td><td>Переопределяет align-items для этого элемента</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>order и доступность:</strong> Свойство <code>order</code> меняет только визуальный порядок,
+          но не порядок DOM. Скринридеры и навигация клавиатурой следуют порядку HTML, а не CSS.
+          Используйте <code>order</code> осторожно.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex6-code" rows="62"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; padding: 14px; background: #f8f9fa; }
+  h4 { font-size: 12px; color: #555; margin-bottom: 5px; font-weight: bold; }
+
+  .container {
+    display: flex; gap: 8px;
+    background: #fff3e0; border: 2px solid #ffcc80;
+    border-radius: 8px; padding: 10px;
+    margin-bottom: 16px;
+    height: 80px; align-items: flex-start;
+  }
+  .item {
+    background: #fb8c00; color: #fff;
+    width: 70px; height: 50px; border-radius: 6px;
+    font-size: 11px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; flex-shrink: 0;
+  }
+
+  /* order — визуально меняет порядок */
+  .order-demo .a { order: 3; background: #e64a19; }
+  .order-demo .b { order: 1; background: #bf360c; }
+  .order-demo .c { order: 4; background: #ff7043; }
+  .order-demo .d { order: 2; background: #ff8a65; color: #333; }
+
+  /* align-self — индивидуальное выравнивание */
+  .as-demo {
+    align-items: flex-start; /* контейнер сверху */
+    height: 90px;
+    background: #e8f5e9; border-color: #a5d6a7;
+  }
+  .as-demo .item { background: #43a047; width: 65px; }
+  .as-self-end    { align-self: flex-end;   background: #e53935 !important; }
+  .as-self-center { align-self: center;     background: #1976d2 !important; }
+  .as-self-stretch{ align-self: stretch;    height: auto !important; background: #7b1fa2 !important; }
+</style>
+</head>
+<body>
+  <h4>order — HTML-порядок: A B C D → визуальный: B(1) D(2) A(3) C(4)</h4>
+  <div class="container order-demo">
+    <div class="item a">A<br>order:3</div>
+    <div class="item b">B<br>order:1</div>
+    <div class="item c">C<br>order:4</div>
+    <div class="item d">D<br>order:2</div>
+  </div>
+
+  <h4>align-self — индивидуальное выравнивание (контейнер: align-items: flex-start)</h4>
+  <div class="container as-demo">
+    <div class="item">обычный<br>(start)</div>
+    <div class="item as-self-end">align-self:<br>flex-end</div>
+    <div class="item as-self-center">align-self:<br>center</div>
+    <div class="item as-self-stretch">align-self:<br>stretch</div>
+    <div class="item">обычный<br>(start)</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex6')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex6-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 10</h3>
+          <p>Создайте гибкую сетку карточек с Flexbox</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Напишите HTML+CSS страницу с адаптивной сеткой карточек:
+          <ul>
+            <li>Контейнер карточек должен использовать <code>display: flex</code> и <code>flex-wrap: wrap</code></li>
+            <li>Карточки должны равномерно растягиваться (<code>flex: 1 1 200px</code> или аналогично)</li>
+            <li>Использовать <code>justify-content: center</code> или <code>space-between</code> для выравнивания</li>
+            <li>Добавить <code>align-items</code> для вертикального выравнивания содержимого карточек</li>
+            <li>Минимум 4 карточки с разным содержимым</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css10-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css10-exercise')" data-exercise-id="css10-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css10-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css10-exercise-feedback"></div>
+        <div class="exercise-preview" id="css10-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css10-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="css9-display.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">CSS Раздел 9: Display и видимость</span>
+        </div>
+      </a>
+      <a href="css11-grid.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 11: CSS Grid</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

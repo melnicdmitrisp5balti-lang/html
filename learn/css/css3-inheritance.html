@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 3 — Наследование — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css3">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 3: Наследование</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 3</div>
+      <div class="sidebar-title">Наследование</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Что наследуется
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> Что не наследуется
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> inherit, initial, unset
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Управление наследованием
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css3-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 3</div>
+      <h1 class="chapter-title">Наследование</h1>
+      <p class="chapter-intro">
+        Наследование в CSS — это механизм, при котором дочерние элементы автоматически
+        получают значения некоторых CSS-свойств от родительских элементов. Понимание того,
+        какие свойства наследуются, а какие нет, помогает писать компактный и предсказуемый CSS.
+        В этом разделе вы также освоите ключевые слова <code>inherit</code>, <code>initial</code>
+        и <code>unset</code> для явного управления наследованием.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Что наследуется</h2>
+      <p class="lesson-desc">
+        Свойства, связанные с оформлением текста, как правило наследуются автоматически.
+        Это означает, что достаточно задать их один раз на родителе — и все вложенные
+        элементы получат эти значения без дополнительных объявлений.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Описание</th></tr>
+        <tr><td><code>color</code></td><td>Цвет текста</td></tr>
+        <tr><td><code>font-family</code></td><td>Гарнитура шрифта</td></tr>
+        <tr><td><code>font-size</code></td><td>Размер шрифта</td></tr>
+        <tr><td><code>font-weight</code></td><td>Жирность шрифта</td></tr>
+        <tr><td><code>line-height</code></td><td>Межстрочный интервал</td></tr>
+        <tr><td><code>text-align</code></td><td>Выравнивание текста</td></tr>
+        <tr><td><code>text-transform</code></td><td>Регистр текста</td></tr>
+        <tr><td><code>letter-spacing</code></td><td>Межбуквенный интервал</td></tr>
+        <tr><td><code>list-style</code></td><td>Маркеры списка</td></tr>
+        <tr><td><code>cursor</code></td><td>Вид курсора</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Практическое применение:</strong> Задайте <code>font-family</code> и <code>color</code>
+          на элементе <code>body</code> — все элементы страницы унаследуют эти значения, и вам не придётся
+          повторять их для каждого тега отдельно.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="44"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  /* Задаём стили на родителе */
+  .parent {
+    color: #1a5276;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: center;
+    background: #eaf2ff;
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  /* Дочерние элементы наследуют цвет и шрифт */
+  .parent h3 {
+    /* НЕ задаём color и font-family —
+       они унаследуются от .parent */
+    font-size: 1.2em; /* em зависит от унаследованного font-size */
+    margin: 0 0 8px;
+  }
+</style>
+</head>
+<body>
+  <div class="parent">
+    <h3>Заголовок (унаследовал цвет и шрифт)</h3>
+    <p>Параграф унаследовал: синий цвет, Georgia, 15px,
+    межстрочный 1.7 и выравнивание по центру.</p>
+    <span>Элемент span тоже наследует всё то же самое.</span>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Что не наследуется</h2>
+      <p class="lesson-desc">
+        Свойства блочной модели и визуального оформления блоков не наследуются.
+        Каждый элемент получает их начальное (браузерное) значение, и для его изменения
+        нужно явно задать стиль для этого элемента.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Начальное значение</th></tr>
+        <tr><td><code>margin</code></td><td><code>0</code></td></tr>
+        <tr><td><code>padding</code></td><td><code>0</code></td></tr>
+        <tr><td><code>border</code></td><td><code>none</code></td></tr>
+        <tr><td><code>background</code></td><td><code>transparent</code></td></tr>
+        <tr><td><code>width</code> / <code>height</code></td><td><code>auto</code></td></tr>
+        <tr><td><code>display</code></td><td><code>inline</code></td></tr>
+        <tr><td><code>position</code></td><td><code>static</code></td></tr>
+        <tr><td><code>overflow</code></td><td><code>visible</code></td></tr>
+      </table>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Фон не наследуется!</strong> Если родитель имеет <code>background: yellow</code>,
+          дочерние элементы будут прозрачными (<code>transparent</code>), просто «просвечивая»
+          родительский фон. Это не наследование, а прозрачность.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="44"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 10px; }
+
+  .parent {
+    background: #fef9e7;  /* НЕ наследуется */
+    border: 3px solid #f39c12; /* НЕ наследуется */
+    padding: 16px;        /* НЕ наследуется */
+    margin: 10px;         /* НЕ наследуется */
+    color: #784212;       /* наследуется */
+    font-size: 15px;      /* наследуется */
+  }
+
+  /* Дочернему нужно задать border и background явно */
+  .child-no-style {
+    /* нет border, нет background, нет padding */
+  }
+
+  .child-with-style {
+    border: 2px dashed #e67e22;
+    background: #fad7a0;
+    padding: 8px;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+  <div class="parent">
+    <p>Родительский блок: жёлтый фон, оранжевая рамка, отступы.</p>
+
+    <div class="child-no-style">
+      Дочерний БЕЗ стилей: цвет унаследован (коричневый),
+      но рамки и фона НЕТ — они не наследуются.
+    </div>
+
+    <div class="child-with-style">
+      Дочерний СО стилями: рамка и фон заданы явно.
+      Цвет по-прежнему унаследован от родителя.
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — inherit, initial, unset</h2>
+      <p class="lesson-desc">
+        CSS предоставляет специальные ключевые слова для явного управления наследованием.
+        Они работают как значение для любого CSS-свойства.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Ключевое слово</th><th>Описание</th></tr>
+        <tr><td><code>inherit</code></td><td>Принудительно наследовать значение от родителя</td></tr>
+        <tr><td><code>initial</code></td><td>Сбросить к начальному значению по спецификации CSS</td></tr>
+        <tr><td><code>unset</code></td><td>Если свойство наследуется — применить <code>inherit</code>, иначе — <code>initial</code></td></tr>
+        <tr><td><code>revert</code></td><td>Сбросить к значению по умолчанию браузера (User Agent)</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>all: unset</strong> — сокращение для сброса всех свойств одновременно.
+          Удобно при стилизации компонентов изолированно от остального CSS страницы.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 10px; }
+
+  .parent {
+    color: #8e44ad;
+    border: 3px solid #9b59b6;
+    padding: 14px;
+    margin: 8px 0;
+    border-radius: 6px;
+    background: #f5eef8;
+  }
+
+  /* inherit — принудительно наследует border от родителя */
+  .use-inherit {
+    border: inherit;  /* берёт border от .parent */
+    padding: 6px;
+    background: #e8daef;
+    margin-top: 8px;
+  }
+
+  /* initial — сбрасывает color к начальному (чёрный) */
+  .use-initial {
+    color: initial;   /* черный — начальное по спецификации */
+    background: #fff;
+    padding: 6px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+  }
+
+  /* unset — color наследуется (unset = inherit),
+     border сбрасывается (unset = initial = none) */
+  .use-unset {
+    color: unset;     /* наследуемое → inherit → фиолетовый */
+    border: unset;    /* ненаследуемое → initial → none */
+    padding: 6px;
+    margin-top: 8px;
+    background: #f0f0f0;
+  }
+</style>
+</head>
+<body>
+  <div class="parent">
+    <p>Родитель: фиолетовый текст, фиолетовая рамка</p>
+
+    <div class="use-inherit">
+      <strong>inherit:</strong> border унаследован от родителя
+    </div>
+
+    <div class="use-initial">
+      <strong>initial:</strong> color сброшен к начальному — чёрный
+    </div>
+
+    <div class="use-unset">
+      <strong>unset:</strong> color → inherit (фиолетовый),
+      border → initial (нет рамки)
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Управление наследованием на практике</h2>
+      <p class="lesson-desc">
+        В реальных проектах наследование используется для задания единых стилей текста на уровне
+        контейнера и точечного переопределения там, где нужно. Рассмотрим более сложный пример
+        с карточкой товара.
+      </p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Стратегия:</strong> Задавайте шрифт, цвет и межстрочный интервал на <code>body</code>
+          или крупном контейнере. Переопределяйте только то, что нужно изменить в конкретных дочерних элементах.
+          Это сокращает количество CSS-правил и упрощает поддержку.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="54"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  /* Глобальные стили — наследуются всеми */
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #2c3e50;
+    line-height: 1.6;
+    background: #f0f4f8;
+    padding: 16px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 320px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* Наследует font-family и color от body */
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: #1a252f; /* переопределяем только color */
+  }
+
+  .card-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #27ae60; /* переопределяем color */
+    margin: 8px 0;
+  }
+
+  /* Наследует font-family, line-height, color от body */
+  .card-desc {
+    font-size: 0.9rem;
+    color: inherit; /* явно наследуем — то же, что не задавать */
+    margin: 0 0 14px;
+  }
+
+  .card-btn {
+    background: #3498db;
+    color: initial; /* сбрасываем к белому? нет — initial = black */
+    /* используем явно: */
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit; /* наследуем шрифт от body */
+    font-size: 0.95rem;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h3 class="card-title">Беспроводные наушники</h3>
+    <p class="card-desc">
+      Высококачественный звук, 30 часов работы,
+      активное шумоподавление.
+    </p>
+    <div class="card-price">4 990 ₽</div>
+    <button class="card-btn">В корзину</button>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 3</h3>
+          <p>Продемонстрируйте работу наследования в CSS</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте HTML-страницу, которая наглядно показывает наследование:
+          <ul>
+            <li>Задать цвет и шрифт на родительском элементе и показать, что они унаследованы дочерними</li>
+            <li>Показать свойство, которое НЕ наследуется (<code>border</code> или <code>background</code>)</li>
+            <li>Использовать ключевое слово <code>inherit</code> для принудительного наследования</li>
+            <li>Применить <code>initial</code> для сброса стиля к браузерному значению по умолчанию</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css3-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css3-exercise')" data-exercise-id="css3-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css3-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css3-exercise-feedback"></div>
+        <div class="exercise-preview" id="css3-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css3-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="css2-cascade.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">CSS Раздел 2: Каскад</span>
+        </div>
+      </a>
+      <a href="css4-colors.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 4: Цвета и фоны</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>
