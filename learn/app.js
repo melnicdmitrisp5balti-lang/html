@@ -216,7 +216,7 @@ function runCode(id) {
 
   const code = editor.value;
   // Render user HTML in a blob: URL — isolated from parent page origin
-  const blob = new Blob([code], { type: 'text/html' });
+  const blob = new Blob([code], { type: 'text/html; charset=utf-8' });
   const url = URL.createObjectURL(blob);
   if (frame._prevBlobUrl) URL.revokeObjectURL(frame._prevBlobUrl);
   frame._prevBlobUrl = url;
@@ -529,7 +529,7 @@ function previewExercise(exerciseId) {
 
   if (previewEl.classList.contains('show')) {
     // Render user HTML in a blob: URL — isolated from parent page origin
-    const blob = new Blob([code], { type: 'text/html' });
+    const blob = new Blob([code], { type: 'text/html; charset=utf-8' });
     const url = URL.createObjectURL(blob);
     if (frameEl._prevBlobUrl) URL.revokeObjectURL(frameEl._prevBlobUrl);
     frameEl._prevBlobUrl = url;
