@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTML Учебник — Интерактивный курс</title>
+  <title>HTML & CSS Учебник — Интерактивный курс</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -287,38 +287,106 @@
     }
     footer strong { color: var(--accent); }
 
+    /* COURSE SELECTOR */
+    .course-selector {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .course-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 28px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.8);
+      transition: all 0.25s;
+      backdrop-filter: blur(6px);
+    }
+    .course-btn:hover {
+      background: rgba(255,255,255,0.22);
+      color: white;
+      border-color: rgba(255,255,255,0.7);
+    }
+    .course-btn.active {
+      background: white;
+      color: var(--primary);
+      border-color: white;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    }
+    .course-btn.active.css-btn {
+      color: #2980b9;
+    }
+
+    /* COURSE SECTIONS */
+    .course-content { display: none; }
+    .course-content.active { display: block; }
+    .course-grid { display: none; }
+    .course-grid.active { display: grid; }
+
+    /* TRANSITION FADE */
+    .fade-transition {
+      animation: fadeIn 0.35s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* CSS course accent color */
+    :root { --css-accent: #2980b9; }
+    .css-active .chapter-card:hover { border-color: var(--css-accent); }
+    .css-active .btn-hero-primary { background: var(--css-accent); box-shadow: 0 4px 20px rgba(41,128,185,0.4); }
+    .css-active .btn-hero-primary:hover { background: #1a6fa0; box-shadow: 0 8px 25px rgba(41,128,185,0.5); }
+    .css-active .stat-num { color: #5dade2; }
+    .css-active .hero { background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 40%, #2980b9 100%); }
+
     /* RESPONSIVE */
     @media (max-width: 600px) {
       .chapters-grid { grid-template-columns: 1fr; }
       .stats-bar { gap: 24px; }
+      .course-btn { padding: 8px 18px; font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
 
 <!-- HERO HEADER -->
-<header class="hero">
+<header class="hero" id="main-hero">
   <div class="hero-badge">🎓 Бесплатный курс</div>
-  <h1>HTML <span>Учебник</span></h1>
-  <p>Интерактивный курс для изучения HTML с нуля. Пишите код прямо в браузере и сразу видите результат.</p>
+
+  <!-- COURSE SELECTOR -->
+  <div class="course-selector">
+    <button class="course-btn active" data-course="html" onclick="selectCourse('html')">🌐 HTML Учебник</button>
+    <button class="course-btn css-btn" data-course="css" onclick="selectCourse('css')">🎨 CSS Учебник</button>
+  </div>
+
+  <h1 id="hero-title">HTML <span id="hero-title-span">Учебник</span></h1>
+  <p id="hero-desc">Интерактивный курс для изучения HTML с нуля. Пишите код прямо в браузере и сразу видите результат.</p>
   <div class="hero-actions">
-    <a href="learn/chapters/ch1-basics.html" class="btn-hero btn-hero-primary">▶ Начать обучение</a>
-    <a href="#chapters" class="btn-hero btn-hero-secondary">📋 Все главы</a>
+    <a id="btn-start" href="learn/chapters/ch1-basics.html" class="btn-hero btn-hero-primary">▶ Начать обучение HTML</a>
+    <a id="btn-all" href="#chapters" class="btn-hero btn-hero-secondary">📋 Все главы HTML</a>
   </div>
 </header>
 
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat-item">
-    <div class="stat-num">9</div>
+    <div class="stat-num" id="stat-chapters">13</div>
     <div class="stat-label">Глав</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">47</div>
+    <div class="stat-num" id="stat-lessons">68</div>
     <div class="stat-label">Уроков</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">9</div>
+    <div class="stat-num" id="stat-exercises">13</div>
     <div class="stat-label">Упражнений</div>
   </div>
   <div class="stat-item">
@@ -338,11 +406,12 @@
 
 <!-- CHAPTERS SECTION -->
 <div class="section-title" id="chapters">
-  <h2>Содержание курса</h2>
-  <p>От основ до продвинутых тем — всё что нужно для работы с HTML</p>
+  <h2 id="section-title-text">Содержание курса HTML</h2>
+  <p id="section-desc-text">От основ до продвинутых тем — всё что нужно для работы с HTML</p>
 </div>
 
-<div class="chapters-grid">
+<!-- HTML CHAPTERS GRID -->
+<div class="chapters-grid course-grid active" id="html-chapters">
 
   <a class="chapter-card" href="learn/chapters/ch1-basics.html" id="card-ch1">
     <div class="card-header">
@@ -553,9 +622,472 @@
     </div>
   </a>
 
+  <a class="chapter-card" href="learn/chapters/ch10-containers.html" id="card-ch10">
+    <div class="card-header">
+      <div class="card-icon">📦</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 10</div>
+        <div class="card-title">Контейнеры и блочные элементы</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Блочные и строчные элементы, div, span, группировка контента и структура макета.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&lt;div&gt;</span>
+      <span class="tag">&lt;span&gt;</span>
+      <span class="tag">display</span>
+      <span class="tag">block</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 6 уроков</span>
+      <span class="status-badge new" id="status-ch10">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch11-inline.html" id="card-ch11">
+    <div class="card-header">
+      <div class="card-icon">🔠</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 11</div>
+        <div class="card-title">Встроенные элементы</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Строчные элементы HTML: abbr, cite, q, mark, small, sub, sup и другие.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&lt;abbr&gt;</span>
+      <span class="tag">&lt;mark&gt;</span>
+      <span class="tag">&lt;cite&gt;</span>
+      <span class="tag">&lt;q&gt;</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch11">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch12-entities.html" id="card-ch12">
+    <div class="card-header">
+      <div class="card-icon">🔣</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 12</div>
+        <div class="card-title">Спецсимволы и META-теги</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">HTML-сущности, специальные символы, мета-теги и настройка HEAD-секции документа.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&amp;amp;</span>
+      <span class="tag">&lt;meta&gt;</span>
+      <span class="tag">&lt;link&gt;</span>
+      <span class="tag">charset</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 4 урока</span>
+      <span class="status-badge new" id="status-ch12">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch13-data-attrs.html" id="card-ch13">
+    <div class="card-header">
+      <div class="card-icon">🗂️</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 13</div>
+        <div class="card-title">Атрибуты и Data-атрибуты</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Глобальные атрибуты HTML, пользовательские data-атрибуты и работа с ними через JavaScript.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">data-*</span>
+      <span class="tag">id</span>
+      <span class="tag">class</span>
+      <span class="tag">dataset</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 4 урока</span>
+      <span class="status-badge new" id="status-ch13">🆕 Новая</span>
+    </div>
+  </a>
+
 </div>
 
-<!-- FEATURES -->
+<!-- CSS CHAPTERS GRID -->
+<div class="chapters-grid course-grid" id="css-chapters">
+
+  <a class="chapter-card" href="learn/css/css1-selectors.html" id="card-css1">
+    <div class="card-header">
+      <div class="card-icon">🎯</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 1</div>
+        <div class="card-title">Селекторы</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Простые, комбинированные, псевдоклассы, псевдоэлементы и селекторы атрибутов.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">.class</span>
+      <span class="tag">#id</span>
+      <span class="tag">:hover</span>
+      <span class="tag">::before</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-css1">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css2-cascade.html" id="card-css2">
+    <div class="card-header">
+      <div class="card-icon">🌊</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 2</div>
+        <div class="card-title">Каскад и специфичность</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Как браузер применяет стили: каскад, специфичность, порядок правил и !important.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">specificity</span>
+      <span class="tag">!important</span>
+      <span class="tag">cascade</span>
+      <span class="tag">inherit</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 4 урока</span>
+      <span class="status-badge new" id="status-css2">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css3-inheritance.html" id="card-css3">
+    <div class="card-header">
+      <div class="card-icon">🧬</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 3</div>
+        <div class="card-title">Наследование</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Что наследуется в CSS, ключевые слова inherit, initial, unset и управление наследованием.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">inherit</span>
+      <span class="tag">initial</span>
+      <span class="tag">unset</span>
+      <span class="tag">revert</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 4 урока</span>
+      <span class="status-badge new" id="status-css3">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css4-colors.html" id="card-css4">
+    <div class="card-header">
+      <div class="card-icon">🎨</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 4</div>
+        <div class="card-title">Цвета и фоны</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Форматы цветов, свойства фона, градиенты и множественные фоновые слои.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">color</span>
+      <span class="tag">background</span>
+      <span class="tag">rgba()</span>
+      <span class="tag">gradient</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-css4">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css5-text.html" id="card-css5">
+    <div class="card-header">
+      <div class="card-icon">🔡</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 5</div>
+        <div class="card-title">Текст и шрифты</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">font-family, начертание, выравнивание, оформление текста, интервалы и пробелы.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">font-family</span>
+      <span class="tag">font-size</span>
+      <span class="tag">text-align</span>
+      <span class="tag">line-height</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-css5">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css6-units.html" id="card-css6">
+    <div class="card-header">
+      <div class="card-icon">📏</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 6</div>
+        <div class="card-title">Единицы измерения</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Абсолютные и относительные единицы: px, em, rem, vw, vh, % — когда что использовать.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">px</span>
+      <span class="tag">em</span>
+      <span class="tag">rem</span>
+      <span class="tag">vw/vh</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-css6">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css7-boxmodel.html" id="card-css7">
+    <div class="card-header">
+      <div class="card-icon">📐</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 7</div>
+        <div class="card-title">Блочная модель</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">CSS box model: margin, padding, border, box-sizing и схлопывание отступов.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">margin</span>
+      <span class="tag">padding</span>
+      <span class="tag">border</span>
+      <span class="tag">box-sizing</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-css7">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css8-positioning.html" id="card-css8">
+    <div class="card-header">
+      <div class="card-icon">📍</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 8</div>
+        <div class="card-title">Позиционирование</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">static, relative, absolute, fixed, sticky — управление расположением элементов.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">position</span>
+      <span class="tag">top/left</span>
+      <span class="tag">z-index</span>
+      <span class="tag">sticky</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 6 уроков</span>
+      <span class="status-badge new" id="status-css8">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css9-display.html" id="card-css9">
+    <div class="card-header">
+      <div class="card-icon">👁️</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 9</div>
+        <div class="card-title">Display и видимость</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Типы отображения: block, inline, inline-block, none, flex, grid и управление видимостью.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">display</span>
+      <span class="tag">visibility</span>
+      <span class="tag">opacity</span>
+      <span class="tag">flex/grid</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-css9">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css10-flexbox.html" id="card-css10">
+    <div class="card-header">
+      <div class="card-icon">↔️</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 10</div>
+        <div class="card-title">Flexbox</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Гибкая верстка с Flexbox: направление, выравнивание, перенос и flex-элементы.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">flex</span>
+      <span class="tag">justify-content</span>
+      <span class="tag">align-items</span>
+      <span class="tag">flex-wrap</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 6 уроков</span>
+      <span class="status-badge new" id="status-css10">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css11-grid.html" id="card-css11">
+    <div class="card-header">
+      <div class="card-icon">🔲</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 11</div>
+        <div class="card-title">CSS Grid</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Сеточная верстка: grid-template, fr единицы, gap, размещение элементов и области.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">grid</span>
+      <span class="tag">fr</span>
+      <span class="tag">repeat()</span>
+      <span class="tag">grid-area</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 6 уроков</span>
+      <span class="status-badge new" id="status-css11">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css12-transforms.html" id="card-css12">
+    <div class="card-header">
+      <div class="card-icon">🔄</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 12</div>
+        <div class="card-title">Трансформации</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">CSS transform: перемещение, вращение, масштабирование, наклон и 3D-трансформации.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">translate</span>
+      <span class="tag">rotate</span>
+      <span class="tag">scale</span>
+      <span class="tag">skew</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 6 уроков</span>
+      <span class="status-badge new" id="status-css12">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css13-transitions.html" id="card-css13">
+    <div class="card-header">
+      <div class="card-icon">⏱️</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 13</div>
+        <div class="card-title">Переходы (Transitions)</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Плавные CSS-переходы: duration, delay, timing-function и hover-эффекты для кнопок.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">transition</span>
+      <span class="tag">duration</span>
+      <span class="tag">ease</span>
+      <span class="tag">hover</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-css13">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css14-animations.html" id="card-css14">
+    <div class="card-header">
+      <div class="card-icon">✨</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 14</div>
+        <div class="card-title">Анимации (@keyframes)</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">CSS-анимации с @keyframes: имя, длительность, задержка, итерации и fill-mode.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">@keyframes</span>
+      <span class="tag">animation</span>
+      <span class="tag">iteration</span>
+      <span class="tag">fill-mode</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 6 уроков</span>
+      <span class="status-badge new" id="status-css14">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css15-filters.html" id="card-css15">
+    <div class="card-header">
+      <div class="card-icon">🌈</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 15</div>
+        <div class="card-title">Фильтры и эффекты</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">CSS фильтры: blur, brightness, contrast, saturate и backdrop-filter для стеклянных эффектов.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">filter</span>
+      <span class="tag">blur()</span>
+      <span class="tag">brightness()</span>
+      <span class="tag">backdrop-filter</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-css15">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/css/css16-shadows.html" id="card-css16">
+    <div class="card-header">
+      <div class="card-icon">🌑</div>
+      <div class="card-meta">
+        <div class="card-num">Раздел 16</div>
+        <div class="card-title">Тени</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Тени блоков и текста: box-shadow, text-shadow, вложенные и цветные тени.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">box-shadow</span>
+      <span class="tag">text-shadow</span>
+      <span class="tag">inset</span>
+      <span class="tag">rgba</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 4 урока</span>
+      <span class="status-badge new" id="status-css16">🆕 Новая</span>
+    </div>
+  </a>
+
+</div>
 <div class="features-section">
   <div style="text-align:center;margin-bottom:40px;">
     <h2 style="font-size:1.8rem;margin-bottom:8px;">Почему этот курс?</h2>
@@ -591,17 +1123,111 @@
 </div>
 
 <footer>
-  <p>HTML Учебник &copy; 2024 — <strong>Интерактивный курс HTML</strong> — Создано для изучения веб-разработки</p>
+  <p>HTML & CSS Учебник &copy; 2024 — <strong>Интерактивный курс</strong> — Создано для изучения веб-разработки</p>
 </footer>
 
 <script>
+  // Course data
+  const COURSES = {
+    html: {
+      title: 'HTML',
+      titleSpan: 'Учебник',
+      desc: 'Интерактивный курс для изучения HTML с нуля. Пишите код прямо в браузере и сразу видите результат.',
+      startLink: 'learn/chapters/ch1-basics.html',
+      startLabel: '▶ Начать обучение HTML',
+      allLabel: '📋 Все главы HTML',
+      chapters: 13,
+      lessons: 68,
+      exercises: 13,
+      sectionTitle: 'Содержание курса HTML',
+      sectionDesc: 'От основ до продвинутых тем — всё что нужно для работы с HTML',
+      keys: ['ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9','ch10','ch11','ch12','ch13'],
+      storageKey: 'htmlCourseProgress',
+      gridId: 'html-chapters',
+    },
+    css: {
+      title: 'CSS',
+      titleSpan: 'Учебник',
+      desc: 'Полный курс CSS: от основ стилизации до анимаций, Flexbox и Grid. Практика в браузере.',
+      startLink: 'learn/css/css1-selectors.html',
+      startLabel: '▶ Начать обучение CSS',
+      allLabel: '📋 Все разделы CSS',
+      chapters: 16,
+      lessons: 82,
+      exercises: 16,
+      sectionTitle: 'Содержание курса CSS',
+      sectionDesc: 'От селекторов и цветов до анимаций, Flexbox и Grid',
+      keys: ['css1','css2','css3','css4','css5','css6','css7','css8','css9','css10','css11','css12','css13','css14','css15','css16'],
+      storageKey: 'cssCourseProgress',
+      gridId: 'css-chapters',
+    }
+  };
+
+  let currentCourse = 'html';
+
+  function selectCourse(course) {
+    if (currentCourse === course) return;
+    currentCourse = course;
+
+    // Save to localStorage
+    localStorage.setItem('selectedCourse', course);
+
+    // Update selector buttons
+    document.querySelectorAll('.course-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.course === course);
+    });
+
+    // Update hero class for CSS-themed colors
+    const hero = document.getElementById('main-hero');
+    if (course === 'css') {
+      document.body.classList.add('css-active');
+    } else {
+      document.body.classList.remove('css-active');
+    }
+
+    const data = COURSES[course];
+
+    // Update hero content
+    document.getElementById('hero-title').childNodes[0].textContent = data.title + ' ';
+    document.getElementById('hero-title-span').textContent = data.titleSpan;
+    document.getElementById('hero-desc').textContent = data.desc;
+    document.getElementById('btn-start').href = data.startLink;
+    document.getElementById('btn-start').textContent = data.startLabel;
+    document.getElementById('btn-all').textContent = data.allLabel;
+
+    // Update section title
+    document.getElementById('section-title-text').textContent = data.sectionTitle;
+    document.getElementById('section-desc-text').textContent = data.sectionDesc;
+
+    // Update stats
+    document.getElementById('stat-chapters').textContent = data.chapters;
+    document.getElementById('stat-lessons').textContent = data.lessons;
+    document.getElementById('stat-exercises').textContent = data.exercises;
+
+    // Toggle grids with fade animation
+    document.querySelectorAll('.course-grid').forEach(grid => {
+      grid.classList.remove('active');
+    });
+    const activeGrid = document.getElementById(data.gridId);
+    activeGrid.classList.add('active');
+    activeGrid.classList.remove('fade-transition');
+    void activeGrid.offsetWidth; // trigger reflow
+    activeGrid.classList.add('fade-transition');
+
+    // Update page title
+    document.title = (course === 'html' ? 'HTML' : 'CSS') + ' Учебник — Интерактивный курс';
+
+    // Load progress for selected course
+    loadProgress(course);
+  }
+
   // Load progress from localStorage and update UI
-  function loadProgress() {
-    const progress = JSON.parse(localStorage.getItem('htmlCourseProgress') || '{}');
-    const chapters = ['ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9'];
+  function loadProgress(course) {
+    const data = COURSES[course];
+    const progress = JSON.parse(localStorage.getItem(data.storageKey) || '{}');
     let completed = 0;
 
-    chapters.forEach(ch => {
+    data.keys.forEach(ch => {
       const badge = document.getElementById('status-' + ch);
       const card = document.getElementById('card-' + ch);
       if (progress[ch + '-exercise']) {
@@ -610,19 +1236,29 @@
         if (card) card.classList.add('completed');
       } else if (progress[ch + '-visited']) {
         if (badge) { badge.className = 'status-badge start'; badge.textContent = '▶ В процессе'; }
+      } else {
+        if (badge) { badge.className = 'status-badge new'; badge.textContent = '🆕 Новая'; }
+        if (card) card.classList.remove('completed');
       }
     });
 
-    const pct = Math.round((completed / 9) * 100);
+    const total = data.keys.length;
+    const pct = Math.round((completed / total) * 100);
     document.getElementById('main-progress').style.width = pct + '%';
     document.getElementById('stat-done').textContent = completed;
     document.getElementById('progress-text').textContent =
       completed === 0 ? 'Начните обучение чтобы отслеживать прогресс' :
-      completed === 9 ? '🎉 Курс пройден! Отличная работа!' :
-      `Выполнено ${completed} из 9 глав (${pct}%)`;
+      completed === total ? '🎉 Курс пройден! Отличная работа!' :
+      `Выполнено ${completed} из ${total} глав (${pct}%)`;
   }
 
-  loadProgress();
+  // Init: restore last selected course
+  (function init() {
+    const saved = localStorage.getItem('selectedCourse') || 'html';
+    // Force re-apply by resetting currentCourse to opposite first
+    currentCourse = saved === 'css' ? 'html' : 'css';
+    selectCourse(saved);
+  })();
 </script>
 </body>
 </html>
