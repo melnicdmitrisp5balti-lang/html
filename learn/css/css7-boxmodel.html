@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 7 — Блочная модель — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css7">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 7: Блочная модель</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 7</div>
+      <div class="sidebar-title">Блочная модель</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Модель блока
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> width и height
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> box-sizing
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Схлопывание margin
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> border и border-radius
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css7-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 7</div>
+      <h1 class="chapter-title">Блочная модель</h1>
+      <p class="chapter-intro">
+        Каждый HTML-элемент в CSS представляется как прямоугольный блок с четырьмя слоями:
+        содержимое, внутренние отступы (<code>padding</code>), рамка (<code>border</code>)
+        и внешние отступы (<code>margin</code>). Понимание блочной модели — фундамент вёрстки.
+        Без него невозможно точно управлять размерами и расположением элементов на странице.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Модель блока</h2>
+      <p class="lesson-desc">
+        Блочная модель CSS состоит из четырёх областей, вложенных друг в друга:
+        <strong>content</strong> (содержимое) → <strong>padding</strong> (внутренний отступ) →
+        <strong>border</strong> (рамка) → <strong>margin</strong> (внешний отступ).
+        Демо ниже визуально показывает каждый слой.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Слой</th><th>Свойства CSS</th><th>Описание</th></tr>
+        <tr><td>Content</td><td><code>width</code>, <code>height</code></td><td>Область с содержимым (текст, картинки)</td></tr>
+        <tr><td>Padding</td><td><code>padding</code>, <code>padding-top</code> и др.</td><td>Прозрачный отступ внутри рамки</td></tr>
+        <tr><td>Border</td><td><code>border</code>, <code>border-width</code></td><td>Видимая или невидимая рамка</td></tr>
+        <tr><td>Margin</td><td><code>margin</code>, <code>margin-top</code> и др.</td><td>Прозрачный отступ снаружи рамки</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Итоговый размер элемента</strong> по умолчанию:
+          total width = content width + padding-left + padding-right + border-left + border-right + margin-left + margin-right
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex1-code" rows="60"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; background: #f0f0f0; padding: 20px; }
+  h3 { margin: 0 0 16px; color: #333; }
+
+  /* Визуальная диаграмма блочной модели */
+  .diagram {
+    display: inline-block;
+    background: #b3d9ff; /* margin — голубой */
+    padding: 24px;
+    position: relative;
+  }
+  .border-layer {
+    background: #4a90d9; /* border — синий */
+    padding: 6px;
+  }
+  .padding-layer {
+    background: #a8e6a3; /* padding — зелёный */
+    padding: 24px;
+  }
+  .content-layer {
+    background: #fff;
+    width: 140px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; color: #333; font-size: 14px;
+    border: 2px dashed #999;
+  }
+
+  /* Подписи слоёв */
+  .labels { margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .lbl { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+  .dot { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+  .dot-margin  { background: #b3d9ff; border: 1px solid #4a90d9; }
+  .dot-border  { background: #4a90d9; }
+  .dot-padding { background: #a8e6a3; border: 1px solid #3a9432; }
+  .dot-content { background: #fff; border: 2px dashed #999; }
+</style>
+</head>
+<body>
+  <h3>Слои блочной модели</h3>
+  <div class="diagram">
+    <!-- margin = внешняя голубая область -->
+    <div class="border-layer">
+      <!-- border = синяя рамка -->
+      <div class="padding-layer">
+        <!-- padding = зелёная область -->
+        <div class="content-layer">Content</div>
+      </div>
+    </div>
+  </div>
+  <div class="labels">
+    <div class="lbl"><div class="dot dot-margin"></div> Margin (внешний отступ)</div>
+    <div class="lbl"><div class="dot dot-border"></div> Border (рамка)</div>
+    <div class="lbl"><div class="dot dot-padding"></div> Padding (внутренний отступ)</div>
+    <div class="lbl"><div class="dot dot-content"></div> Content (содержимое)</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — width и height</h2>
+      <p class="lesson-desc">
+        Свойства <code>width</code> и <code>height</code> задают размер <strong>области содержимого</strong>.
+        Значение <code>auto</code> (по умолчанию) означает: для ширины — растянуться на всего родителя,
+        для высоты — подстроиться под содержимое. При переполнении работает свойство <code>overflow</code>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значения</th><th>Описание</th></tr>
+        <tr><td><code>width</code></td><td><code>auto</code>, px, %, rem</td><td>Ширина области содержимого</td></tr>
+        <tr><td><code>height</code></td><td><code>auto</code>, px, vh</td><td>Высота области содержимого</td></tr>
+        <tr><td><code>min-width / max-width</code></td><td>px, %</td><td>Ограничения по ширине</td></tr>
+        <tr><td><code>min-height / max-height</code></td><td>px, vh</td><td>Ограничения по высоте</td></tr>
+        <tr><td><code>overflow</code></td><td><code>visible</code>, <code>hidden</code>, <code>scroll</code>, <code>auto</code></td><td>Поведение при переполнении</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex2-code" rows="48"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f8f9fa; }
+  .box {
+    background: #5c6bc0;
+    color: #fff;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  .auto   { width: auto; }           /* растягивается */
+  .fixed  { width: 300px; height: 50px; overflow: hidden; }
+  .scroll { width: 250px; height: 60px; overflow: auto;   background: #7986cb; }
+  .minmax { min-width: 100px; max-width: 400px; width: 60%; background: #3949ab; }
+  label { font-size: 11px; opacity: .8; display: block; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+  <label>width: auto (по умолчанию — вся доступная ширина)</label>
+  <div class="box auto">auto: заполняет всю ширину контейнера</div>
+
+  <label>width: 300px; height: 50px; overflow: hidden</label>
+  <div class="box fixed">
+    Фиксированный размер. Текст который не вмещается — обрезается без прокрутки.
+    Очень длинный текст исчезнет.
+  </div>
+
+  <label>width: 250px; height: 60px; overflow: auto</label>
+  <div class="box scroll">
+    Фиксированный размер с overflow: auto — появится прокрутка, если содержимое не помещается.
+    Прокрутите меня вниз или вправо чтобы увидеть скроллбар.
+  </div>
+
+  <label>min-width: 100px; max-width: 400px; width: 60%</label>
+  <div class="box minmax">min/max ограничения: ширина гибкая (60%), но не меньше 100px и не больше 400px</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — box-sizing: content-box vs border-box</h2>
+      <p class="lesson-desc">
+        По умолчанию (<code>content-box</code>) <code>width</code> задаёт только ширину содержимого,
+        а padding и border добавляются сверху. С <code>border-box</code> <code>width</code> включает
+        padding и border — итоговый элемент ровно указанного размера. Это гораздо удобнее!
+      </p>
+
+      <table class="attr-table">
+        <tr><th>box-sizing</th><th>Что включает width</th><th>Итоговая ширина</th></tr>
+        <tr><td><code>content-box</code></td><td>Только content</td><td>width + padding + border</td></tr>
+        <tr><td><code>border-box</code></td><td>Content + padding + border</td><td>Ровно width</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Лучшая практика:</strong> Большинство современных проектов добавляют
+          <code>*, *::before, *::after &#123; box-sizing: border-box; &#125;</code> глобально —
+          это делает вёрстку намного предсказуемее.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex3-code" rows="50"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 20px; background: #f5f5f5; }
+  h4 { margin: 0 0 6px; font-size: 13px; color: #555; }
+
+  .wrapper { display: flex; gap: 30px; align-items: flex-start; }
+
+  /* Оба блока имеют width: 200px */
+  .content-box {
+    box-sizing: content-box;
+    width: 200px;
+    padding: 20px;
+    border: 10px solid #e53935;
+    background: #ffcdd2;
+    color: #333;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+  .border-box {
+    box-sizing: border-box;
+    width: 200px;
+    padding: 20px;
+    border: 10px solid #388e3c;
+    background: #c8e6c9;
+    color: #333;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+
+  .size-label {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .red  { color: #c62828; }
+  .green { color: #2e7d32; }
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <div>
+      <h4>content-box (по умолчанию)</h4>
+      <div class="content-box">
+        width: 200px<br>
+        padding: 20px<br>
+        border: 10px
+      </div>
+      <p class="size-label red">Итого: 200 + 40 + 20 = <u>260px</u> 🔴</p>
+    </div>
+    <div>
+      <h4>border-box</h4>
+      <div class="border-box">
+        width: 200px<br>
+        padding: 20px<br>
+        border: 10px
+      </div>
+      <p class="size-label green">Итого: ровно <u>200px</u> ✅</p>
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Схлопывание margin (margin collapse)</h2>
+      <p class="lesson-desc">
+        Вертикальные внешние отступы (<code>margin-top</code> и <code>margin-bottom</code>)
+        соседних блочных элементов <strong>схлопываются</strong>: вместо суммы двух отступов
+        применяется один — наибольший. Это стандартное поведение CSS, которое часто удивляет новичков.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Ситуация</th><th>Схлопывание</th><th>Решение</th></tr>
+        <tr><td>Соседние блоки</td><td>margin-bottom + margin-top → max()</td><td>Используйте только один margin</td></tr>
+        <tr><td>Родитель и первый ребёнок</td><td>margin-top ребёнка «вытекает» наружу</td><td>Добавьте padding или border родителю</td></tr>
+        <tr><td>Пустой блок</td><td>margin-top и margin-bottom схлопываются</td><td>Добавьте padding или border</td></tr>
+      </table>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Схлопывание не работает для:</strong> flex-контейнеров, grid-контейнеров,
+          элементов с <code>overflow</code> не <code>visible</code>, float-элементов и абсолютно позиционированных элементов.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex4-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f8f9fa; }
+  h4 { margin: 0 0 6px; font-size: 13px; color: #555; }
+
+  .cols { display: flex; gap: 30px; }
+  .col { flex: 1; }
+
+  /* Схлопывание — два блока по 20px margin дают 20px, а не 40px */
+  .collapse-box {
+    background: #ffe082;
+    border: 2px solid #f9a825;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .box-a { margin-bottom: 20px; }
+  .box-b { margin-top: 20px; }
+
+  /* Без схлопывания — flex убирает схлопывание */
+  .no-collapse {
+    display: flex;
+    flex-direction: column;
+  }
+  .nc-box {
+    background: #a5d6a7;
+    border: 2px solid #388e3c;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .nc-a { margin-bottom: 20px; }
+  .nc-b { margin-top: 20px; }
+
+  .arrow {
+    background: rgba(255,100,100,.15);
+    border: 1px dashed #e53935;
+    text-align: center;
+    font-size: 11px;
+    color: #c62828;
+    padding: 3px;
+    margin: -1px 0;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="cols">
+  <div class="col">
+    <h4>😕 Схлопывание (обычные блоки)</h4>
+    <div class="collapse-box box-a">margin-bottom: 20px</div>
+    <div class="arrow">← Расстояние = 20px (не 40px!)</div>
+    <div class="collapse-box box-b">margin-top: 20px</div>
+    <p style="font-size:11px;color:#888;margin-top:8px;">
+      Ожидали 40px, получили 20px — схлопывание!
+    </p>
+  </div>
+  <div class="col">
+    <h4>✅ Без схлопывания (flex)</h4>
+    <div class="no-collapse">
+      <div class="nc-box nc-a">margin-bottom: 20px</div>
+      <div class="nc-box nc-b">margin-top: 20px</div>
+    </div>
+    <p style="font-size:11px;color:#888;margin-top:8px;">
+      Flex-контейнер отменяет схлопывание: расстояние = 40px.
+    </p>
+  </div>
+</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — border: стили и border-radius</h2>
+      <p class="lesson-desc">
+        Свойство <code>border</code> — шорткат для задания ширины, стиля и цвета рамки.
+        Стиль рамки обязателен: без него рамка не отображается. <code>border-radius</code>
+        скругляет углы и позволяет создавать круги, капсулы и другие фигуры.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Стиль</th><th>Вид</th><th>Синтаксис</th></tr>
+        <tr><td><code>solid</code></td><td>Сплошная линия</td><td><code>border: 2px solid #333</code></td></tr>
+        <tr><td><code>dashed</code></td><td>Пунктирная</td><td><code>border: 2px dashed #333</code></td></tr>
+        <tr><td><code>dotted</code></td><td>Точечная</td><td><code>border: 2px dotted #333</code></td></tr>
+        <tr><td><code>double</code></td><td>Двойная</td><td><code>border: 4px double #333</code></td></tr>
+        <tr><td><code>groove</code></td><td>Вдавленная</td><td><code>border: 4px groove #999</code></td></tr>
+        <tr><td><code>ridge</code></td><td>Выпуклая</td><td><code>border: 4px ridge #999</code></td></tr>
+        <tr><td><code>none</code></td><td>Нет рамки</td><td><code>border: none</code></td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex5-code" rows="58"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f5f5f5; }
+  .grid { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .box {
+    width: 120px; height: 70px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: bold; color: #333;
+    background: #fff; border-radius: 0;
+    text-align: center;
+  }
+  .b-solid  { border: 3px solid   #3f51b5; }
+  .b-dashed { border: 3px dashed  #e91e63; }
+  .b-dotted { border: 3px dotted  #009688; }
+  .b-double { border: 6px double  #ff5722; }
+  .b-groove { border: 6px groove  #795548; }
+  .b-ridge  { border: 6px ridge   #607d8b; }
+
+  /* border-radius демо */
+  h4 { margin: 0 0 10px; font-size: 13px; color: #555; }
+  .radii { display: flex; gap: 14px; flex-wrap: wrap; }
+  .r {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff; font-size: 10px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .r0  { border-radius: 0; }
+  .r8  { border-radius: 8px; }
+  .r20 { border-radius: 20px; }
+  .r50p { border-radius: 50%; }
+  .capsule { border-radius: 40px; width: 140px; height: 50px; }
+  .tl-only { border-radius: 30px 0 0 0; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="box b-solid">solid</div>
+    <div class="box b-dashed">dashed</div>
+    <div class="box b-dotted">dotted</div>
+    <div class="box b-double">double</div>
+    <div class="box b-groove">groove</div>
+    <div class="box b-ridge">ridge</div>
+  </div>
+
+  <h4>border-radius</h4>
+  <div class="radii">
+    <div class="r r0">0px</div>
+    <div class="r r8">8px</div>
+    <div class="r r20">20px</div>
+    <div class="r r50p">50%<br>(круг)</div>
+    <div class="r capsule">капсула<br>40px</div>
+    <div class="r tl-only">один<br>угол</div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 7</h3>
+          <p>Создайте карточку товара с правильной блочной моделью</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Напишите HTML+CSS карточку товара, в которой:
+          <ul>
+            <li>Карточка должна иметь <code>border</code> (рамку) и <code>border-radius</code> (скруглённые углы)</li>
+            <li>Используйте <code>padding</code> для внутренних отступов (не менее <code>16px</code>)</li>
+            <li>Задайте <code>margin</code> для отступов от других элементов</li>
+            <li>Примените <code>box-sizing: border-box</code> и задайте конкретную ширину карточки</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css7-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css7-exercise')" data-exercise-id="css7-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css7-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css7-exercise-feedback"></div>
+        <div class="exercise-preview" id="css7-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css7-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="css6-units.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">CSS Раздел 6: Единицы измерения</span>
+        </div>
+      </a>
+      <a href="css8-positioning.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 8: Позиционирование</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

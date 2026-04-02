@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 8 — Позиционирование — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css8">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 8: Позиционирование</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 8</div>
+      <div class="sidebar-title">Позиционирование</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> position: static
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> position: relative
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> position: absolute
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> position: fixed
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> position: sticky
+      </a>
+      <a class="sidebar-link" data-target="lesson-6">
+        <span class="link-num">6</span> top, right, bottom, left
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css8-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 8</div>
+      <h1 class="chapter-title">Позиционирование</h1>
+      <p class="chapter-intro">
+        CSS-позиционирование определяет, как элементы размещаются на странице.
+        Свойство <code>position</code> управляет схемой позиционирования: от обычного потока
+        (<code>static</code>) до фиксированных, абсолютных и «прилипающих» элементов.
+        Вместе со свойствами <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>
+        и <code>z-index</code> это открывает полный контроль над расположением любого элемента.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — position: static</h2>
+      <p class="lesson-desc">
+        <code>position: static</code> — значение по умолчанию для всех элементов.
+        Элементы располагаются в нормальном потоке документа: один за другим сверху вниз.
+        Свойства <code>top</code>, <code>left</code> и т.д. на статичные элементы не влияют.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>Значение</th><th>Описание</th></tr>
+        <tr><td><code>position</code></td><td><code>static</code></td><td>Нормальный поток (по умолчанию)</td></tr>
+        <tr><td><code>top / left / right / bottom</code></td><td>игнорируются</td><td>Не работают для static</td></tr>
+        <tr><td><code>z-index</code></td><td>игнорируется</td><td>Не работает для static</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Нормальный поток:</strong> Блочные элементы (<code>div</code>, <code>p</code>)
+          занимают всю ширину и располагаются вертикально. Строчные элементы (<code>span</code>, <code>a</code>)
+          располагаются по строкам горизонтально.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex1-code" rows="38"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f0f4f8; }
+  .box {
+    padding: 14px 20px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    /* position: static — по умолчанию, top/left игнорируются */
+    position: static;
+    top: 100px;  /* не работает */
+    left: 50px;  /* не работает */
+  }
+  .a { background: #5c6bc0; }
+  .b { background: #7e57c2; }
+  .c { background: #ab47bc; }
+</style>
+</head>
+<body>
+  <div class="box a">Блок A — position: static (top: 100px игнорируется)</div>
+  <div class="box b">Блок B — нормальный поток</div>
+  <div class="box c">Блок C — следует за B</div>
+  <p style="font-size:12px;color:#666;margin-top:12px;">
+    Все блоки расположены в нормальном потоке — сверху вниз, без смещений.
+  </p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — position: relative</h2>
+      <p class="lesson-desc">
+        <code>position: relative</code> смещает элемент <strong>от его нормальной позиции</strong>
+        с помощью <code>top</code>, <code>left</code>, <code>right</code>, <code>bottom</code>.
+        Важно: исходное место в потоке <em>сохраняется</em> — соседние элементы не сдвигаются.
+        Кроме того, <code>relative</code> создаёт контекст позиционирования для вложенных <code>absolute</code> элементов.
+      </p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Основное применение:</strong> Устанавливать <code>position: relative</code>
+          на родительский контейнер, чтобы дочерние <code>absolute</code> элементы позиционировались
+          относительно него, а не всей страницы.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex2-code" rows="46"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f0f4f8; }
+  .box {
+    padding: 14px 20px; margin-bottom: 8px;
+    border-radius: 6px; color: #fff; font-size: 13px; font-weight: bold;
+  }
+  .static { background: #90a4ae; position: static; }
+  .relative {
+    background: #e53935;
+    position: relative;
+    top: 15px;    /* смещаем вниз от нормальной позиции */
+    left: 30px;   /* смещаем вправо */
+    /* место в потоке осталось прежним — см. пустой «призрак» выше */
+  }
+  .after  { background: #90a4ae; position: static; }
+
+  /* Показываем «призрак» */
+  .ghost {
+    height: 48px; margin-bottom: 8px;
+    border: 2px dashed #e53935; border-radius: 6px;
+    background: rgba(229,57,53,.08);
+  }
+  .note { font-size: 11px; color: #c62828; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+  <div class="box static">Блок A — static, на месте</div>
+  <div class="note">↓ Место, которое Блок B занимает в потоке (виден «призрак»)</div>
+  <div class="ghost"></div>
+  <div class="box after">Блок C — static, не сдвинулся</div>
+
+  <!-- Блок B смещён поверх -->
+  <div class="box relative">Блок B — relative: top:15px, left:30px (смещён от своего места)</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — position: absolute</h2>
+      <p class="lesson-desc">
+        <code>position: absolute</code> <strong>вырывает элемент из нормального потока</strong> —
+        соседние элементы заполняют его место. Элемент позиционируется относительно
+        ближайшего предка с <code>position</code> не <code>static</code>.
+        Если такого нет — относительно начального блока (<code>&lt;html&gt;</code>).
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Контекст</th><th>Описание</th></tr>
+        <tr><td>Предок с position: relative/absolute/fixed/sticky</td><td>Позиционируется от его краёв</td></tr>
+        <tr><td>Нет позиционированного предка</td><td>Позиционируется от &lt;html&gt;</td></tr>
+      </table>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex3-code" rows="50"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 20px; background: #f0f4f8; }
+
+  .parent {
+    position: relative;      /* создаём контекст позиционирования */
+    width: 340px;
+    height: 180px;
+    background: #e3f2fd;
+    border: 2px solid #1976d2;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .parent-label {
+    font-size: 12px; font-weight: bold; color: #1565c0;
+    margin-bottom: 8px;
+  }
+
+  /* Абсолютно позиционированные «бейджи» внутри родителя */
+  .badge {
+    position: absolute;
+    background: #1976d2;
+    color: #fff;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  .tl { top:  10px; left:  10px; background: #e53935; }
+  .tr { top:  10px; right: 10px; background: #43a047; }
+  .bl { bottom: 10px; left:  10px; background: #fb8c00; }
+  .br { bottom: 10px; right: 10px; background: #8e24aa; }
+  .center {
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #00838f;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+  <div class="parent">
+    <div class="parent-label">position: relative (родитель)</div>
+    <div class="badge tl">top-left</div>
+    <div class="badge tr">top-right</div>
+    <div class="badge bl">bottom-left</div>
+    <div class="badge br">bottom-right</div>
+    <div class="badge center">центр</div>
+  </div>
+  <p style="font-size:12px;color:#666;margin-top:12px;">
+    Все бейджи позиционируются от краёв родителя (position: relative).
+  </p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — position: fixed</h2>
+      <p class="lesson-desc">
+        <code>position: fixed</code> закрепляет элемент в определённом месте <strong>вьюпорта</strong> —
+        он не прокручивается вместе со страницей. Идеально для навигационных панелей,
+        кнопок «Наверх», чатов и уведомлений. Элемент тоже вырван из потока.
+      </p>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Помните про z-index:</strong> Фиксированные элементы могут перекрывать контент.
+          Добавьте достаточный <code>padding-bottom</code> или <code>margin</code> к основному контенту,
+          чтобы он не прятался под фиксированными панелями.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex4-code" rows="50"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; height: 400px; background: #f5f5f5; }
+
+  /* Фиксированная верхняя панель */
+  .fixed-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #1a237e;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  }
+
+  /* Фиксированная кнопка «Наверх» */
+  .fixed-btn {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    background: #e53935;
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+    z-index: 100;
+  }
+
+  /* Фиксированный бейдж уведомления */
+  .fixed-badge {
+    position: fixed;
+    top: 50px; right: 0;
+    background: #43a047;
+    color: #fff;
+    padding: 8px 14px 8px 18px;
+    border-radius: 6px 0 0 6px;
+    font-size: 12px;
+    z-index: 100;
+    box-shadow: -2px 2px 8px rgba(0,0,0,.2);
+  }
+
+  .content { margin-top: 60px; }
+  p { color: #666; font-size: 13px; line-height: 1.6; }
+</style>
+</head>
+<body>
+  <div class="fixed-nav">📌 Фиксированная навигация (position: fixed)</div>
+  <div class="fixed-badge">🔔 Уведомление</div>
+  <div class="fixed-btn">↑</div>
+
+  <div class="content">
+    <p>Прокрутите этот фрейм вниз — навигация, уведомление и кнопка «Наверх» останутся на месте.</p>
+    <p>position: fixed — всегда в одном месте вьюпорта, независимо от прокрутки.</p>
+    <p>Полезно для: навигационных панелей, sidebar, чатов, кнопок помощи.</p>
+    <br><br><br><br>
+    <p>Даже здесь — они всё ещё на месте! 👆</p>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — position: sticky</h2>
+      <p class="lesson-desc">
+        <code>position: sticky</code> — гибрид <code>relative</code> и <code>fixed</code>.
+        Элемент ведёт себя как <code>relative</code>, пока не достигает заданного порога прокрутки,
+        после чего «прилипает» как <code>fixed</code>. Широко используется для заголовков таблиц
+        и навигации, которая должна следовать за скроллом до определённой точки.
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Требование:</strong> Для работы <code>sticky</code> необходимо задать хотя бы одно
+          из свойств смещения (<code>top</code>, <code>bottom</code> и т.д.), а у родительского контейнера
+          не должно быть <code>overflow: hidden</code> или <code>overflow: auto</code>.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex5-code" rows="54"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; }
+  .scroll-container { height: 320px; overflow-y: auto; }
+
+  .section { padding: 0; }
+  .sticky-header {
+    position: sticky;
+    top: 0;          /* прилипает к верху при прокрутке */
+    background: #283593;
+    color: #fff;
+    padding: 10px 16px;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 10;
+    border-bottom: 2px solid #1a237e;
+  }
+  .section-content {
+    padding: 12px 16px;
+    background: #fff;
+  }
+  .section-content p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .s2 .sticky-header { background: #1b5e20; border-color: #145214; }
+  .s3 .sticky-header { background: #b71c1c; border-color: #7f1111; }
+  .s4 .sticky-header { background: #4a148c; border-color: #321065; }
+</style>
+</head>
+<body>
+  <div class="scroll-container">
+    <div class="section">
+      <div class="sticky-header">📘 Раздел 1 — прокрутите вниз!</div>
+      <div class="section-content">
+        <p>Прокручивайте этот блок. Заголовок раздела «прилипнет» к верху, когда вы до него доберётесь.</p>
+        <p>position: sticky работает в рамках своего родительского контейнера.</p>
+        <p>Как только раздел полностью прокрутится — заголовок тоже уйдёт вверх.</p>
+        <p>Это отличие от fixed: sticky «привязан» к своему блоку.</p>
+      </div>
+    </div>
+    <div class="section s2">
+      <div class="sticky-header">🌿 Раздел 2 — тоже прилипает!</div>
+      <div class="section-content">
+        <p>Каждый заголовок раздела прилипает, пока его секция видна на экране.</p>
+        <p>Это классический паттерн для длинных страниц с разделами.</p>
+        <p>Используется в мобильных приложениях, в списках контактов, в документации.</p>
+        <p>Очень удобно для навигации по большому количеству информации.</p>
+      </div>
+    </div>
+    <div class="section s3">
+      <div class="sticky-header">🔴 Раздел 3</div>
+      <div class="section-content">
+        <p>Раздел 3 с sticky-заголовком. Продолжайте прокрутку.</p>
+        <p>position: sticky — top: 0 означает: прилипнуть когда элемент достигает верха.</p>
+      </div>
+    </div>
+    <div class="section s4">
+      <div class="sticky-header">🟣 Раздел 4</div>
+      <div class="section-content">
+        <p>Последний раздел. Вы освоили position: sticky!</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 6 -->
+    <section class="lesson-section" id="lesson-6">
+      <h2 class="lesson-title">Урок 6 — top, right, bottom, left</h2>
+      <p class="lesson-desc">
+        Свойства <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>
+        задают смещение позиционированного элемента. Их смысл зависит от типа позиционирования:
+        для <code>relative</code> — отступ от исходной позиции, для <code>absolute/fixed</code> —
+        расстояние от соответствующего края контейнера.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>relative</th><th>absolute / fixed</th></tr>
+        <tr><td><code>top: 20px</code></td><td>Смещение на 20px вниз от исходной позиции</td><td>20px от верхнего края контейнера</td></tr>
+        <tr><td><code>bottom: 20px</code></td><td>Смещение на 20px вверх от исходной позиции</td><td>20px от нижнего края контейнера</td></tr>
+        <tr><td><code>left: 20px</code></td><td>Смещение на 20px вправо от исходной позиции</td><td>20px от левого края контейнера</td></tr>
+        <tr><td><code>right: 20px</code></td><td>Смещение на 20px влево от исходной позиции</td><td>20px от правого края контейнера</td></tr>
+        <tr><td><code>top: 0; bottom: 0</code></td><td>—</td><td>Растянуть элемент по всей высоте</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Центрирование через absolute:</strong>
+          <code>top: 50%; left: 50%; transform: translate(-50%, -50%)</code> —
+          классический приём точного центрирования абсолютно позиционированного элемента.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex6-code" rows="52"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f0f4f8; }
+  h4 { margin: 0 0 8px; font-size: 13px; color: #555; }
+
+  .box {
+    position: relative;
+    width: 300px; height: 180px;
+    background: #e8eaf6;
+    border: 2px solid #5c6bc0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  .label { font-size: 10px; color: #5c6bc0; padding: 6px; }
+
+  .badge {
+    position: absolute;
+    background: #5c6bc0; color: #fff;
+    font-size: 11px; padding: 4px 8px;
+    border-radius: 4px; font-weight: bold;
+  }
+  .a { top: 8px;    left: 8px; }
+  .b { top: 8px;    right: 8px;  background: #e53935; }
+  .c { bottom: 8px; left: 8px;   background: #43a047; }
+  .d { bottom: 8px; right: 8px;  background: #fb8c00; }
+  .e {
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #00838f;
+    font-size: 12px;
+  }
+  /* Растянутый по высоте — right: 0, top: 0, bottom: 0 */
+  .stretch {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 8px;
+    background: linear-gradient(to bottom, #5c6bc0, #e53935);
+    border-radius: 0 6px 6px 0;
+  }
+</style>
+</head>
+<body>
+  <h4>position: absolute + top/right/bottom/left</h4>
+  <div class="box">
+    <span class="label">position: relative (родитель)</span>
+    <div class="badge a">top:8 left:8</div>
+    <div class="badge b">top:8 right:8</div>
+    <div class="badge c">bottom:8 left:8</div>
+    <div class="badge d">bottom:8 right:8</div>
+    <div class="badge e">top:50% left:50%<br>translate(-50%,-50%)</div>
+    <div class="stretch"></div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex6')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex6-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 8</h3>
+          <p>Создайте макет с разными типами позиционирования</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Напишите HTML+CSS страницу, в которой:
+          <ul>
+            <li>Создайте блок с <code>position: relative</code> и дочерний элемент с <code>position: absolute</code> в правом верхнем углу</li>
+            <li>Добавьте элемент с <code>position: fixed</code> (например, кнопку «Наверх» в нижнем правом углу)</li>
+            <li>Используйте <code>position: sticky</code> для заголовка секции</li>
+            <li>Все смещения задавайте через свойства <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code></li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css8-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css8-exercise')" data-exercise-id="css8-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css8-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css8-exercise-feedback"></div>
+        <div class="exercise-preview" id="css8-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css8-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="css7-boxmodel.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">CSS Раздел 7: Блочная модель</span>
+        </div>
+      </a>
+      <a href="css9-display.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 9: Display и видимость</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

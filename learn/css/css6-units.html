@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Раздел 6 — Единицы измерения — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="css6">
+
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div class="sidebar-overlay"></div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">CSS Раздел 6: Единицы измерения</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">CSS Раздел 6</div>
+      <div class="sidebar-title">Единицы измерения</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1">
+        <span class="link-num">1</span> Абсолютные единицы
+      </a>
+      <a class="sidebar-link" data-target="lesson-2">
+        <span class="link-num">2</span> em и rem
+      </a>
+      <a class="sidebar-link" data-target="lesson-3">
+        <span class="link-num">3</span> Viewport единицы
+      </a>
+      <a class="sidebar-link" data-target="lesson-4">
+        <span class="link-num">4</span> Проценты %
+      </a>
+      <a class="sidebar-link" data-target="lesson-5">
+        <span class="link-num">5</span> Когда использовать
+      </a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="css6-exercise">
+        <span class="link-num">✎</span> Упражнение
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📚 CSS Раздел 6</div>
+      <h1 class="chapter-title">Единицы измерения</h1>
+      <p class="chapter-intro">
+        CSS предлагает богатый набор единиц для задания размеров: от абсолютных пикселей и сантиметров
+        до гибких относительных единиц <code>em</code>, <code>rem</code>, процентов и единиц вьюпорта.
+        Правильный выбор единицы измерения — основа адаптивной и масштабируемой вёрстки.
+        В этом разделе вы изучите все ключевые единицы и узнаете, когда применять каждую из них.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Абсолютные единицы</h2>
+      <p class="lesson-desc">
+        Абсолютные единицы измерения имеют фиксированный физический размер, не зависящий от контекста.
+        Они подходят для печатных носителей, но в вебе чаще всего используются только пиксели <code>px</code>.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Единица</th><th>Описание</th><th>Соответствие</th></tr>
+        <tr><td><code>px</code></td><td>Пиксель экрана</td><td>1px = 1/96 дюйма (экранный)</td></tr>
+        <tr><td><code>pt</code></td><td>Типографский пункт</td><td>1pt = 1/72 дюйма ≈ 1.33px</td></tr>
+        <tr><td><code>cm</code></td><td>Сантиметр</td><td>1cm = 37.8px</td></tr>
+        <tr><td><code>mm</code></td><td>Миллиметр</td><td>1mm = 3.78px</td></tr>
+        <tr><td><code>in</code></td><td>Дюйм</td><td>1in = 96px</td></tr>
+        <tr><td><code>pc</code></td><td>Пика</td><td>1pc = 16px</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>Пиксель в вебе:</strong> Экранный пиксель (<code>px</code>) — это условная единица CSS,
+          не всегда равная физическому пикселю экрана. На дисплеях Retina один CSS-пиксель
+          соответствует 2–3 физическим пикселям.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex1-code" rows="42"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f0f4f8; }
+  h3 { margin: 0 0 12px; color: #334; font-size: 14px; }
+  .row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .box {
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 11px; font-weight: bold;
+    border-radius: 4px; text-align: center;
+  }
+  .px50  { width: 50px;  height: 50px;  background: #4f8ef7; }
+  .px100 { width: 100px; height: 100px; background: #3a7bd5; }
+  .px150 { width: 150px; height: 150px; background: #2563b0; }
+  .px200 { width: 200px; height: 200px; background: #1a4a8a; }
+  .label { font-size: 11px; color: #555; text-align: center; margin-top: 4px; }
+  .item { display: flex; flex-direction: column; align-items: center; }
+</style>
+</head>
+<body>
+  <h3>Блоки разного размера в пикселях (px)</h3>
+  <div class="row">
+    <div class="item">
+      <div class="box px50">50</div>
+      <div class="label">50px</div>
+    </div>
+    <div class="item">
+      <div class="box px100">100</div>
+      <div class="label">100px</div>
+    </div>
+    <div class="item">
+      <div class="box px150">150</div>
+      <div class="label">150px</div>
+    </div>
+    <div class="item">
+      <div class="box px200">200</div>
+      <div class="label">200px</div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#666;">
+    Размеры фиксированы — они не меняются от настроек браузера или родителя.
+  </p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Относительные единицы em и rem</h2>
+      <p class="lesson-desc">
+        <code>em</code> — единица, относительная к размеру шрифта <strong>родительского</strong> элемента.
+        <code>rem</code> — единица, относительная к размеру шрифта <strong>корневого элемента</strong>
+        (<code>&lt;html&gt;</code>). Ключевое отличие: при вложении <code>em</code> умножается,
+        а <code>rem</code> остаётся стабильным.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Единица</th><th>Относительна к</th><th>Особенность</th></tr>
+        <tr><td><code>em</code></td><td>font-size родителя</td><td>Каскадно умножается при вложении</td></tr>
+        <tr><td><code>rem</code></td><td>font-size &lt;html&gt;</td><td>Всегда предсказуемый размер</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Совет:</strong> Используйте <code>rem</code> для размеров шрифтов и глобальных отступов —
+          так проще управлять масштабом всего сайта, изменяя лишь <code>font-size</code> на <code>html</code>.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex2-code" rows="55"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  html { font-size: 16px; }
+  body { font-family: sans-serif; padding: 12px; background: #f8f9fa; margin: 0; }
+  h4 { margin: 0 0 8px; font-size: 13px; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+  .cols { display: flex; gap: 20px; }
+  .col { flex: 1; }
+
+  /* em — умножается при вложении */
+  .em-outer { font-size: 1.5em; background: #ffd6d6; padding: 8px; border-radius: 6px; }
+  .em-mid   { font-size: 1.5em; background: #ffb3b3; padding: 8px; border-radius: 4px; margin-top: 6px; }
+  .em-inner { font-size: 1.5em; background: #ff8a8a; padding: 8px; border-radius: 4px; margin-top: 6px; color: #fff; }
+
+  /* rem — всегда от корня */
+  .rem-outer { font-size: 1.5rem; background: #d6e8ff; padding: 8px; border-radius: 6px; }
+  .rem-mid   { font-size: 1.5rem; background: #b3d4ff; padding: 8px; border-radius: 4px; margin-top: 6px; }
+  .rem-inner { font-size: 1.5rem; background: #80b8ff; padding: 8px; border-radius: 4px; margin-top: 6px; }
+
+  .tag { font-size: 10px; opacity: .7; display: block; }
+</style>
+</head>
+<body>
+<div class="cols">
+  <div class="col">
+    <h4>em — каскадное умножение</h4>
+    <div class="em-outer">
+      font-size: 1.5em = 24px
+      <span class="tag">(16px × 1.5)</span>
+      <div class="em-mid">
+        font-size: 1.5em = 36px
+        <span class="tag">(24px × 1.5)</span>
+        <div class="em-inner">
+          font-size: 1.5em = 54px
+          <span class="tag">(36px × 1.5) 🔺 растёт!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <h4>rem — всегда от &lt;html&gt;</h4>
+    <div class="rem-outer">
+      font-size: 1.5rem = 24px
+      <span class="tag">(16px × 1.5)</span>
+      <div class="rem-mid">
+        font-size: 1.5rem = 24px
+        <span class="tag">(16px × 1.5)</span>
+        <div class="rem-inner">
+          font-size: 1.5rem = 24px
+          <span class="tag">(16px × 1.5) ✅ стабильно!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Viewport единицы</h2>
+      <p class="lesson-desc">
+        Единицы вьюпорта задают размер как долю от видимой области браузера.
+        Они незаменимы для создания полноэкранных секций, адаптивных заголовков
+        и элементов, размер которых должен зависеть от размера окна.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Единица</th><th>Описание</th><th>Пример</th></tr>
+        <tr><td><code>vw</code></td><td>1% ширины вьюпорта</td><td><code>50vw</code> = половина ширины окна</td></tr>
+        <tr><td><code>vh</code></td><td>1% высоты вьюпорта</td><td><code>100vh</code> = вся высота окна</td></tr>
+        <tr><td><code>vmin</code></td><td>1% меньшей стороны</td><td>Квадратные элементы по меньшей стороне</td></tr>
+        <tr><td><code>vmax</code></td><td>1% большей стороны</td><td>Элемент по большей стороне экрана</td></tr>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <strong>100vh и мобильные браузеры:</strong> На мобильных устройствах
+          <code>100vh</code> может включать высоту адресной строки. Для точного
+          полного экрана используйте <code>100dvh</code> (dynamic viewport height).
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex3-code" rows="48"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin: 0; font-family: sans-serif; background: #1a1a2e; color: #eee; }
+  .section {
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; text-align: center;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+  }
+  .s1 { height: 40vh; background: linear-gradient(135deg,#667eea,#764ba2); }
+  .s2 { height: 30vh; background: linear-gradient(135deg,#f093fb,#f5576c); }
+  .s3 {
+    width: 50vw; height: 20vh;
+    background: linear-gradient(135deg,#4facfe,#00f2fe);
+    margin: 10px auto; border-radius: 8px;
+  }
+  .title { font-size: 4vw; font-weight: bold; margin: 0; }
+  .sub   { font-size: 2vw; opacity: .8; margin: 4px 0 0; }
+  .label { font-size: 12px; background: rgba(0,0,0,.3); padding: 4px 10px; border-radius: 20px; margin-top: 6px; }
+</style>
+</head>
+<body>
+  <div class="section s1">
+    <p class="title">height: 40vh</p>
+    <p class="sub">40% высоты вьюпорта</p>
+    <span class="label">font-size: 4vw</span>
+  </div>
+  <div class="section s2">
+    <p class="title">height: 30vh</p>
+    <p class="sub">30% высоты вьюпорта</p>
+    <span class="label">font-size: 4vw</span>
+  </div>
+  <div class="section s3">
+    <p class="title" style="font-size:16px;">width: 50vw</p>
+    <p class="sub" style="font-size:12px;">50% ширины вьюпорта</p>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Проценты %</h2>
+      <p class="lesson-desc">
+        Проценты — относительная единица, вычисляемая от <strong>родительского элемента</strong>.
+        Для <code>width</code> и <code>height</code> — это размер родителя,
+        для <code>font-size</code> — размер шрифта родителя,
+        для <code>padding</code> и <code>margin</code> — ширина родительского блока.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Свойство</th><th>% вычисляется от</th><th>Пример</th></tr>
+        <tr><td><code>width</code></td><td>ширина родителя</td><td><code>50%</code> = половина родителя</td></tr>
+        <tr><td><code>height</code></td><td>высота родителя (если задана)</td><td>Требует высоты у родителя</td></tr>
+        <tr><td><code>font-size</code></td><td>font-size родителя</td><td><code>150%</code> = 1.5× родитель</td></tr>
+        <tr><td><code>padding / margin</code></td><td>ширина родителя (даже вертикальные!)</td><td>Трюк для aspect-ratio</td></tr>
+      </table>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>height: 100% не работает без родителя:</strong> Чтобы дочерний элемент занял
+          <code>100%</code> высоты, у родителя должна быть явно задана высота.
+          Иначе браузер не знает, 100% от чего считать.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex4-code" rows="50"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; padding: 16px; background: #f5f5f5; }
+  h4 { margin: 0 0 8px; font-size: 13px; color: #444; }
+  .parent {
+    width: 400px;
+    background: #c8e6c9;
+    padding: 10px;
+    border: 2px solid #388e3c;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  .child-100 { width: 100%; background: #4caf50; color: #fff; padding: 6px; border-radius: 4px; margin-bottom: 6px; box-sizing: border-box; text-align: center; font-size: 13px; }
+  .child-75  { width: 75%;  background: #66bb6a; color: #fff; padding: 6px; border-radius: 4px; margin-bottom: 6px; box-sizing: border-box; text-align: center; font-size: 13px; }
+  .child-50  { width: 50%;  background: #81c784; color: #fff; padding: 6px; border-radius: 4px; margin-bottom: 6px; box-sizing: border-box; text-align: center; font-size: 13px; }
+  .child-25  { width: 25%;  background: #a5d6a7; color: #333; padding: 6px; border-radius: 4px; box-sizing: border-box; text-align: center; font-size: 13px; }
+  .label { font-size: 11px; color: #1b5e20; margin-bottom: 6px; }
+</style>
+</head>
+<body>
+  <h4>Родитель: width = 400px</h4>
+  <div class="parent">
+    <div class="label">↕ Родитель (400px)</div>
+    <div class="child-100">width: 100% = 400px</div>
+    <div class="child-75">width: 75% = 300px</div>
+    <div class="child-50">width: 50% = 200px</div>
+    <div class="child-25">25%</div>
+  </div>
+  <p style="font-size:12px;color:#666;">
+    Уменьшите ширину родителя — и все дочерние блоки автоматически пересчитаются!
+  </p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Когда использовать какие единицы</h2>
+      <p class="lesson-desc">
+        Нет универсального ответа — каждая единица подходит для своей задачи.
+        Зная правила применения, вы сможете строить масштабируемые, доступные и адаптивные интерфейсы.
+      </p>
+
+      <table class="attr-table">
+        <tr><th>Единица</th><th>Лучше всего для</th><th>Избегать для</th></tr>
+        <tr><td><code>px</code></td><td>Рамки (border), тени, 1px детали</td><td>Размеры шрифтов, отступы</td></tr>
+        <tr><td><code>rem</code></td><td>Размеры шрифтов, глобальные отступы</td><td>Внутренние компонентные отступы</td></tr>
+        <tr><td><code>em</code></td><td>Padding/margin внутри компонента</td><td>Глобальные размеры (каскадный эффект)</td></tr>
+        <tr><td><code>%</code></td><td>Ширина колонок, адаптивные блоки</td><td>Высота (без явной высоты родителя)</td></tr>
+        <tr><td><code>vw / vh</code></td><td>Полноэкранные секции, hero-блоки</td><td>Мелкие компонентные размеры</td></tr>
+        <tr><td><code>vmin / vmax</code></td><td>Квадратные элементы, иконки</td><td>Типографика (непредсказуемо)</td></tr>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <strong>Золотое правило адаптивной вёрстки:</strong> <code>px</code> для декора,
+          <code>rem</code> для типографики, <code>%</code> для раскладки,
+          <code>vh/vw</code> для экранных секций.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">CSS + HTML</div>
+          <textarea class="code-editor" id="ex5-code" rows="56"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  /* rem для шрифта, % для макета, px для декора, vh для секции */
+  html { font-size: 16px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; }
+
+  .hero {
+    height: 30vh;                  /* vh — экранная секция */
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+  }
+  .hero h1 {
+    font-size: 2.5rem;             /* rem — типографика */
+    letter-spacing: 1px;
+  }
+
+  .container {
+    width: 90%;                    /* % — адаптивная ширина */
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1.5rem 0;             /* rem — отступы */
+  }
+
+  .cards {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .card {
+    flex: 1 1 45%;                 /* % — колонки */
+    background: #fff;
+    border: 1px solid #ddd;        /* px — декор */
+    border-radius: 8px;            /* px — декор */
+    padding: 1em;                  /* em — внутренний отступ компонента */
+    box-shadow: 0 2px 6px rgba(0,0,0,.08); /* px — тень */
+  }
+  .card h3 { font-size: 1.1rem; margin-bottom: .5em; color: #333; }
+  .card p  { font-size: 0.9rem; color: #666; line-height: 1.5; }
+  .badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    background: #667eea; color: #fff;
+    border-radius: 20px; margin-bottom: .5em;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Смешиваем единицы</h1>
+  </div>
+  <div class="container">
+    <div class="cards">
+      <div class="card">
+        <span class="badge">rem</span>
+        <h3>Шрифты и отступы</h3>
+        <p>font-size: 1.1rem, padding: 1em — масштабируемо и доступно.</p>
+      </div>
+      <div class="card">
+        <span class="badge">%</span>
+        <h3>Ширина колонок</h3>
+        <p>flex: 1 1 45% — адаптивные карточки, не ломающиеся на мобиле.</p>
+      </div>
+      <div class="card">
+        <span class="badge">px</span>
+        <h3>Декоративные детали</h3>
+        <p>border: 1px, border-radius: 8px — точные, неизменные декоры.</p>
+      </div>
+      <div class="card">
+        <span class="badge">vh</span>
+        <h3>Экранные секции</h3>
+        <p>height: 30vh — герой-блок занимает часть экрана независимо от устройства.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 6</h3>
+          <p>Создайте адаптивный макет, используя разные единицы измерения</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Напишите HTML+CSS страницу, в которой:
+          <ul>
+            <li>Задайте размер шрифта заголовка в <code>rem</code> (минимум <code>2rem</code>)</li>
+            <li>Используйте <code>em</code> для внутренних отступов (padding) блоков</li>
+            <li>Ширину основного контейнера задайте в процентах (не более <code>80%</code>)</li>
+            <li>Добавьте блок с высотой в <code>vh</code> (например, <code>50vh</code>)</li>
+          </ul>
+        </div>
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="css6-exercise-code" rows="16"><!-- Напишите ваш CSS код здесь -->
+</textarea>
+        </div>
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('css6-exercise')" data-exercise-id="css6-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('css6-exercise')">
+            👁 Предпросмотр
+          </button>
+        </div>
+        <div class="exercise-feedback" id="css6-exercise-feedback"></div>
+        <div class="exercise-preview" id="css6-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="css6-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION -->
+    <nav class="chapter-nav">
+      <a href="css5-text.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Назад</span>
+          <span class="nav-sub">CSS Раздел 5: Оформление текста</span>
+        </div>
+      </a>
+      <a href="css7-boxmodel.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая глава →</span>
+          <span class="nav-sub">CSS Раздел 7: Блочная модель</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>
