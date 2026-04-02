@@ -52,20 +52,22 @@ function isComplete(id) {
 // =============================================
 
 /**
- * Lightweight HTML syntax highlighter.
- * Processes raw HTML text and returns highlighted HTML string.
+ * Highlight HTML source text in-place on a DOM element.
+ * Builds a DocumentFragment using textNode + createElement — no HTML string parsing.
+ * @param {string} code - raw HTML source text to highlight
+ * @param {DocumentFragment} frag - fragment to append highlighted nodes into
  */
-function highlightHTML(code) {
-  // Escape HTML entities first (for display)
-  function esc(str) {
-    return str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+function highlightToFragment(code, frag) {
+  function span(cls, text) {
+    const s = document.createElement('span');
+    s.className = cls;
+    s.textContent = text; // textContent safely sets text without HTML parsing
+    return s;
+  }
+  function text(str) {
+    return document.createTextNode(str);
   }
 
-  // We'll use a token-based approach
-  let result = '';
   let i = 0;
   const len = code.length;
 
@@ -74,7 +76,7 @@ function highlightHTML(code) {
     if (code.slice(i, i + 9).toUpperCase() === '<!DOCTYPE') {
       const end = code.indexOf('>', i);
       if (end !== -1) {
-        result += '<span class="hl-doctype">' + esc(code.slice(i, end + 1)) + '</span>';
+        frag.appendChild(span('hl-doctype', code.slice(i, end + 1)));
         i = end + 1;
         continue;
       }
@@ -84,7 +86,7 @@ function highlightHTML(code) {
     if (code.slice(i, i + 4) === '<!--') {
       const end = code.indexOf('-->', i + 4);
       if (end !== -1) {
-        result += '<span class="hl-comment">' + esc(code.slice(i, end + 3)) + '</span>';
+        frag.appendChild(span('hl-comment', code.slice(i, end + 3)));
         i = end + 3;
         continue;
       }
@@ -94,139 +96,120 @@ function highlightHTML(code) {
     if (code[i] === '<' && i + 1 < len && code[i + 1] !== ' ') {
       const tagStart = i;
       let j = i + 1;
-      // Find end of tag (accounting for quoted attributes)
       let inQuote = false;
       let quoteChar = '';
       while (j < len) {
         if (!inQuote && (code[j] === '"' || code[j] === "'")) {
-          inQuote = true;
-          quoteChar = code[j];
+          inQuote = true; quoteChar = code[j];
         } else if (inQuote && code[j] === quoteChar) {
           inQuote = false;
         } else if (!inQuote && code[j] === '>') {
-          j++;
-          break;
+          j++; break;
         }
         j++;
       }
-
-      const tagStr = code.slice(tagStart, j);
-      result += highlightTag(tagStr);
+      appendTagNodes(frag, code.slice(tagStart, j), span, text);
       i = j;
       continue;
     }
 
-    // Regular text
-    result += esc(code[i]);
+    // Regular text character
+    const last = frag.lastChild;
+    if (last && last.nodeType === Node.TEXT_NODE) {
+      last.data += code[i]; // coalesce adjacent text nodes
+    } else {
+      frag.appendChild(text(code[i]));
+    }
     i++;
   }
-
-  return result;
 }
 
-function highlightTag(tagStr) {
-  // tagStr starts with < and ends with >
-  let result = '<span class="hl-tag">&lt;</span>';
+function appendTagNodes(frag, tagStr, span, text) {
+  frag.appendChild(span('hl-tag', '<'));
   let inner = tagStr.slice(1, tagStr.endsWith('>') ? tagStr.length - 1 : tagStr.length);
-  let close = tagStr.endsWith('>') ? '<span class="hl-tag">&gt;</span>' : '';
 
-  // Closing tag
   if (inner.startsWith('/')) {
-    result += '<span class="hl-tag">/</span>';
+    frag.appendChild(span('hl-tag', '/'));
     inner = inner.slice(1);
   }
 
-  // Self-closing
-  let selfClose = '';
+  let selfClose = false;
   if (inner.endsWith('/')) {
-    selfClose = '<span class="hl-tag">/</span>';
+    selfClose = true;
     inner = inner.slice(0, -1).trimEnd();
   }
 
-  // Tag name
   const nameMatch = inner.match(/^([a-zA-Z][a-zA-Z0-9-]*)([\s\S]*)$/);
   if (!nameMatch) {
-    return '<span class="hl-tag">' + escHtml(tagStr) + '</span>';
+    // Fallback: treat whole thing as tag text
+    frag.lastChild.data = frag.lastChild.data || '';
+    frag.appendChild(text(inner));
+  } else {
+    frag.appendChild(span('hl-tagname', nameMatch[1]));
+    appendAttrNodes(frag, nameMatch[2], span, text);
   }
 
-  result += '<span class="hl-tagname">' + escHtml(nameMatch[1]) + '</span>';
-  let attrs = nameMatch[2];
-
-  // Parse attributes
-  result += highlightAttrs(attrs);
-  result += selfClose + close;
-  return result;
+  if (selfClose) frag.appendChild(span('hl-tag', '/'));
+  if (tagStr.endsWith('>')) frag.appendChild(span('hl-tag', '>'));
 }
 
-function highlightAttrs(attrStr) {
-  if (!attrStr.trim()) return '';
-  let result = '';
+function appendAttrNodes(frag, attrStr, span, text) {
   let i = 0;
   const len = attrStr.length;
-
   while (i < len) {
-    // whitespace
     if (/\s/.test(attrStr[i])) {
-      result += attrStr[i];
-      i++;
-      continue;
+      const last = frag.lastChild;
+      if (last && last.nodeType === Node.TEXT_NODE) {
+        last.data += attrStr[i];
+      } else {
+        frag.appendChild(text(attrStr[i]));
+      }
+      i++; continue;
     }
-
-    // attribute name
     let nameEnd = i;
-    while (nameEnd < len && attrStr[nameEnd] !== '=' && attrStr[nameEnd] !== ' ' && attrStr[nameEnd] !== '\t' && attrStr[nameEnd] !== '\n' && attrStr[nameEnd] !== '>') {
-      nameEnd++;
-    }
-    const attrName = attrStr.slice(i, nameEnd);
-    result += '<span class="hl-attr">' + escHtml(attrName) + '</span>';
+    while (nameEnd < len && attrStr[nameEnd] !== '=' && !/[\s>]/.test(attrStr[nameEnd])) nameEnd++;
+    frag.appendChild(span('hl-attr', attrStr.slice(i, nameEnd)));
     i = nameEnd;
 
     if (i < len && attrStr[i] === '=') {
-      result += '<span class="hl-tag">=</span>';
+      frag.appendChild(span('hl-tag', '='));
       i++;
-
-      // attribute value
       if (i < len && (attrStr[i] === '"' || attrStr[i] === "'")) {
         const quote = attrStr[i];
         let valEnd = i + 1;
         while (valEnd < len && attrStr[valEnd] !== quote) valEnd++;
-        valEnd++; // include closing quote
-        result += '<span class="hl-value">' + escHtml(attrStr.slice(i, valEnd)) + '</span>';
+        valEnd++;
+        frag.appendChild(span('hl-value', attrStr.slice(i, valEnd)));
         i = valEnd;
       } else {
-        // unquoted value
         let valEnd = i;
         while (valEnd < len && !/\s/.test(attrStr[valEnd]) && attrStr[valEnd] !== '>') valEnd++;
-        result += '<span class="hl-value">' + escHtml(attrStr.slice(i, valEnd)) + '</span>';
+        frag.appendChild(span('hl-value', attrStr.slice(i, valEnd)));
         i = valEnd;
       }
     }
   }
-  return result;
 }
 
-function escHtml(str) {
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-
-// Apply syntax highlighting to all .html-code elements.
-// highlightHTML() escapes all raw text via esc()/escHtml() before wrapping
-// in <span> tags, so the produced HTML string contains no user-supplied input.
+// Apply syntax highlighting to all static .html-code elements on the page.
 function applyHighlighting() {
   document.querySelectorAll('code.html-code').forEach(el => {
-    // raw is textContent (static page content), never user input.
-    // Use DOMParser to parse the highlighted result into a document fragment
-    // rather than assigning directly to innerHTML.
     const raw = el.textContent;
-    const highlighted = highlightHTML(raw);
-    const parser = new DOMParser();
-    const parsed = parser.parseFromString(highlighted, 'text/html');
     const frag = document.createDocumentFragment();
-    Array.from(parsed.body.childNodes).forEach(node => frag.appendChild(node.cloneNode(true)));
-    el.textContent = ''; // clear existing
-    el.appendChild(frag);
+    highlightToFragment(raw, frag); // builds DOM nodes, no HTML string parsing
+    el.replaceChildren(frag);
   });
 }
+
+// Keep highlightHTML as a utility for any string-based callers (unused on this page).
+function highlightHTML(code) {
+  const frag = document.createDocumentFragment();
+  highlightToFragment(code, frag);
+  const tmp = document.createElement('span');
+  tmp.appendChild(frag);
+  return tmp.innerHTML;
+}
+
 
 // =============================================
 // LIVE CODE EDITOR
