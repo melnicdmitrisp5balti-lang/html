@@ -137,7 +137,6 @@ function appendTagNodes(frag, tagStr, span, text) {
   const nameMatch = inner.match(/^([a-zA-Z][a-zA-Z0-9-]*)([\s\S]*)$/);
   if (!nameMatch) {
     // Fallback: treat whole thing as tag text
-    frag.lastChild.data = frag.lastChild.data || '';
     frag.appendChild(text(inner));
   } else {
     frag.appendChild(span('hl-tagname', nameMatch[1]));
