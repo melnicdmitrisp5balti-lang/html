@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Учебник — Интерактивный курс</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #2c3e50;
+      --accent: #e74c3c;
+      --accent2: #e67e22;
+      --success: #27ae60;
+      --info: #2980b9;
+      --bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --text: #2c3e50;
+      --text-muted: #6c757d;
+      --border: #dee2e6;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
+      --radius: 12px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .hero {
+      background: linear-gradient(135deg, #2c3e50 0%, #3d5a73 40%, #e74c3c 100%);
+      color: white;
+      padding: 70px 20px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 20%, rgba(231,76,60,0.2) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+    .hero h1 span { color: #ff6b6b; }
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-hero-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 20px rgba(231,76,60,0.4);
+    }
+    .btn-hero-primary:hover { background: #c0392b; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(231,76,60,0.5); }
+    .btn-hero-secondary {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.4);
+      backdrop-filter: blur(10px);
+    }
+    .btn-hero-secondary:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--primary);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; color: white; }
+    .stat-num { font-size: 1.8rem; font-weight: 700; color: #ff6b6b; }
+    .stat-label { font-size: 0.8rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* PROGRESS SECTION */
+    .progress-section {
+      background: var(--card-bg);
+      padding: 28px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .progress-section h3 { margin-bottom: 12px; color: var(--primary); }
+    .progress-bar-wrapper {
+      max-width: 500px;
+      margin: 0 auto 8px;
+      background: #e9ecef;
+      border-radius: 50px;
+      height: 12px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), #2ecc71);
+      border-radius: 50px;
+      transition: width 0.8s ease;
+      width: 0%;
+    }
+    .progress-text { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* MAIN CONTENT */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+    .section-title h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .section-title p { color: var(--text-muted); font-size: 1.05rem; }
+
+    /* CHAPTERS GRID */
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      padding: 20px 20px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .chapter-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid transparent;
+    }
+    .chapter-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent);
+    }
+    .chapter-card.completed { border-color: var(--success); }
+
+    .card-header {
+      padding: 24px 24px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .card-icon {
+      font-size: 2.5rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .card-meta { flex: 1; }
+    .card-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+    .card-body { padding: 0 24px 16px; }
+    .card-desc { color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; }
+
+    .card-tags {
+      padding: 0 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .tag {
+      background: #f0f4f8;
+      color: var(--info);
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-weight: 500;
+      font-family: 'Courier New', monospace;
+    }
+
+    .card-footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+    .lessons-count { font-size: 0.85rem; color: var(--text-muted); }
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 50px;
+    }
+    .status-badge.done { background: #e8f8f0; color: var(--success); }
+    .status-badge.start { background: #fdf3ee; color: var(--accent2); }
+    .status-badge.new { background: #f0f4ff; color: var(--info); }
+
+    /* FEATURES */
+    .features-section {
+      background: var(--primary);
+      padding: 60px 20px;
+      color: white;
+    }
+    .features-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      text-align: center;
+    }
+    .feature { padding: 10px; }
+    .feature-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .feature h4 { font-size: 1rem; margin-bottom: 8px; }
+    .feature p { opacity: 0.7; font-size: 0.88rem; line-height: 1.5; }
+
+    /* FOOTER */
+    footer {
+      background: #1a252f;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+    }
+    footer strong { color: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .chapters-grid { grid-template-columns: 1fr; }
+      .stats-bar { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO HEADER -->
+<header class="hero">
+  <div class="hero-badge">🎓 Бесплатный курс</div>
+  <h1>HTML <span>Учебник</span></h1>
+  <p>Интерактивный курс для изучения HTML с нуля. Пишите код прямо в браузере и сразу видите результат.</p>
+  <div class="hero-actions">
+    <a href="learn/chapters/ch1-basics.html" class="btn-hero btn-hero-primary">▶ Начать обучение</a>
+    <a href="#chapters" class="btn-hero btn-hero-secondary">📋 Все главы</a>
+  </div>
+</header>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">9</div>
+    <div class="stat-label">Глав</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">47</div>
+    <div class="stat-label">Уроков</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">9</div>
+    <div class="stat-label">Упражнений</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" id="stat-done">0</div>
+    <div class="stat-label">Выполнено</div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-section">
+  <h3>Ваш прогресс</h3>
+  <div class="progress-bar-wrapper">
+    <div class="progress-bar-fill" id="main-progress"></div>
+  </div>
+  <div class="progress-text" id="progress-text">Начните обучение чтобы отслеживать прогресс</div>
+</div>
+
+<!-- CHAPTERS SECTION -->
+<div class="section-title" id="chapters">
+  <h2>Содержание курса</h2>
+  <p>От основ до продвинутых тем — всё что нужно для работы с HTML</p>
+</div>
+
+<div class="chapters-grid">
+
+  <a class="chapter-card" href="learn/chapters/ch1-basics.html" id="card-ch1">
+    <div class="card-header">
+      <div class="card-icon">📚</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 1</div>
+        <div class="card-title">Основы HTML</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Узнайте что такое HTML, познакомьтесь со структурой документа, тегами заголовков и параграфами.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&lt;!DOCTYPE&gt;</span>
+      <span class="tag">&lt;html&gt;</span>
+      <span class="tag">&lt;head&gt;</span>
+      <span class="tag">&lt;body&gt;</span>
+      <span class="tag">&lt;h1&gt;–&lt;h6&gt;</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch1">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch2-text.html" id="card-ch2">
+    <div class="card-header">
+      <div class="card-icon">🔤</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 2</div>
+        <div class="card-title">Форматирование текста</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Жирный, курсив, подчёркивание, перенос строки, надстрочный и подстрочный текст.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&lt;b&gt;</span>
+      <span class="tag">&lt;strong&gt;</span>
+      <span class="tag">&lt;em&gt;</span>
+      <span class="tag">&lt;pre&gt;</span>
+      <span class="tag">&lt;code&gt;</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 6 уроков</span>
+      <span class="status-badge new" id="status-ch2">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch3-links-images.html" id="card-ch3">
+    <div class="card-header">
+      <div class="card-icon">🔗</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 3</div>
+        <div class="card-title">Ссылки и изображения</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Создание гиперссылок, добавление изображений, атрибуты alt и size, изображения-ссылки.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&lt;a href&gt;</span>
+      <span class="tag">&lt;img&gt;</span>
+      <span class="tag">target</span>
+      <span class="tag">alt</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch3">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch4-lists.html" id="card-ch4">
+    <div class="card-header">
+      <div class="card-icon">📋</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 4</div>
+        <div class="card-title">Списки</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Маркированные и нумерованные списки, вложенные списки и списки определений.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&lt;ul&gt;</span>
+      <span class="tag">&lt;ol&gt;</span>
+      <span class="tag">&lt;li&gt;</span>
+      <span class="tag">&lt;dl&gt;</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch4">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch5-tables.html" id="card-ch5">
+    <div class="card-header">
+      <div class="card-icon">📊</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 5</div>
+        <div class="card-title">Таблицы</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Создание таблиц, заголовки, объединение ячеек по столбцам и строкам.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&lt;table&gt;</span>
+      <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;th&gt;</span>
+      <span class="tag">colspan</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch5">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch6-forms.html" id="card-ch6">
+    <div class="card-header">
+      <div class="card-icon">📝</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 6</div>
+        <div class="card-title">Формы</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Создание HTML-форм: поля ввода, метки, выпадающие списки, чекбоксы и радиокнопки.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&lt;form&gt;</span>
+      <span class="tag">&lt;input&gt;</span>
+      <span class="tag">&lt;select&gt;</span>
+      <span class="tag">&lt;label&gt;</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 6 уроков</span>
+      <span class="status-badge new" id="status-ch6">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch7-inputs.html" id="card-ch7">
+    <div class="card-header">
+      <div class="card-icon">🎛️</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 7</div>
+        <div class="card-title">Типы Input</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Все типы полей ввода: текст, пароль, email, число, дата, цвет, файл и другие.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">type="email"</span>
+      <span class="tag">type="date"</span>
+      <span class="tag">type="color"</span>
+      <span class="tag">type="range"</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 6 уроков</span>
+      <span class="status-badge new" id="status-ch7">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch8-semantics.html" id="card-ch8">
+    <div class="card-header">
+      <div class="card-icon">🏗️</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 8</div>
+        <div class="card-title">Семантический HTML</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Правильная структура страницы с семантическими тегами HTML5 для SEO и доступности.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&lt;header&gt;</span>
+      <span class="tag">&lt;nav&gt;</span>
+      <span class="tag">&lt;main&gt;</span>
+      <span class="tag">&lt;article&gt;</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 6 уроков</span>
+      <span class="status-badge new" id="status-ch8">🆕 Новая</span>
+    </div>
+  </a>
+
+  <a class="chapter-card" href="learn/chapters/ch9-media.html" id="card-ch9">
+    <div class="card-header">
+      <div class="card-icon">🎬</div>
+      <div class="card-meta">
+        <div class="card-num">Глава 9</div>
+        <div class="card-title">Медиа</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">Встраивание аудио, видео, iframe, а также основы canvas и SVG-графики.</div>
+    </div>
+    <div class="card-tags">
+      <span class="tag">&lt;audio&gt;</span>
+      <span class="tag">&lt;video&gt;</span>
+      <span class="tag">&lt;iframe&gt;</span>
+      <span class="tag">&lt;svg&gt;</span>
+    </div>
+    <div class="card-footer">
+      <span class="lessons-count">📖 5 уроков</span>
+      <span class="status-badge new" id="status-ch9">🆕 Новая</span>
+    </div>
+  </a>
+
+</div>
+
+<!-- FEATURES -->
+<div class="features-section">
+  <div style="text-align:center;margin-bottom:40px;">
+    <h2 style="font-size:1.8rem;margin-bottom:8px;">Почему этот курс?</h2>
+    <p style="opacity:0.7;">Лучший способ учиться — практика</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-icon">✏️</div>
+      <h4>Живой редактор кода</h4>
+      <p>Пишите HTML прямо в браузере и сразу видите результат без дополнительных инструментов</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">✅</div>
+      <h4>Проверка заданий</h4>
+      <p>Автоматическая валидация ваших решений с подсказками</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📊</div>
+      <h4>Отслеживание прогресса</h4>
+      <p>Система сохраняет ваш прогресс между сессиями</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🎨</div>
+      <h4>Подсветка синтаксиса</h4>
+      <p>Все примеры кода с цветовой подсветкой для удобного чтения</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📱</div>
+      <h4>Адаптивный дизайн</h4>
+      <p>Учитесь с телефона, планшета или компьютера</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>HTML Учебник &copy; 2024 — <strong>Интерактивный курс HTML</strong> — Создано для изучения веб-разработки</p>
+</footer>
+
+<script>
+  // Load progress from localStorage and update UI
+  function loadProgress() {
+    const progress = JSON.parse(localStorage.getItem('htmlCourseProgress') || '{}');
+    const chapters = ['ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9'];
+    let completed = 0;
+
+    chapters.forEach(ch => {
+      const badge = document.getElementById('status-' + ch);
+      const card = document.getElementById('card-' + ch);
+      if (progress[ch + '-exercise']) {
+        completed++;
+        if (badge) { badge.className = 'status-badge done'; badge.textContent = '✓ Выполнена'; }
+        if (card) card.classList.add('completed');
+      } else if (progress[ch + '-visited']) {
+        if (badge) { badge.className = 'status-badge start'; badge.textContent = '▶ В процессе'; }
+      }
+    });
+
+    const pct = Math.round((completed / 9) * 100);
+    document.getElementById('main-progress').style.width = pct + '%';
+    document.getElementById('stat-done').textContent = completed;
+    document.getElementById('progress-text').textContent =
+      completed === 0 ? 'Начните обучение чтобы отслеживать прогресс' :
+      completed === 9 ? '🎉 Курс пройден! Отличная работа!' :
+      `Выполнено ${completed} из 9 глав (${pct}%)`;
+  }
+
+  loadProgress();
+</script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 9: Медиа — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch9">
+
+<div class="sidebar-overlay"></div>
+
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 9: Медиа</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 9</div>
+      <div class="sidebar-title">Медиа</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1"><span class="link-num">1</span> Аудио &lt;audio&gt;</a>
+      <a class="sidebar-link" data-target="lesson-2"><span class="link-num">2</span> Видео &lt;video&gt;</a>
+      <a class="sidebar-link" data-target="lesson-3"><span class="link-num">3</span> Встраивание &lt;iframe&gt;</a>
+      <a class="sidebar-link" data-target="lesson-4"><span class="link-num">4</span> Canvas — рисование</a>
+      <a class="sidebar-link" data-target="lesson-5"><span class="link-num">5</span> SVG — векторная графика</a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch9-exercise"><span class="link-num">✎</span> Упражнение</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">🎬 Глава 9</div>
+      <h1 class="chapter-title">Медиа</h1>
+      <p class="chapter-intro">
+        HTML5 предоставляет нативную поддержку аудио, видео и графики прямо в браузере —
+        без Flash и других плагинов. Вы научитесь встраивать медиа-контент,
+        работать с canvas и SVG, а также использовать iframe для embed-контента.
+      </p>
+    </div>
+
+    <!-- LESSON 1: Audio -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Аудио &lt;audio&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;audio&gt;</code> встраивает аудиофайл. Атрибут <code>controls</code>
+        отображает встроенный плеер с кнопками управления. Атрибут <code>autoplay</code>
+        запускает воспроизведение автоматически (в большинстве браузеров требует также <code>muted</code>).
+        Используйте несколько тегов <code>&lt;source&gt;</code> для поддержки разных форматов.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="20"><!DOCTYPE html>
+<html>
+<body style="font-family:sans-serif; padding:16px;">
+  <h3>Плеер с элементами управления:</h3>
+
+  <!-- Аудио с поддержкой нескольких форматов -->
+  <audio controls>
+    <source
+      src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+      type="audio/mpeg">
+    Ваш браузер не поддерживает аудио.
+  </audio>
+
+  <br><br>
+
+  <h3>Аудио в цикле (loop):</h3>
+  <audio controls loop>
+    <source
+      src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+      type="audio/mpeg">
+  </audio>
+
+  <p style="color:#666; font-size:0.85rem;">
+    Атрибуты: controls, autoplay,
+    loop, muted, preload
+  </p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+
+      <table class="attr-table">
+        <tr><th>Атрибут</th><th>Описание</th></tr>
+        <tr><td><code>controls</code></td><td>Показывает кнопки управления плеером</td></tr>
+        <tr><td><code>autoplay</code></td><td>Автоматически запускает воспроизведение</td></tr>
+        <tr><td><code>loop</code></td><td>Повторяет воспроизведение бесконечно</td></tr>
+        <tr><td><code>muted</code></td><td>Звук выключен по умолчанию</td></tr>
+        <tr><td><code>preload</code></td><td>Предзагрузка: auto, metadata, none</td></tr>
+      </table>
+    </section>
+
+    <!-- LESSON 2: Video -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Видео &lt;video&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;video&gt;</code> аналогичен <code>&lt;audio&gt;</code>, но для видеофайлов.
+        Атрибуты <code>width</code> и <code>height</code> задают размер видеоплеера.
+        Атрибут <code>poster</code> указывает изображение, которое показывается до начала воспроизведения.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="22"><!DOCTYPE html>
+<html>
+<body style="font-family:sans-serif; padding:16px;">
+
+  <h3>Видеоплеер:</h3>
+  <video width="320" height="180"
+         controls
+         poster="https://picsum.photos/320/180">
+    <source
+      src="https://www.w3schools.com/html/mov_bbb.mp4"
+      type="video/mp4">
+    Ваш браузер не поддерживает видео.
+  </video>
+
+  <br><br>
+
+  <h3>Видео с автозапуском (без звука):</h3>
+  <video width="300" height="160"
+         autoplay muted loop
+         style="border-radius:8px;">
+    <source
+      src="https://www.w3schools.com/html/movie.mp4"
+      type="video/mp4">
+  </video>
+
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: iFrame -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Встраивание &lt;iframe&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;iframe&gt;</code> встраивает другую HTML-страницу или внешний контент
+        (YouTube, Google Maps, Figma и т.д.) прямо на вашу страницу.
+        Атрибут <code>src</code> указывает URL встраиваемой страницы.
+        Атрибут <code>allowfullscreen</code> разрешает полноэкранный режим для видео.
+      </p>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Безопасность:</strong> Не все сайты разрешают встраивание через iframe
+          (устанавливают заголовок <code>X-Frame-Options</code>). Для YouTube используйте
+          специальные embed-ссылки (youtube.com/embed/VIDEO_ID).
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="20"><!DOCTYPE html>
+<html>
+<body style="font-family:sans-serif; padding:16px;">
+
+  <h3>YouTube видео:</h3>
+  <iframe
+    width="320" height="180"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    title="YouTube video"
+    frameborder="0"
+    allow="accelerometer; autoplay;
+           clipboard-write; encrypted-media;
+           gyroscope; picture-in-picture"
+    allowfullscreen
+    style="border-radius:8px;">
+  </iframe>
+
+  <br><br>
+
+  <h3>Встроенная страница:</h3>
+  <iframe
+    src="https://example.com"
+    width="320" height="160"
+    style="border:1px solid #ddd;
+           border-radius:8px;">
+  </iframe>
+
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: Canvas -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Canvas — рисование через JavaScript</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;canvas&gt;</code> создаёт холст для рисования через JavaScript.
+        Сам по себе тег — это просто прямоугольная область. Рисование выполняется
+        с помощью JavaScript API. Используется для игр, анимаций, диаграмм.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="28"><!DOCTYPE html>
+<html>
+<body style="font-family:sans-serif; padding:16px;">
+
+  <canvas id="myCanvas" width="300" height="180"
+    style="border:2px solid #2c3e50;
+           border-radius:8px;">
+    Ваш браузер не поддерживает canvas.
+  </canvas>
+
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Фон
+    ctx.fillStyle = '#f8f9fa';
+    ctx.fillRect(0, 0, 300, 180);
+
+    // Прямоугольник
+    ctx.fillStyle = '#e74c3c';
+    ctx.fillRect(20, 20, 100, 60);
+
+    // Круг
+    ctx.beginPath();
+    ctx.arc(200, 60, 40, 0, Math.PI * 2);
+    ctx.fillStyle = '#2980b9';
+    ctx.fill();
+
+    // Текст
+    ctx.fillStyle = '#2c3e50';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText('Canvas!', 100, 150);
+
+    // Линия
+    ctx.beginPath();
+    ctx.moveTo(20, 140);
+    ctx.lineTo(280, 140);
+    ctx.strokeStyle = '#27ae60';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  </script>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: SVG -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — SVG — векторная графика</h2>
+      <p class="lesson-desc">
+        SVG (Scalable Vector Graphics) — это XML-формат для векторной графики.
+        SVG-изображения масштабируются без потери качества.
+        Тег <code>&lt;svg&gt;</code> позволяет встраивать SVG прямо в HTML.
+        SVG поддерживает фигуры, текст, градиенты и анимации.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="30"><!DOCTYPE html>
+<html>
+<body style="font-family:sans-serif; padding:16px;">
+
+  <svg width="300" height="200"
+       style="border:1px solid #ddd;
+              border-radius:8px;">
+
+    <!-- Прямоугольник -->
+    <rect x="10" y="10"
+          width="100" height="60"
+          fill="#e74c3c"
+          rx="6" ry="6"/>
+
+    <!-- Круг -->
+    <circle cx="200" cy="50"
+            r="40"
+            fill="#2980b9"
+            opacity="0.8"/>
+
+    <!-- Линия -->
+    <line x1="10" y1="100"
+          x2="290" y2="100"
+          stroke="#27ae60"
+          stroke-width="3"/>
+
+    <!-- Текст -->
+    <text x="50" y="140"
+          font-size="20"
+          font-weight="bold"
+          fill="#2c3e50">
+      SVG Графика!
+    </text>
+
+    <!-- Звезда (path) -->
+    <polygon
+      points="150,150 160,175 185,175
+              165,190 172,215 150,200
+              128,215 135,190 115,175
+              140,175"
+      fill="#f39c12"/>
+  </svg>
+
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 9</h3>
+          <p>Встройте YouTube видео с iframe</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте страницу с встроенным YouTube видео:
+          <ul>
+            <li>Добавьте тег <code>&lt;iframe&gt;</code></li>
+            <li>Укажите атрибут <code>src</code> с ссылкой на YouTube видео (формат: <code>https://www.youtube.com/embed/ID_ВИДЕО</code>)</li>
+            <li>Задайте размеры через атрибуты <code>width</code> и <code>height</code></li>
+            <li>Ссылка должна содержать youtube.com или youtu.be</li>
+          </ul>
+          <p style="margin-top:8px;">
+            Подсказка: для видео <code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code>
+            embed-ссылка будет: <code>https://www.youtube.com/embed/dQw4w9WgXcQ</code>
+          </p>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch9-exercise-code" rows="14"><!-- Напишите ваш HTML код здесь -->
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Моё видео</h2>
+
+</body>
+</html></textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch9-exercise')" data-exercise-id="ch9-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch9-exercise')">👁 Предпросмотр</button>
+        </div>
+
+        <div class="exercise-feedback" id="ch9-exercise-feedback"></div>
+        <div class="exercise-preview" id="ch9-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch9-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPLETION BANNER -->
+    <div style="background: linear-gradient(135deg, #27ae60, #2ecc71);
+                color: white; border-radius: 16px; padding: 32px;
+                text-align: center; margin-top: 40px; box-shadow: 0 8px 30px rgba(39,174,96,0.3);">
+      <div style="font-size: 3rem; margin-bottom: 12px;">🎉</div>
+      <h2 style="font-size: 1.6rem; margin-bottom: 8px;">Поздравляем!</h2>
+      <p style="opacity:0.9; font-size:1.05rem;">
+        Вы прошли все 9 глав курса HTML Учебник.
+        Теперь вы знаете основы HTML и готовы создавать веб-страницы!
+      </p>
+      <a href="../../index.html" style="display:inline-block; margin-top:16px;
+         background:white; color:#27ae60; padding:12px 28px;
+         border-radius:50px; font-weight:700; text-decoration:none;
+         font-size:0.95rem;">
+        🏠 На главную страницу
+      </a>
+    </div>
+
+    <nav class="chapter-nav">
+      <a href="ch8-semantics.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 8: Семантический HTML</span>
+        </div>
+      </a>
+      <a href="../../index.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>К оглавлению</span>
+          <span class="nav-sub">Все главы курса</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

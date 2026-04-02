@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 2: Форматирование текста — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch2">
+
+<div class="sidebar-overlay"></div>
+
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 2: Форматирование текста</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 2</div>
+      <div class="sidebar-title">Форматирование текста</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1"><span class="link-num">1</span> Жирный текст</a>
+      <a class="sidebar-link" data-target="lesson-2"><span class="link-num">2</span> Курсив</a>
+      <a class="sidebar-link" data-target="lesson-3"><span class="link-num">3</span> Подчёркивание</a>
+      <a class="sidebar-link" data-target="lesson-4"><span class="link-num">4</span> Перенос строки</a>
+      <a class="sidebar-link" data-target="lesson-5"><span class="link-num">5</span> Надстрочный/Подстрочный</a>
+      <a class="sidebar-link" data-target="lesson-6"><span class="link-num">6</span> Форматированный текст</a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch2-exercise"><span class="link-num">✎</span> Упражнение</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">🔤 Глава 2</div>
+      <h1 class="chapter-title">Форматирование текста</h1>
+      <p class="chapter-intro">
+        HTML предоставляет множество тегов для изменения внешнего вида текста.
+        Вы научитесь делать текст жирным, курсивным, подчёркнутым,
+        а также работать с переносами строк и специальным форматированием.
+      </p>
+    </div>
+
+    <!-- LESSON 1: Bold -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Жирный текст</h2>
+      <p class="lesson-desc">
+        Для выделения текста жирным используют два тега:
+        <code>&lt;b&gt;</code> — визуальное выделение (просто жирный),
+        и <code>&lt;strong&gt;</code> — смысловое выделение (важный текст).
+        С точки зрения SEO и доступности предпочтителен <code>&lt;strong&gt;</code>.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="10"><!DOCTYPE html>
+<html>
+<body>
+  <p>Обычный текст и
+  <b>жирный текст с &lt;b&gt;</b>.</p>
+
+  <p>Обычный текст и
+  <strong>важный текст с &lt;strong&gt;</strong>.</p>
+
+  <p><b>Оба тега</b> выглядят
+  одинаково в браузере.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2: Italic -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Курсив</h2>
+      <p class="lesson-desc">
+        Аналогично жирному, для курсива есть два тега:
+        <code>&lt;i&gt;</code> — визуальный курсив,
+        <code>&lt;em&gt;</code> — курсив с акцентом (emphasis).
+        Тег <code>&lt;em&gt;</code> сообщает браузерам и поисковикам, что текст важен.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="12"><!DOCTYPE html>
+<html>
+<body>
+  <p>Обычный текст и
+  <i>курсив с тегом &lt;i&gt;</i>.</p>
+
+  <p>Обычный текст и
+  <em>акцентированный &lt;em&gt;</em>.</p>
+
+  <p>Можно <b><i>комбинировать</i></b>
+  жирный и курсив вместе.</p>
+
+  <p>Или <strong><em>так</em></strong>.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: Underline -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Подчёркивание и зачёркивание</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;u&gt;</code> подчёркивает текст.
+        Тег <code>&lt;s&gt;</code> (или устаревший <code>&lt;strike&gt;</code>) зачёркивает текст.
+        Тег <code>&lt;mark&gt;</code> выделяет текст жёлтым маркером.
+        Тег <code>&lt;small&gt;</code> уменьшает размер текста.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="12"><!DOCTYPE html>
+<html>
+<body>
+  <p><u>Подчёркнутый текст</u></p>
+
+  <p><s>Зачёркнутый текст</s>
+  (например, старая цена)</p>
+
+  <p>Цена: <s>1000 руб.</s>
+  <mark>800 руб.</mark></p>
+
+  <p>Обычный текст и
+  <small>мелкий текст</small>.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: Line breaks -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Перенос строки и горизонтальная линия</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;br&gt;</code> создаёт перенос строки внутри текста (одиночный тег, без закрывающего).
+        Тег <code>&lt;hr&gt;</code> рисует горизонтальную разделительную линию.
+        Обратите внимание: в HTML пробелы и переносы строк в коде игнорируются браузером.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="14"><!DOCTYPE html>
+<html>
+<body>
+  <p>Первая строка.<br>
+  Вторая строка.<br>
+  Третья строка.</p>
+
+  <hr>
+
+  <p>Текст после горизонтальной линии.</p>
+
+  <hr style="border: 2px dashed red;">
+
+  <p>Линию можно стилизовать.</p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: Sup/Sub -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Надстрочный и подстрочный текст</h2>
+      <p class="lesson-desc">
+        <code>&lt;sup&gt;</code> поднимает текст вверх (надстрочный) — используется для степеней, сносок.
+        <code>&lt;sub&gt;</code> опускает текст вниз (подстрочный) — используется в химических формулах.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="12"><!DOCTYPE html>
+<html>
+<body>
+  <p>2<sup>10</sup> = 1024</p>
+
+  <p>E = mc<sup>2</sup></p>
+
+  <p>Химическая формула воды:
+  H<sub>2</sub>O</p>
+
+  <p>CO<sub>2</sub> — углекислый газ</p>
+
+  <p>Примечание<sup>1</sup></p>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 6: Pre/Code -->
+    <section class="lesson-section" id="lesson-6">
+      <h2 class="lesson-title">Урок 6 — Форматированный текст и код</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;pre&gt;</code> отображает текст с сохранением пробелов и переносов строк
+        (преформатированный текст), используя моноширинный шрифт.
+        Тег <code>&lt;code&gt;</code> используется для отображения кода — обычно внутри <code>&lt;pre&gt;</code>.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex6-code" rows="16"><!DOCTYPE html>
+<html>
+<body>
+  <p>Встроенный код: <code>print("Hello")</code></p>
+
+  <pre>
+  Это текст
+      с сохранёнными
+          отступами.
+  </pre>
+
+  <pre><code>
+function hello() {
+    console.log("Hi!");
+}
+  </code></pre>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex6')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex6-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 2</h3>
+          <p>Форматирование текста</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте параграф о себе, используя разное форматирование:
+          <ul>
+            <li>Выделите своё имя или любое слово <strong>жирным</strong> тегом <code>&lt;b&gt;</code> или <code>&lt;strong&gt;</code></li>
+            <li>Добавьте <em>курсивный</em> текст с тегом <code>&lt;i&gt;</code> или <code>&lt;em&gt;</code></li>
+            <li>Добавьте <u>подчёркнутый</u> текст с тегом <code>&lt;u&gt;</code></li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch2-exercise-code" rows="14"><!-- Напишите ваш HTML код здесь -->
+<!DOCTYPE html>
+<html>
+<body>
+  <p>Меня зовут ... </p>
+</body>
+</html></textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch2-exercise')" data-exercise-id="ch2-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch2-exercise')">👁 Предпросмотр</button>
+        </div>
+
+        <div class="exercise-feedback" id="ch2-exercise-feedback"></div>
+        <div class="exercise-preview" id="ch2-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch2-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <nav class="chapter-nav">
+      <a href="ch1-basics.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 1: Основы HTML</span>
+        </div>
+      </a>
+      <a href="ch3-links-images.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая →</span>
+          <span class="nav-sub">Глава 3: Ссылки и изображения</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

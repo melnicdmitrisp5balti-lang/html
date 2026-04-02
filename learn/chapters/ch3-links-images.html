@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 3: Ссылки и изображения — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch3">
+
+<div class="sidebar-overlay"></div>
+
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 3: Ссылки и изображения</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 3</div>
+      <div class="sidebar-title">Ссылки и изображения</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1"><span class="link-num">1</span> Ссылки &lt;a href&gt;</a>
+      <a class="sidebar-link" data-target="lesson-2"><span class="link-num">2</span> Атрибут target</a>
+      <a class="sidebar-link" data-target="lesson-3"><span class="link-num">3</span> Изображения &lt;img&gt;</a>
+      <a class="sidebar-link" data-target="lesson-4"><span class="link-num">4</span> Размер изображений</a>
+      <a class="sidebar-link" data-target="lesson-5"><span class="link-num">5</span> Изображения-ссылки</a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch3-exercise"><span class="link-num">✎</span> Упражнение</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">🔗 Глава 3</div>
+      <h1 class="chapter-title">Ссылки и изображения</h1>
+      <p class="chapter-intro">
+        Ссылки и изображения — основа веба. Ссылки позволяют переходить между страницами,
+        а изображения делают страницы визуально привлекательными. Научитесь работать
+        с тегами <code>&lt;a&gt;</code> и <code>&lt;img&gt;</code>.
+      </p>
+    </div>
+
+    <!-- LESSON 1: Links -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Ссылки &lt;a href&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;a&gt;</code> (anchor — якорь) создаёт гиперссылку.
+        Атрибут <code>href</code> указывает адрес, куда ведёт ссылка.
+        Ссылки бывают: внешние (на другие сайты), внутренние (на страницы того же сайта),
+        и ссылки на email/телефон.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="14"><!DOCTYPE html>
+<html>
+<body>
+  <!-- Внешняя ссылка -->
+  <a href="https://www.google.com">
+    Перейти на Google
+  </a>
+  <br><br>
+
+  <!-- Ссылка на email -->
+  <a href="mailto:info@example.com">
+    Написать нам
+  </a>
+  <br><br>
+
+  <!-- Ссылка на телефон -->
+  <a href="tel:+79001234567">
+    +7 (900) 123-45-67
+  </a>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+
+      <table class="attr-table">
+        <tr><th>Тип ссылки</th><th>Пример</th></tr>
+        <tr><td>Внешняя</td><td><code>href="https://example.com"</code></td></tr>
+        <tr><td>Внутренняя</td><td><code>href="about.html"</code></td></tr>
+        <tr><td>Якорь (раздел)</td><td><code>href="#section-id"</code></td></tr>
+        <tr><td>Email</td><td><code>href="mailto:user@mail.com"</code></td></tr>
+        <tr><td>Телефон</td><td><code>href="tel:+71234567890"</code></td></tr>
+      </table>
+    </section>
+
+    <!-- LESSON 2: Target -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Атрибут target</h2>
+      <p class="lesson-desc">
+        Атрибут <code>target</code> указывает, где открыть ссылку.
+        <code>target="_blank"</code> открывает ссылку в новой вкладке.
+        Атрибут <code>rel="noopener"</code> рекомендуется добавлять для безопасности
+        при использовании <code>target="_blank"</code>.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="14"><!DOCTYPE html>
+<html>
+<body>
+  <!-- Открыть в той же вкладке (по умолчанию) -->
+  <a href="https://ru.wikipedia.org"
+     target="_self">
+    Wikipedia (та же вкладка)
+  </a>
+  <br><br>
+
+  <!-- Открыть в новой вкладке -->
+  <a href="https://ru.wikipedia.org"
+     target="_blank"
+     rel="noopener noreferrer">
+    Wikipedia (новая вкладка) ↗
+  </a>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3: Images -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Изображения &lt;img&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;img&gt;</code> вставляет изображение. Это самозакрывающийся тег (без закрывающего).
+        Обязательные атрибуты: <code>src</code> (путь к изображению) и <code>alt</code>
+        (альтернативный текст для тех, кто не видит изображение).
+      </p>
+
+      <div class="callout info">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body">
+          <strong>Атрибут alt обязателен!</strong>
+          Он отображается если изображение не загрузилось, и читается экранными читалками для слабовидящих.
+          Никогда не оставляйте alt пустым для значимых изображений.
+        </div>
+      </div>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="12"><!DOCTYPE html>
+<html>
+<body>
+  <!-- Изображение с URL -->
+  <img src="https://picsum.photos/200/120"
+       alt="Случайное красивое фото">
+
+  <br><br>
+
+  <!-- Если изображение не найдено -->
+  <img src="not-found.jpg"
+       alt="Описание когда фото не загрузилось">
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4: Image sizing -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Размер изображений</h2>
+      <p class="lesson-desc">
+        Атрибуты <code>width</code> и <code>height</code> задают размер изображения в пикселях.
+        Если задать только одно измерение, второе масштабируется пропорционально.
+        Также можно задавать размеры через CSS.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="14"><!DOCTYPE html>
+<html>
+<body>
+  <p>Оригинальный размер:</p>
+  <img src="https://picsum.photos/200/120"
+       alt="Фото">
+
+  <p>Уменьшенное (100x60):</p>
+  <img src="https://picsum.photos/200/120"
+       alt="Уменьшенное фото"
+       width="100" height="60">
+
+  <p>Только ширина (150px):</p>
+  <img src="https://picsum.photos/200/120"
+       alt="Широкое фото"
+       width="150">
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5: Image links -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Изображения как ссылки</h2>
+      <p class="lesson-desc">
+        Можно поместить тег <code>&lt;img&gt;</code> внутри тега <code>&lt;a&gt;</code>.
+        Тогда изображение становится кликабельной ссылкой. Это часто используется для логотипов.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="14"><!DOCTYPE html>
+<html>
+<body>
+  <p>Нажмите на картинку:</p>
+
+  <a href="https://www.google.com"
+     target="_blank">
+    <img src="https://picsum.photos/160/100"
+         alt="Кликабельное изображение"
+         style="border: 3px solid blue;
+                border-radius: 8px;">
+  </a>
+
+  <p>Изображение-кнопка с текстом:</p>
+  <a href="#" style="display:inline-flex;
+     align-items:center; gap:8px;
+     text-decoration:none; color:#333;">
+    <img src="https://picsum.photos/40/40"
+         alt="иконка"
+         style="border-radius:50%;">
+    <span>Мой профиль</span>
+  </a>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 3</h3>
+          <p>Изображение-ссылка</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте изображение-ссылку:
+          <ul>
+            <li>Добавьте тег <code>&lt;a href="..."&gt;</code> с любым URL</li>
+            <li>Внутри <code>&lt;a&gt;</code> поместите тег <code>&lt;img&gt;</code></li>
+            <li>Добавьте атрибут <code>alt</code> к изображению</li>
+            <li>Изображение должно находиться внутри ссылки (вложенность обязательна!)</li>
+          </ul>
+          <p style="margin-top:8px;">Совет: для src используйте <code>https://picsum.photos/200/120</code></p>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch3-exercise-code" rows="12"><!-- Напишите ваш HTML код здесь -->
+<!DOCTYPE html>
+<html>
+<body>
+
+</body>
+</html></textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch3-exercise')" data-exercise-id="ch3-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch3-exercise')">👁 Предпросмотр</button>
+        </div>
+
+        <div class="exercise-feedback" id="ch3-exercise-feedback"></div>
+        <div class="exercise-preview" id="ch3-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch3-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <nav class="chapter-nav">
+      <a href="ch2-text.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 2: Форматирование текста</span>
+        </div>
+      </a>
+      <a href="ch4-lists.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая →</span>
+          <span class="nav-sub">Глава 4: Списки</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

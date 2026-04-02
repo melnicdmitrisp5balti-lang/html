@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глава 5: Таблицы — HTML Учебник</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-chapter="ch5">
+
+<div class="sidebar-overlay"></div>
+
+<header class="page-header">
+  <a href="../../index.html" class="logo">HTML <span>&lt;/&gt;</span> Учебник</a>
+  <nav class="breadcrumb">
+    <a href="../../index.html">Главная</a>
+    <span class="sep">›</span>
+    <span class="current">Глава 5: Таблицы</span>
+  </nav>
+  <button class="sidebar-toggle">☰ Уроки</button>
+</header>
+
+<div class="app-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-chapter-title">Глава 5</div>
+      <div class="sidebar-title">Таблицы</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">Уроки</div>
+      <a class="sidebar-link" data-target="lesson-1"><span class="link-num">1</span> Структура таблицы</a>
+      <a class="sidebar-link" data-target="lesson-2"><span class="link-num">2</span> Заголовки &lt;th&gt;</a>
+      <a class="sidebar-link" data-target="lesson-3"><span class="link-num">3</span> Подпись &lt;caption&gt;</a>
+      <a class="sidebar-link" data-target="lesson-4"><span class="link-num">4</span> colspan и rowspan</a>
+      <a class="sidebar-link" data-target="lesson-5"><span class="link-num">5</span> Стилизация таблиц</a>
+      <div class="sidebar-nav-title" style="margin-top:8px;">Практика</div>
+      <a class="sidebar-link" data-target="exercise" data-done="ch5-exercise"><span class="link-num">✎</span> Упражнение</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="chapter-progress-mini">Упражнение не выполнено</div>
+      <div class="progress-mini-bar"><div class="progress-mini-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="chapter-header">
+      <div class="chapter-label">📊 Глава 5</div>
+      <h1 class="chapter-title">Таблицы</h1>
+      <p class="chapter-intro">
+        HTML-таблицы позволяют представлять данные в строках и столбцах.
+        Они отлично подходят для расписаний, прайс-листов, сравнительных таблиц
+        и любых структурированных данных.
+      </p>
+    </div>
+
+    <!-- LESSON 1 -->
+    <section class="lesson-section" id="lesson-1">
+      <h2 class="lesson-title">Урок 1 — Базовая структура таблицы</h2>
+      <p class="lesson-desc">
+        HTML-таблица создаётся с помощью тега <code>&lt;table&gt;</code>.
+        Строки таблицы задаются тегом <code>&lt;tr&gt;</code> (table row),
+        а ячейки данных — тегом <code>&lt;td&gt;</code> (table data).
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex1-code" rows="18"><!DOCTYPE html>
+<html>
+<body>
+  <table border="1">
+    <tr>
+      <td>Строка 1, Ячейка 1</td>
+      <td>Строка 1, Ячейка 2</td>
+      <td>Строка 1, Ячейка 3</td>
+    </tr>
+    <tr>
+      <td>Строка 2, Ячейка 1</td>
+      <td>Строка 2, Ячейка 2</td>
+      <td>Строка 2, Ячейка 3</td>
+    </tr>
+    <tr>
+      <td>Строка 3, Ячейка 1</td>
+      <td>Строка 3, Ячейка 2</td>
+      <td>Строка 3, Ячейка 3</td>
+    </tr>
+  </table>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex1')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex1-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 2 -->
+    <section class="lesson-section" id="lesson-2">
+      <h2 class="lesson-title">Урок 2 — Заголовки таблицы &lt;th&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;th&gt;</code> (table header) создаёт ячейку-заголовок.
+        По умолчанию текст в <code>&lt;th&gt;</code> выводится жирным и выровнен по центру.
+        Заголовки также помогают экранным читалкам понять структуру таблицы.
+        Атрибут <code>scope</code> уточняет, является ли заголовок строчным или столбцовым.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex2-code" rows="18"><!DOCTYPE html>
+<html>
+<body>
+  <table border="1" cellpadding="8">
+    <tr>
+      <th>Имя</th>
+      <th>Возраст</th>
+      <th>Город</th>
+    </tr>
+    <tr>
+      <td>Анна</td>
+      <td>25</td>
+      <td>Москва</td>
+    </tr>
+    <tr>
+      <td>Иван</td>
+      <td>30</td>
+      <td>Санкт-Петербург</td>
+    </tr>
+    <tr>
+      <td>Мария</td>
+      <td>22</td>
+      <td>Казань</td>
+    </tr>
+  </table>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex2')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex2-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 3 -->
+    <section class="lesson-section" id="lesson-3">
+      <h2 class="lesson-title">Урок 3 — Подпись к таблице &lt;caption&gt;</h2>
+      <p class="lesson-desc">
+        Тег <code>&lt;caption&gt;</code> добавляет подпись (заголовок) к таблице.
+        Он должен быть первым элементом внутри <code>&lt;table&gt;</code>.
+        По умолчанию подпись располагается над таблицей.
+        Также можно использовать теги <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>
+        для группировки строк.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex3-code" rows="22"><!DOCTYPE html>
+<html>
+<body>
+  <table border="1" cellpadding="8">
+    <caption>Расписание уроков</caption>
+    <thead>
+      <tr>
+        <th>Время</th>
+        <th>Понедельник</th>
+        <th>Вторник</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>9:00 – 10:30</td>
+        <td>HTML</td>
+        <td>CSS</td>
+      </tr>
+      <tr>
+        <td>11:00 – 12:30</td>
+        <td>JavaScript</td>
+        <td>React</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">
+          Всего: 4 пары
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex3')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex3-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 4 -->
+    <section class="lesson-section" id="lesson-4">
+      <h2 class="lesson-title">Урок 4 — Объединение ячеек: colspan и rowspan</h2>
+      <p class="lesson-desc">
+        Атрибут <code>colspan</code> объединяет ячейки по горизонтали (по столбцам).
+        Атрибут <code>rowspan</code> объединяет ячейки по вертикали (по строкам).
+        Значение указывает, сколько ячеек нужно объединить.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex4-code" rows="22"><!DOCTYPE html>
+<html>
+<body>
+  <table border="1" cellpadding="8">
+    <caption>Пример объединения</caption>
+    <tr>
+      <!-- Занимает 2 столбца -->
+      <th colspan="2">Личные данные</th>
+      <th>Оценка</th>
+    </tr>
+    <tr>
+      <!-- Занимает 2 строки -->
+      <td rowspan="2">Иван</td>
+      <td>Математика</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Физика</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td rowspan="2">Мария</td>
+      <td>Математика</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Физика</td>
+      <td>5</td>
+    </tr>
+  </table>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex4')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex4-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSON 5 -->
+    <section class="lesson-section" id="lesson-5">
+      <h2 class="lesson-title">Урок 5 — Стилизация таблиц</h2>
+      <p class="lesson-desc">
+        Таблицы можно красиво стилизовать с помощью CSS. Свойство <code>border-collapse: collapse</code>
+        убирает двойные границы между ячейками. Чередование цветов строк улучшает читаемость.
+      </p>
+
+      <div class="code-demo">
+        <div class="code-panel">
+          <div class="code-header">HTML Code</div>
+          <textarea class="code-editor" id="ex5-code" rows="30"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: sans-serif;
+  }
+  th {
+    background: #2c3e50;
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  td { padding: 9px 14px; }
+  tr:nth-child(even) td {
+    background: #f8f9fa;
+  }
+  tr:hover td {
+    background: #e3f2fd;
+  }
+  table, td, th {
+    border: 1px solid #dee2e6;
+  }
+</style>
+</head>
+<body>
+  <table>
+    <tr>
+      <th>Товар</th>
+      <th>Цена</th>
+      <th>Кол-во</th>
+    </tr>
+    <tr><td>Яблоки</td><td>80 руб/кг</td><td>2 кг</td></tr>
+    <tr><td>Молоко</td><td>65 руб/л</td><td>1 л</td></tr>
+    <tr><td>Хлеб</td><td>45 руб</td><td>2 шт</td></tr>
+  </table>
+</body>
+</html></textarea>
+          <div class="code-footer">
+            <button class="run-btn" onclick="runCode('ex5')">▶ Запустить</button>
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-header">Результат</div>
+          <iframe class="result-frame" id="ex5-result"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXERCISE -->
+    <section class="exercise-section" id="exercise">
+      <div class="exercise-header">
+        <div class="exercise-icon">✏️</div>
+        <div class="exercise-header-text">
+          <h3>Сделайте сами — Упражнение 5</h3>
+          <p>Создайте таблицу 3×3 с заголовками</p>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-task">
+          <strong>Задание:</strong> Создайте таблицу с информацией о 3 странах мира:
+          <ul>
+            <li>Тег <code>&lt;table&gt;</code> с тегом <code>&lt;caption&gt;</code></li>
+            <li>Строка заголовков с тегами <code>&lt;th&gt;</code> (например: Страна, Столица, Население)</li>
+            <li>Минимум 3 строки <code>&lt;tr&gt;</code> с данными</li>
+            <li>Минимум 6 ячеек <code>&lt;td&gt;</code> с данными</li>
+          </ul>
+        </div>
+
+        <div class="exercise-editor-wrap">
+          <textarea class="exercise-code" id="ch5-exercise-code" rows="18"><!-- Напишите ваш HTML код здесь -->
+<!DOCTYPE html>
+<html>
+<body>
+
+</body>
+</html></textarea>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-btn" onclick="checkExercise('ch5-exercise')" data-exercise-id="ch5-exercise">
+            🔍 Проверить
+          </button>
+          <button class="preview-btn" onclick="previewExercise('ch5-exercise')">👁 Предпросмотр</button>
+        </div>
+
+        <div class="exercise-feedback" id="ch5-exercise-feedback"></div>
+        <div class="exercise-preview" id="ch5-exercise-preview">
+          <div class="exercise-preview-header">Предпросмотр</div>
+          <iframe class="exercise-preview-frame" id="ch5-exercise-preview-frame"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <nav class="chapter-nav">
+      <a href="ch4-lists.html" class="nav-btn">
+        ← <div class="nav-btn-content">
+          <span>Предыдущая</span>
+          <span class="nav-sub">Глава 4: Списки</span>
+        </div>
+      </a>
+      <a href="ch6-forms.html" class="nav-btn primary">
+        <div class="nav-btn-content">
+          <span>Следующая →</span>
+          <span class="nav-sub">Глава 6: Формы</span>
+        </div>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>
