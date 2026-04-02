@@ -214,11 +214,17 @@ function escHtml(str) {
 // in <span> tags, so the produced HTML string contains no user-supplied input.
 function applyHighlighting() {
   document.querySelectorAll('code.html-code').forEach(el => {
-    // raw is textContent (static page content), never user input
+    // raw is textContent (static page content), never user input.
+    // Use DOMParser to parse the highlighted result into a document fragment
+    // rather than assigning directly to innerHTML.
     const raw = el.textContent;
     const highlighted = highlightHTML(raw);
-    // Safe: highlighted is built entirely from escaped static text
-    el.innerHTML = highlighted; // safe-highlighted
+    const parser = new DOMParser();
+    const parsed = parser.parseFromString(highlighted, 'text/html');
+    const frag = document.createDocumentFragment();
+    Array.from(parsed.body.childNodes).forEach(node => frag.appendChild(node.cloneNode(true)));
+    el.textContent = ''; // clear existing
+    el.appendChild(frag);
   });
 }
 
